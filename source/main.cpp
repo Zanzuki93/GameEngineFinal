@@ -59,7 +59,7 @@ SDL_Window *window;
 //initialize SDL
 SDL_Init(SDL_INIT_VIDEO);
 //Create the window
-window = SDL_CreateWindow("SDL Test Window",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1024,768,SDL_WINDOW_OPENGL);
+window = SDL_CreateWindow("DonQuixote's Last Ride",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1024,768,SDL_WINDOW_OPENGL);
 
 //create a renderer
 r1 = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -96,71 +96,82 @@ Wall.x = 1220;
 Wall.y = -620;
 Wall.w = 30;
 Wall.h = 1300;
-SDL_Texture * w1 = IMG_LoadTexture(r1, (images_dir+"WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w1 = IMG_LoadTexture(r1, (images_dir+"WallTexturePlaceholder.png").c_str());
 //Left Wall
 SDL_Rect Wall2;
 Wall2.x = 0;
 Wall2.y = -1270;
 Wall2.w = 10;
 Wall2.h = 1970;
-SDL_Texture * w2 = IMG_LoadTexture(r1, (images_dir+"WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w2 = IMG_LoadTexture(r1, (images_dir+"WallTexturePlaceholder.png").c_str());
 //Roof
 SDL_Rect Wall3;
 Wall3.x = 0;
 Wall3.y = -1270;
 Wall3.w = 1650;
 Wall3.h = 30;
-SDL_Texture * w3 = IMG_LoadTexture(r1, (images_dir+"WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w3 = IMG_LoadTexture(r1, (images_dir+"WallTexturePlaceholder.png").c_str());
 //Floor
 SDL_Rect Wall4;
 Wall4.x = 0;
 Wall4.y = 670;
 Wall4.w = 1650;
 Wall4.h = 30;
-SDL_Texture * w4 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w4 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Right Wall
 SDL_Rect Wall5;
 Wall5.x = 460;
 Wall5.y = -790;
 Wall5.w = 30;
 Wall5.h = 1475;
-SDL_Texture * w5 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w5 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Right Wall
 SDL_Rect Wall6;
 Wall6.x = 1650;
 Wall6.y = -1270;
 Wall6.w = 10;
 Wall6.h = 1970;
-SDL_Texture * w6 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w6 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Ceiling For Rooms
 SDL_Rect Wall7;
 Wall7.x = 0;
 Wall7.y = -790;
 Wall7.w = 40;
 Wall7.h = 30;
-SDL_Texture * w7 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w7 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect Wall8;
 Wall8.x = 150;
 Wall8.y = -790;
 Wall8.w = 325;
 Wall8.h = 20;
-SDL_Texture * w8 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w8 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect Wall9;
 Wall9.x = 650;
 Wall9.y = -790;
 Wall9.w = 1000;
 Wall9.h = 20;
-SDL_Texture * w9 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w9 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect Wall10;
 Wall10.x = 990;
 Wall10.y = -620;
 Wall10.w = 500;
 Wall10.h = 20;
-SDL_Texture * w10 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//SDL_Texture * w10 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 
-
-
-
+//Creating a pickup
+SDL_Rect healthPickUp;
+healthPickUp.x = 700;
+healthPickUp.y = 620;
+healthPickUp.w = 30;
+healthPickUp.h = 30;
+SDL_Texture * HealthPkUp1 = IMG_LoadTexture(r1,(images_dir+"healthPickUp.png").c_str());
+//Creating a ammo pickup
+SDL_Rect ammoPickUp;
+ammoPickUp.x = 600;
+ammoPickUp.y = 620;
+ammoPickUp.w = 30;
+ammoPickUp.h = 30;
+SDL_Texture * AmmoPkUp1 = IMG_LoadTexture(r1,(images_dir+"ammoPickUp.png").c_str());
 //Error Messages For Texture File Paths
 if (t1 == NULL)
 {
@@ -171,7 +182,14 @@ if(t2 == NULL)
 {
 	cout <<"Error Loading Player :("<<endl;
 }
-
+if(HealthPkUp1 == NULL)
+{
+	cout <<"Error Loading Health Pick Up Texture :("<<endl;
+}
+if(AmmoPkUp1 == NULL)
+{
+	cout <<"Error Loading Ammo Pick Up Texture :("<<endl;
+}
 if(window == NULL)
 {
 	printf("\n Couldn't create window :( ",SDL_GetError());
@@ -237,7 +255,7 @@ while(inGame)
 	//Adjusting the screen Horizontally
 	Player.x += PlayerVelX;
 	Player.y += PlayerVelY;
-	if(Player.x > 1024 - (Player.w * 2))
+	/*if(Player.x > 1024 - (Player.w * 2))
 		{
 			Player.x = 1024 - (Player.w*2);
 			Background.x -= PlayerVelX;
@@ -322,19 +340,22 @@ while(inGame)
 				SDL_HasIntersection(&Player, &Wall9)||SDL_HasIntersection(&Player, &Wall10))
 			{
 				Player.y -= PlayerVelY;
-			}
+			}*/
 	//Update Player End//
 
 //SDL Drawing Process//
 // clear buffer and draw agents and walls.
 SDL_RenderClear(r1);
 //render a copy of the texture
-SDL_RenderCopy(r1, t1, NULL, &Background);
+/*SDL_RenderCopy(r1, t1, NULL, &Background);*/
 //render what is presently in the buffer
 SDL_RenderCopy(r1,t2,NULL,&Player);
-
+//Rendering the health pickup
+SDL_RenderCopy(r1,HealthPkUp1,NULL,&healthPickUp);
+//Rendering the Ammo Pickup
+SDL_RenderCopy(r1,AmmoPkUp1,NULL,&ammoPickUp);
 //Wall Texture Code
-SDL_RenderCopy(r1,w1,NULL,&Wall);
+/*SDL_RenderCopy(r1,w1,NULL,&Wall);
 
 SDL_RenderCopy(r1,w2,NULL,&Wall2);
 
@@ -352,7 +373,7 @@ SDL_RenderCopy(r1, w8, NULL, &Wall8);
 
 SDL_RenderCopy(r1, w9, NULL, &Wall9);
 
-SDL_RenderCopy(r1, w10, NULL, &Wall10);
+SDL_RenderCopy(r1, w10, NULL, &Wall10);*/
 
 SDL_RenderPresent(r1);
 //SDL Drawing Process End//
