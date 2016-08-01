@@ -186,6 +186,19 @@ HealthBarBack.y = 50;
 HealthBarBack.w = 200;
 HealthBarBack.h = 30;
 SDL_Texture * HBarBack = IMG_LoadTexture(r1, (images_dir + "healthBarBackground.png").c_str());
+//Burning Windmill
+SDL_Rect Windmill;
+Windmill.x = 53;
+Windmill.y = 30;
+Windmill.w = 50;
+Windmill.h = 50;
+SDL_Texture * WindmillTexture = IMG_LoadTexture(r1, (images_dir + "windmillGUI.png").c_str());
+SDL_Rect Windmill2;
+Windmill2.x = 290;
+Windmill2.y = 30;
+Windmill2.w = 50;
+Windmill2.h = 50;
+SDL_Texture * WindmillTexture2 = IMG_LoadTexture(r1, (images_dir + "windmillGUI.png").c_str());
 //Creating the Mana Bar
 SDL_Rect ManaBarFront;
 ManaBarFront.x = 100;
@@ -199,6 +212,13 @@ ManaBarBack.y = 125;
 ManaBarBack.w = 200;
 ManaBarBack.h = 30;
 SDL_Texture * MBarBack = IMG_LoadTexture(r1, (images_dir + "ammoGUIBackground.png").c_str());
+//Mana Potion GUI
+SDL_Rect ManaPotion;
+ManaPotion.x = 53;
+ManaPotion.y = 110;
+ManaPotion.w = 50;
+ManaPotion.h = 50;
+SDL_Texture * ManaPot = IMG_LoadTexture(r1, (images_dir + "manaPotionGUI.png").c_str());
 //Creating the GUI For the Keys
 SDL_Rect PinkKeyGUI;
 PinkKeyGUI.x = 100;
@@ -559,9 +579,12 @@ SDL_RenderCopy(r1,AmmoPkUp1,NULL,&ammoPickUp);
 //Rendering the Health Bar
 SDL_RenderCopy(r1, HBarBack, NULL, &HealthBarBack);
 SDL_RenderCopy(r1, HBarFront, NULL, &HealthBarFront);
+SDL_RenderCopy(r1, WindmillTexture, NULL, &Windmill);
+SDL_RenderCopy(r1, WindmillTexture2, NULL, &Windmill2);
 //Rendering the Ammo GUI
 SDL_RenderCopy(r1, MBarBack, NULL, &ManaBarBack);
 SDL_RenderCopy(r1, MBarFront, NULL, &ManaBarFront);
+SDL_RenderCopy(r1, ManaPot, NULL, &ManaPotion);
 //Rendering the enemy texture
 SDL_RenderCopy(r1, EnemyTexture, NULL, &Enemy);
 //Rendering the Keys in the level
@@ -591,7 +614,7 @@ if (hasPurpleKey == true)
 	SDL_RenderCopy(r1, PurpleKeyGUITexture, NULL, &PurpleKeyGUI);
 }
 //Wall Texture Code
-SDL_RenderCopy(r1,w1,NULL,&Wall);
+/*SDL_RenderCopy(r1,w1,NULL,&Wall);
 
 SDL_RenderCopy(r1,w2,NULL,&Wall2);
 
@@ -609,7 +632,7 @@ SDL_RenderCopy(r1, w8, NULL, &Wall8);
 
 SDL_RenderCopy(r1, w9, NULL, &Wall9);
 
-SDL_RenderCopy(r1, w10, NULL, &Wall10);
+SDL_RenderCopy(r1, w10, NULL, &Wall10);*/
 
 SDL_RenderPresent(r1);
 //SDL Drawing Process End//
