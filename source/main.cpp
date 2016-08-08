@@ -118,7 +118,7 @@ public:
 
 	void Update()
 	{
-		if (isActive == true)
+		if (isActive == true && BulletDir == 1)
 		{
 			EnemBullet.x += BulletSpeed;
 		}
@@ -134,10 +134,10 @@ public:
 			EnemBullet.y = 2000;
 			isActive = false;
 		}
-		/*if(isActive == true)
+		if(isActive == true && BulletDir == -1)
 		{
 		EnemBullet.x -= BulletSpeed;
-		}*/
+		}
 	}
 };
 
@@ -295,11 +295,17 @@ Wall12.h = 30;
 SDL_Texture *w12 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Creating Floating Platforms
 SDL_Rect Platform;
-Platform.x = Player.x + 40;
-Platform.y = Player.y - 10;
-Platform.w = 40;
-Platform.h = 10;
+Platform.x = 825;
+Platform.y = 620;
+Platform.w = 400;
+Platform.h = 40;
 SDL_Texture *p1 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform2;
+Platform2.x = 825;
+Platform2.y = 520;
+Platform2.w = 100;
+Platform2.h = 40;
+SDL_Texture *p2 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Creating a pickup
 SDL_Rect healthPickUp;
 healthPickUp.x = 700;
@@ -407,15 +413,15 @@ Enemy.h = 30;
 SDL_Texture * EnemyTexture = IMG_LoadTexture(r1, (images_dir + "placeholder.png").c_str());
 //Creating a Turret Enemy
 SDL_Rect Turret;
-Turret.x = 20;
+Turret.x = 180;
 Turret.y = -885;
 Turret.w = 50;
 Turret.h = 100;
 SDL_Texture * TurretTexture = IMG_LoadTexture(r1, (images_dir + "KillerPlantRight.png").c_str());
 //Creating Detection Box for the player
 SDL_Rect TurretVision;
-TurretVision.x = 40;
-TurretVision.y = -885;
+TurretVision.x = Turret.x + 20;
+TurretVision.y = Turret.y;
 TurretVision.w = 400;
 TurretVision.h = 50;
 
@@ -513,7 +519,7 @@ while(inGame)
 	{
 		if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
 		{
-			if (State[SDL_SCANCODE_A] && State[SDL_SCANCODE_P])
+			if (State[SDL_SCANCODE_A] && State[SDL_SCANCODE_P] && ammoCount >0)
 			{
 				cout << "The A and P are pressed down" << endl;
 				ManaBarFront.w -= 20;
@@ -530,7 +536,7 @@ while(inGame)
 					}
 				}
 			}
-			if (State[SDL_SCANCODE_D] && State[SDL_SCANCODE_P])
+			if (State[SDL_SCANCODE_D] && State[SDL_SCANCODE_P] >0)
 			{
 				cout << "The D Key and P are pressed down" << endl;
 				ManaBarFront.w -= 20;
@@ -558,6 +564,7 @@ while(inGame)
 				inGame = false;
 				break;
 			case SDLK_w:
+				isGrounded = false;
 				PlayerVelY -= Player_Vel;
 				break;
 			case SDLK_s:
@@ -571,7 +578,7 @@ while(inGame)
 				break;
 			case SDLK_SPACE:
 				isGrounded = false;
-				Player.y -= Player_Vel * 20;
+				Player.y -= Player_Vel * 14.8;
 				break;
 			}
 		}
@@ -612,6 +619,25 @@ while(inGame)
 			BulletList[k].Update();
 		}
 	}
+	//Update Turrets//
+	if (Player.x < Turret.x)
+	{
+		TurretVision.x = Turret.x - 200;
+		TurretTexture = IMG_LoadTexture(r1, (images_dir + "KillerPlantLeft.png").c_str());
+		for (int eb = 0; eb < 4; eb++)
+		{
+			BulletList[eb].BulletDir = -1;
+		}
+	}
+	if (Player.x > Turret.x)
+	{
+		TurretVision.x = Turret.x + 20;
+		TurretTexture = IMG_LoadTexture(r1, (images_dir + "KillerPlantRight.png").c_str());
+		for (int eb = 0; eb < 4; eb++)
+		{
+			BulletList[eb].BulletDir = 1;
+		}
+	}
 	//Update Player//
 	//Adjusting the screen Horizontally
 	Player.x += PlayerVelX;
@@ -645,7 +671,8 @@ while(inGame)
 		Enemy.x -= PlayerVelX;
 		Turret.x -= PlayerVelX;
 		TurretVision.x -= PlayerVelX;
-
+		Platform.x -= PlayerVelX;
+		Platform2.x -= PlayerVelX;
 	}
 	if (Player.x < 0 + (Player.w * 2))
 	{
@@ -672,7 +699,8 @@ while(inGame)
 		Enemy.x -= PlayerVelX;
 		Turret.x -= PlayerVelX;
 		TurretVision.x -= PlayerVelX;
-
+		Platform.x -= PlayerVelX;
+		Platform2.x -= PlayerVelX;
 	}
 	//Checking For collision with walls and the player Left and Right
 	if (SDL_HasIntersection(&Player, &Wall) || SDL_HasIntersection(&Player, &Wall2) ||
@@ -683,12 +711,15 @@ while(inGame)
 		SDL_HasIntersection(&Player, &Wall11) || SDL_HasIntersection(&Player, &Wall12))
 	{
 		Player.x -= PlayerVelX;
-	}//Platform Collision
-	if (SDL_HasIntersection(&Player, &Platform))
-	{
-		Player.y -= PlayerVelY;
-		isGrounded = true;
 	}
+
+	/*Platform Collision
+	if (SDL_HasIntersection(&Player, &Platform) || SDL_HasIntersection(&Player,&Platform2))
+	{
+		Player.x -= PlayerVelX;
+		isGrounded = true;
+	}*/
+
 	//Enemy Collision
 	if (SDL_HasIntersection(&Player, &Enemy))
 	{
@@ -716,7 +747,7 @@ while(inGame)
 			{
 				if (BulletList[t].isActive == false && random_number == 1)
 				{
-					cout << "Turret Found The Player >:) " << endl;
+					//cout << "Turret Found The Player >:) " << endl;
 					BulletList[t].EnemBullet.x = Turret.x;
 					BulletList[t].EnemBullet.y = Turret.y;
 					BulletList[t].isActive = true;
@@ -826,6 +857,8 @@ while(inGame)
 		Turret.y -= PlayerVelY;
 		TurretVision.y -= PlayerVelY;
 		tempBullet.EnemBullet.y -= PlayerVelY;
+		Platform.y -= PlayerVelY;
+		Platform2.y -= PlayerVelY;
 	}
 
 	if (Player.y > 768 - (Player.h * 3))
@@ -854,6 +887,8 @@ while(inGame)
 		Turret.y -= PlayerVelY;
 		TurretVision.y -= PlayerVelY;
 		tempBullet.EnemBullet.y -= PlayerVelY;
+		Platform.y -= PlayerVelY;
+		Platform2.y -= PlayerVelY;
 	}
 
 
@@ -865,9 +900,17 @@ while(inGame)
 		SDL_HasIntersection(&Player, &Wall9) || SDL_HasIntersection(&Player, &Wall10) ||
 		SDL_HasIntersection(&Player, &Wall11) || SDL_HasIntersection(&Player, &Wall12))
 	{
-		Player.y -= PlayerVelY + 2;
+		Player.y -= PlayerVelY + 10;
 		isGrounded = true;
 	}
+
+	/*Platrform Collision
+	/*if (SDL_HasIntersection(&Player, &Platform) || SDL_HasIntersection(&Player, &Platform2))
+	{
+		Player.y -= PlayerVelY + 2;
+		isGrounded = true;
+	}*/
+
 	//Enemy Collision
 	if (SDL_HasIntersection(&Player, &Enemy))
 	{
@@ -1001,6 +1044,10 @@ SDL_RenderCopy(r1, w10, NULL, &Wall10);
 SDL_RenderCopy(r1, w11, NULL, &Wall11);
 
 SDL_RenderCopy(r1, w12, NULL, &Wall12);
+
+//Render Floating Platforms
+//SDL_RenderCopy(r1, p1, NULL, &Platform);
+//SDL_RenderCopy(r1, p2, NULL, &Platform2);
 
 SDL_RenderPresent(r1);
 //SDL Drawing Process End//
