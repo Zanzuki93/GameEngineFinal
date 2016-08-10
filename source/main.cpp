@@ -225,7 +225,7 @@ public:
 		discipleHealth = rand() % 20;
 		discipleDead = false;
 	}
-	void DrawTurret(SDL_Renderer * r1)
+	void DrawDisciple(SDL_Renderer * r1)
 	{
 		SDL_RenderCopy(r1, DiscipleTexture, NULL, &Disciple);
 	}
@@ -246,6 +246,10 @@ public:
 			{
 				DiscipleTexture = IMG_LoadTexture(r1, (testPath).c_str());
 			}
+		}
+		if (DiscipleTexture == NULL)
+		{
+			cout << "Error Loading Disciple Texture" << endl;
 		}
 		if (discipleDead == true)
 		{
@@ -590,8 +594,8 @@ tempTurret = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(),r1);
 Turrets.push_back(tempTurret);
 
 //Creating List of Disciples
-DiscipleEnemy tempDisciple = DiscipleEnemy((images_dir + "DiscipleRight.png").c_str(), r1);
-tempDisciple = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1);
+DiscipleEnemy tempDisciple = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1);
+tempDisciple = DiscipleEnemy((images_dir + "DiscipleRight.png").c_str(), r1);
 Disciples.push_back(tempDisciple);
 
 //Creating Enemy Bullet
@@ -776,10 +780,25 @@ while(inGame)
 			BulletList[eb].BulletDir = -1;
 		}
 	}
-	for(int eT = 0; eT < 1; eT++)
+	for (int eD = 0; eD < 1; eD++)
 	{
-	Turrets[eT].Update(Player,r1,(images_dir + "KillerPlantLeft.png").c_str(),(images_dir + "KillerPlantRight.png").c_str());
+		Turrets[eD].Update(Player, r1, (images_dir + "KillerPlantLeft.png").c_str(), (images_dir + "KillerPlantRight.png").c_str());
 	}
+	//Updating Disciples in array
+	Disciples[0].Disciple.x = 800;
+	Disciples[0].Disciple.y = 300;
+	Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x + 20;
+	Disciples[0].DiscipleVision.y = Disciples[0].Disciple.y;
+	for(int eD = 0; eD < 1; eD++)
+	{
+	Disciples[eD].Update(Player,r1,(images_dir + "DisicpleLeft.png").c_str(),(images_dir + "DisicpleRight.png").c_str());
+	}
+	
+	if (Player.x < Disciples[0].Disciple.x)
+	{
+		Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x - 200;
+	}
+	
 	//Update Turrets//
 	if (Player.x < Turret.x)
 	{
@@ -988,6 +1007,7 @@ while(inGame)
 	//Disciple Detection Box
 	if(SDL_HasIntersection(&Player,&DiscipleVision))
 	{
+		cout << "Disciple has found the player" << endl;
 		if(Player.x > Disciple.x)
 			{
 			Disciple.x +=2;
@@ -1359,11 +1379,20 @@ for (int l = 0; l<9; l++)
 		ListofAmmo[l].DrawBullet(r1);
 	}
 }
+//Rendering Turrets in array 
 for(int eT = 0; eT<1; eT++)
 {
 	if(Turrets[eT].turretDead == false)
 	{
 	Turrets[eT].DrawTurret(r1);
+	}
+}
+//Rendering Disciple in array
+for (int eD = 0; eD < 1; eD++)
+{
+	if (Disciples[eD].discipleDead == false)
+	{
+		Disciples[eD].DrawDisciple(r1);
 	}
 }
 //Rendering the Keys in the level
