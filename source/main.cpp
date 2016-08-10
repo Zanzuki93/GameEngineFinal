@@ -118,6 +118,7 @@ public:
 
 	void Update()
 	{
+		cout <<"THis is what the class see BulletDir as" << BulletDir <<endl;
 		if (isActive == true && BulletDir == 1)
 		{
 			EnemBullet.x += BulletSpeed;
@@ -205,15 +206,17 @@ class DiscipleEnemy
 {
 public:
 	int discipleHealth;
-	bool discipleDead;
+	bool discipleDead,isRight;
 	SDL_Rect Disciple;
 	SDL_Rect DiscipleVision;
-	SDL_Texture * DiscipleTexture;
-	string filePath;
-	DiscipleEnemy(string testPath, SDL_Renderer * r1)
+	SDL_Texture * DiscipleTexture, * DiscipleTexture2;
+	string filePath,filePath2;
+	DiscipleEnemy(string testPath, SDL_Renderer * r1,string testPath2)
 	{
 		filePath = testPath;
+		filePath2 = testPath2;
 		DiscipleTexture = IMG_LoadTexture(r1, (filePath).c_str());
+		DiscipleTexture2 = IMG_LoadTexture(r1,(filePath2).c_str());
 		Disciple.x = 3000;
 		Disciple.y = 3000;
 		Disciple.w = 50;
@@ -224,12 +227,20 @@ public:
 		DiscipleVision.h = 50;
 		discipleHealth = rand() % 20;
 		discipleDead = false;
+		isRight = false;
 	}
 	void DrawDisciple(SDL_Renderer * r1)
 	{
+		if(isRight == false)
+		{
 		SDL_RenderCopy(r1, DiscipleTexture, NULL, &Disciple);
+		}
+		else
+		{
+		SDL_RenderCopy(r1, DiscipleTexture2,NULL,&Disciple);
+		}
 	}
-	void Update(SDL_Rect Player, SDL_Renderer * r1, string testPath, string testPath2)
+	void Update(SDL_Rect Player, SDL_Renderer * r1)
 	{
 		if (discipleHealth <= 0)
 		{
@@ -240,11 +251,11 @@ public:
 		{
 			if (Player.x > Disciple.x)
 			{
-				DiscipleTexture = IMG_LoadTexture(r1, (testPath2).c_str());
+				isRight = true;
 			}
 			if (Player.x < Disciple.x)
 			{
-				DiscipleTexture = IMG_LoadTexture(r1, (testPath).c_str());
+				isRight = false;
 			}
 		}
 		if (DiscipleTexture == NULL)
@@ -591,11 +602,18 @@ DiscipleVision.h = 100;
 //Creating List of Turrets
 TurretEnemy tempTurret = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
 tempTurret = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(),r1);
+tempTurret.Turret.x = 800;
+tempTurret.Turret.y = -40;
+tempTurret.TurretVision.x = tempTurret.Turret.x;
+tempTurret.TurretVision.y = tempTurret.Turret.y;
 Turrets.push_back(tempTurret);
 
 //Creating List of Disciples
-DiscipleEnemy tempDisciple = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1);
-tempDisciple = DiscipleEnemy((images_dir + "DiscipleRight.png").c_str(), r1);
+DiscipleEnemy tempDisciple = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
+tempDisciple.Disciple.x = 800;
+tempDisciple.Disciple.y = 300;
+tempDisciple.DiscipleVision.x = tempDisciple.Disciple.x + 20;
+tempDisciple.DiscipleVision.y = tempDisciple.Disciple.y;
 Disciples.push_back(tempDisciple);
 
 //Creating Enemy Bullet
@@ -768,10 +786,14 @@ while(inGame)
 		}
 	}
 	//Updating Turrets in array
-	Turrets[0].Turret.x = 800;
-	Turrets[0].Turret.y = -40;
-	Turrets[0].TurretVision.x = Turrets[0].Turret.x + 20;
-	Turrets[0].TurretVision.y = Turrets[0].Turret.y;
+	if (Player.x > Turrets[0].Turret.x)
+		{
+			Turrets[0].TurretVision.x = Turrets[0].Turret.x + 20;
+			for (int eb = 0; eb < 4; eb++)
+			{
+				BulletList[eb].BulletDir = 1;
+			}
+		}
 	if (Player.x < Turrets[0].Turret.x)
 	{
 		Turrets[0].TurretVision.x = Turrets[0].Turret.x - 200;
@@ -780,27 +802,23 @@ while(inGame)
 			BulletList[eb].BulletDir = -1;
 		}
 	}
-	for (int eD = 0; eD < 1; eD++)
+	for (int eT = 0; eT < 1; eT++)
 	{
-		Turrets[eD].Update(Player, r1, (images_dir + "KillerPlantLeft.png").c_str(), (images_dir + "KillerPlantRight.png").c_str());
+		Turrets[eT].Update(Player, r1, (images_dir + "KillerPlantLeft.png").c_str(), (images_dir + "KillerPlantRight.png").c_str());
 	}
 	//Updating Disciples in array
-	Disciples[0].Disciple.x = 800;
-	Disciples[0].Disciple.y = 300;
-	Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x + 20;
-	Disciples[0].DiscipleVision.y = Disciples[0].Disciple.y;
-	for(int eD = 0; eD < 1; eD++)
-	{
-	Disciples[eD].Update(Player,r1,(images_dir + "DisicpleLeft.png").c_str(),(images_dir + "DisicpleRight.png").c_str());
-	}
-	
 	if (Player.x < Disciples[0].Disciple.x)
 	{
 		Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x - 200;
 	}
+
+	for(int eD = 0; eD < 1; eD++)
+	{
+		Disciples[eD].Update(Player,r1);
+	}
 	
 	//Update Turrets//
-	if (Player.x < Turret.x)
+	/*if (Player.x < Turret.x)
 	{
 		TurretVision.x = Turret.x - 200;
 		TurretTexture = IMG_LoadTexture(r1, (images_dir + "KillerPlantLeft.png").c_str());
@@ -808,8 +826,8 @@ while(inGame)
 		{
 			BulletList[eb].BulletDir = -1;
 		}
-	}
-	if (Player.x > Turret.x)
+	}*/
+	/*if (Player.x > Turret.x)
 	{
 		TurretVision.x = Turret.x + 20;
 		TurretTexture = IMG_LoadTexture(r1, (images_dir + "KillerPlantRight.png").c_str());
@@ -817,7 +835,7 @@ while(inGame)
 		{
 			BulletList[eb].BulletDir = 1;
 		}
-	}
+	}*/
 	//Update Moving Enemy
 	if(Player.x > Disciple.x)
 	{
@@ -859,6 +877,8 @@ while(inGame)
 		DiscipleVision.x -= PlayerVelX;
 		Turret.x -= PlayerVelX;
 		TurretVision.x -= PlayerVelX;
+		Turrets[0].Turret.x -= PlayerVelX;
+		Turrets[0].TurretVision.x -= PlayerVelX;
 		Platform.x -= PlayerVelX;
 		Platform2.x -= PlayerVelX;
 		Platform3.x -= PlayerVelX;
@@ -893,6 +913,8 @@ while(inGame)
 		DiscipleVision.x -= PlayerVelX;
 		Turret.x -= PlayerVelX;
 		TurretVision.x -= PlayerVelX;
+		Turrets[0].Turret.x -= PlayerVelX;
+		Turrets[0].TurretVision.x -= PlayerVelX;
 		Platform.x -= PlayerVelX;
 		Platform2.x -= PlayerVelX;
 		Platform3.x -= PlayerVelX;
@@ -958,6 +980,20 @@ while(inGame)
 		{
 			TurretVision.x = -1000;
 			TurretVision.y = -1000;
+		}
+	}
+	if(SDL_HasIntersection(&Player,&Disciples[0].DiscipleVision))
+	{
+		cout << "Disciple has found the player"<<endl;
+		if(Disciples[0].isRight == true)
+		{
+		Disciples[0].Disciple.x += 2;
+		Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x + 75;
+		}
+		if(Disciples[0].isRight == false)
+		{
+			Disciples[0].Disciple.x -= 2;
+			Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x -75;
 		}
 	}
 	//Collision with Turrets in array with player bullets 
@@ -1147,6 +1183,8 @@ while(inGame)
 				Turret.y -= PlayerVelY;
 				TurretVision.y -= PlayerVelY;
 				tempBullet.EnemBullet.y -= PlayerVelY;
+				Turrets[0].Turret.y -= PlayerVelY;
+				Turrets[0].TurretVision.y -= PlayerVelY;
 				Platform.y -= PlayerVelY;
 				Platform2.y -= PlayerVelY;
 				Platform3.y -= PlayerVelY;
@@ -1183,6 +1221,8 @@ while(inGame)
 				Turret.y -= PlayerVelY;
 				TurretVision.y -= PlayerVelY;
 				tempBullet.EnemBullet.y -= PlayerVelY;
+				Turrets[0].Turret.y -= PlayerVelY;
+				Turrets[0].TurretVision.y -= PlayerVelY;
 				Platform.y -= PlayerVelY;
 				Platform2.y -= PlayerVelY;
 				Platform3.y -= PlayerVelY;
@@ -1226,6 +1266,8 @@ while(inGame)
 			Turret.y -= PlayerVelY;
 			TurretVision.y -= PlayerVelY;
 			tempBullet.EnemBullet.y -= PlayerVelY;
+			Turrets[0].Turret.y -= PlayerVelY;
+			Turrets[0].TurretVision.y -= PlayerVelY;
 			Platform.y -= PlayerVelY;
 			Platform2.y -= PlayerVelY;
 			Platform3.y -= PlayerVelY;
@@ -1262,6 +1304,8 @@ while(inGame)
 			Turret.y -= PlayerVelY;
 			TurretVision.y -= PlayerVelY;
 			tempBullet.EnemBullet.y -= PlayerVelY;
+			Turrets[0].Turret.y -= PlayerVelY;
+			Turrets[0].TurretVision.y -= PlayerVelY;
 			Platform.y -= PlayerVelY;
 			Platform2.y -= PlayerVelY;
 			Platform3.y -= PlayerVelY;
