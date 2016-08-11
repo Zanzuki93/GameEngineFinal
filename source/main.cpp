@@ -303,6 +303,8 @@ string currentWorkingDirectory(getcwd(NULL, 0));
  int ammoCount = 10;
  bool hasBlackKey = false, hasPurpleKey = false, hasPinkKey = false;
  bool inGame = true;
+ int state;
+ enum state{ingame,Lose,Win};
  srand(time(NULL));
  //Ammo Arrays
  vector <EnemyBullet> BulletList, BulletList2, BulletList3;
