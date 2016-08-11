@@ -436,7 +436,7 @@ Wall12.y = 670;
 Wall12.w = 875;
 Wall12.h = 30;
 SDL_Texture *w12 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
-//Creating Floating Platforms
+//Creating stairs
 SDL_Rect Platform;
 Platform.x = 840;
 Platform.y = 630;
@@ -461,6 +461,9 @@ Platform4.y = 490;
 Platform4.w = 180;
 Platform4.h = 60;
 SDL_Texture *p4 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//End of Creating stairs
+
+//Creating Floating Platforms
 SDL_Rect Platform5;
 Platform5.x = 940;
 Platform5.y = 340;
@@ -510,17 +513,24 @@ Platform12.w = 140;
 Platform12.h = 20;
 SDL_Texture *p12 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect Platform13;
-Platform13.x = 825;
-Platform13.y = -330;
+Platform13.x = 960;
+Platform13.y = -310;
 Platform13.w = 140;
 Platform13.h = 20;
 SDL_Texture *p13 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect Platform14;
-Platform14.x = 650;
-Platform14.y = 990;
-Platform14.w = 250;
-Platform14.h = 30;
+Platform14.x = 960;
+Platform14.y = -310;
+Platform14.w = 140;
+Platform14.h = 20;
 SDL_Texture *p14 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//Bottom Level Platforms
+SDL_Rect BottomPlatform;
+BottomPlatform.x = 650;
+BottomPlatform.y = 990;
+BottomPlatform.w = 250;
+BottomPlatform.h = 30;
+SDL_Texture *pbm = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Create Ladders Here VVV
 SDL_Rect Ladder;
 Ladder.x = 700;
@@ -535,22 +545,22 @@ Ladder2.w = 90;
 Ladder2.h = 230;
 SDL_Texture *l2 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
 SDL_Rect Ladder3;
-Ladder3.x = 525;
+Ladder3.x = 500;
 Ladder3.y = -800;
-Ladder3.w = 90;
-Ladder3.h = 230;
+Ladder3.w = 160;
+Ladder3.h = 265;
 SDL_Texture *l3 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
 SDL_Rect Ladder4;
-Ladder4.x = 80;
+Ladder4.x = 30;
 Ladder4.y = -800;
-Ladder4.w = 90;
-Ladder4.h = 230;
+Ladder4.w = 150;
+Ladder4.h = 175;
 SDL_Texture *l4 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
 SDL_Rect Ladder5;
-Ladder5.x = 225;
-Ladder5.y = 100;
-Ladder5.w = 90;
-Ladder5.h = 230;
+Ladder5.x = 10;
+Ladder5.y = 325;
+Ladder5.w = 120;
+Ladder5.h = 350;
 SDL_Texture *l5 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
 //End of Creating Ladders^^^
 //Creating a pickup
@@ -684,6 +694,27 @@ tempDisciple.DiscipleVision.x = tempDisciple.Disciple.x + 20;
 tempDisciple.DiscipleVision.y = tempDisciple.Disciple.y;
 Disciples.push_back(tempDisciple);
 
+DiscipleEnemy tempDisciple2 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
+tempDisciple2.Disciple.x = 100;
+tempDisciple2.Disciple.y = 100;
+tempDisciple2.DiscipleVision.x = tempDisciple2.Disciple.x + 20;
+tempDisciple2.DiscipleVision.y = tempDisciple2.Disciple.y;
+Disciples.push_back(tempDisciple2);
+
+DiscipleEnemy tempDisciple3 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
+tempDisciple3.Disciple.x = 1000;
+tempDisciple3.Disciple.y = -100;
+tempDisciple3.DiscipleVision.x = tempDisciple3.Disciple.x + 20;
+tempDisciple3.DiscipleVision.y = tempDisciple3.Disciple.y;
+Disciples.push_back(tempDisciple3);
+
+DiscipleEnemy tempDisciple4 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
+tempDisciple4.Disciple.x = 800;
+tempDisciple4.Disciple.y = 0;
+tempDisciple4.DiscipleVision.x = tempDisciple4.Disciple.x + 20;
+tempDisciple4.DiscipleVision.y = tempDisciple4.Disciple.y;
+Disciples.push_back(tempDisciple4);
+
 //Creating Enemy Bullet List
 EnemyBullet tempBullet = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
 BulletList.push_back(tempBullet);
@@ -772,6 +803,9 @@ if(window == NULL)
 	printf("\n Couldn't create window :( ",SDL_GetError());
 	return 1;
 }
+state = ingame;
+while(state == ingame)
+{
 while(inGame)
 {
 	//Input for Game//
@@ -780,7 +814,6 @@ while(inGame)
 	if(event.type == SDL_QUIT)
 	 {
 	 inGame = false;
-
 	 }
 	else
 	{
@@ -829,13 +862,18 @@ while(inGame)
 			{
 			case SDLK_ESCAPE:
 				inGame = false;
+				state = Lose;
 				break;
 			case SDLK_w:
 				isGrounded = false;
-				PlayerVelY -= Player_Vel;
+
 				if (onLadder == true)
 				{
-					Player.y += PlayerVelY - 400;
+					Player.y -= PlayerVelY + 400;
+				}
+				else
+				{
+					PlayerVelY -= Player_Vel;
 				}
 				break;
 			case SDLK_s:
@@ -843,7 +881,7 @@ while(inGame)
 				PlayerVelY += Player_Vel;
 				if (onLadder == true)
 				{
-					Player.y -= PlayerVelY - 400;
+					Player.y -= PlayerVelY - 200;
 				}
 				break;
 			case SDLK_a:
@@ -967,12 +1005,14 @@ while(inGame)
 	}
 
 	//Updating Disciples in array
-	if (Player.x < Disciples[0].Disciple.x)
+	for(int eD = 0; eD <4; eD++)
 	{
-		Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x - 200;
+		if (Player.x < Disciples[eD].Disciple.x)
+		{
+			Disciples[eD].DiscipleVision.x = Disciples[eD].Disciple.x - 200;
+		}
 	}
-
-	for(int eD = 0; eD < 1; eD++)
+	for(int eD = 0; eD < 4; eD++)
 	{
 		Disciples[eD].Update(Player,r1);
 	}
@@ -1012,6 +1052,12 @@ while(inGame)
 		Turrets[2].TurretVision.x -= PlayerVelX;
 		Disciples[0].Disciple.x -= PlayerVelX;
 		Disciples[0].DiscipleVision.x -= PlayerVelX;
+		Disciples[1].Disciple.x -= PlayerVelX;
+		Disciples[1].DiscipleVision.x -= PlayerVelX;
+		Disciples[2].Disciple.x -= PlayerVelX;
+		Disciples[2].DiscipleVision.x -= PlayerVelX;
+		Disciples[3].Disciple.x -= PlayerVelX;
+		Disciples[3].DiscipleVision.x -= PlayerVelX;
 		Platform.x -= PlayerVelX;
 		Platform2.x -= PlayerVelX;
 		Platform3.x -= PlayerVelX;
@@ -1026,6 +1072,7 @@ while(inGame)
 		Platform12.x -= PlayerVelX;
 		Platform13.x -= PlayerVelX;
 		Platform14.x -= PlayerVelX;
+		BottomPlatform.x -= PlayerVelX;
 		Ladder.x -= PlayerVelX;
 		Ladder2.x -= PlayerVelX;
 		Ladder3.x -= PlayerVelX;
@@ -1062,6 +1109,12 @@ while(inGame)
 		Turrets[2].TurretVision.x -= PlayerVelX;
 		Disciples[0].Disciple.x -= PlayerVelX;
 		Disciples[0].DiscipleVision.x -= PlayerVelX;
+		Disciples[1].Disciple.x -= PlayerVelX;
+		Disciples[1].DiscipleVision.x -= PlayerVelX;
+		Disciples[2].Disciple.x -= PlayerVelX;
+		Disciples[2].DiscipleVision.x -= PlayerVelX;
+		Disciples[3].Disciple.x -= PlayerVelX;
+		Disciples[3].DiscipleVision.x -= PlayerVelX;
 		Platform.x -= PlayerVelX;
 		Platform2.x -= PlayerVelX;
 		Platform3.x -= PlayerVelX;
@@ -1076,6 +1129,7 @@ while(inGame)
 		Platform12.x -= PlayerVelX;
 		Platform13.x -= PlayerVelX;
 		Platform14.x -= PlayerVelX;
+		BottomPlatform.x -= PlayerVelX;
 		Ladder.x -= PlayerVelX;
 		Ladder2.x -= PlayerVelX;
 		Ladder3.x -= PlayerVelX;
@@ -1104,6 +1158,10 @@ while(inGame)
 	{
 		Player.x -= PlayerVelX;
 	}
+	if(SDL_HasIntersection(&Player, &BottomPlatform))
+	{
+		Player.x -= PlayerVelX;
+	}
 	//Ladder Collision
 	if(SDL_HasIntersection(&Player,&Ladder)|| SDL_HasIntersection(&Player, &Ladder2)||
 		SDL_HasIntersection(&Player, &Ladder3) || SDL_HasIntersection(&Player, &Ladder4)||
@@ -1116,6 +1174,40 @@ while(inGame)
 	{
 		onLadder = false;
 	}
+	//Making Sure the enemies cannot go through walls either ;)
+		for(int eD =0; eD < 4; eD++)
+		{
+		if (SDL_HasIntersection(&Disciples[eD].Disciple, &Wall) || SDL_HasIntersection(&Disciples[eD].Disciple, &Wall2) ||
+				SDL_HasIntersection(&Disciples[eD].Disciple, &Wall3) || SDL_HasIntersection(&Disciples[eD].Disciple, &Wall4) ||
+				SDL_HasIntersection(&Disciples[eD].Disciple, &Wall5) || SDL_HasIntersection(&Disciples[eD].Disciple, &Wall6) ||
+				SDL_HasIntersection(&Disciples[eD].Disciple, &Wall7) || SDL_HasIntersection(&Disciples[eD].Disciple, &Wall8) ||
+				SDL_HasIntersection(&Disciples[eD].Disciple, &Wall9) || SDL_HasIntersection(&Disciples[eD].Disciple, &Wall10) ||
+				SDL_HasIntersection(&Disciples[eD].Disciple, &Wall11) || SDL_HasIntersection(&Disciples[eD].Disciple, &Wall12))
+			{
+				Disciples[eD].Disciple.x -= 2;
+			}
+		}
+		//Making Sure the enemies cannot go through platforms either ;)
+			for(int eD =0; eD < 4; eD++)
+			{
+			if (SDL_HasIntersection(&Disciples[eD].Disciple, &Platform) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform2) ||
+					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform3) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform4) ||
+					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform5) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform6) ||
+					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform7) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform8) ||
+					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform9) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform10) ||
+					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform11) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform12)||
+					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform13) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform14))
+				{
+					Disciples[eD].Disciple.x -= 2;
+				}
+			}
+			for(int eD = 0; eD <4; eD++)
+			{
+				if(SDL_HasIntersection(&Disciples[eD].Disciple, &BottomPlatform))
+				{
+					Disciples[eD].Disciple.x -= 2;
+				}
+			}
 	//Player to Enemy Bullet Collision
 	for (int eb = 0; eb <4; eb++)
 	{
@@ -1129,24 +1221,30 @@ while(inGame)
 		}
 	}
 	//Player Collision with DiscipleVision
-	if(SDL_HasIntersection(&Player,&Disciples[0].DiscipleVision))
+	for(int eD =0; eD<4; eD++)
 	{
-		if(Disciples[0].isRight == true)
+		if(SDL_HasIntersection(&Player,&Disciples[eD].DiscipleVision))
 		{
-		Disciples[0].Disciple.x += 2;
-		Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x + 75;
-		}
-		if(Disciples[0].isRight == false)
-		{
-			Disciples[0].Disciple.x -= 2;
-			Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x -75;
+			if(Disciples[eD].isRight == true)
+			{
+			Disciples[eD].Disciple.x += 2;
+			Disciples[eD].DiscipleVision.x = Disciples[eD].Disciple.x + 75;
+			}
+			if(Disciples[eD].isRight == false)
+			{
+				Disciples[eD].Disciple.x -= 2;
+				Disciples[eD].DiscipleVision.x = Disciples[eD].Disciple.x -75;
+			}
 		}
 	}
 	//Disciple Colliding with player
-	if(SDL_HasIntersection(&Player,&Disciples[0].Disciple))
+	for(int eD = 0; eD<4; eD++)
 	{
-		HealthBarFront.w -= 10;
-		playerHealth -=5;
+		if(SDL_HasIntersection(&Player,&Disciples[eD].Disciple))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -=5;
+		}
 	}
 	//PlayerBullet Collision with Disciple
 	for(int pb = 0; pb <9; pb++)
@@ -1165,6 +1263,54 @@ while(inGame)
 			}
 		}
 	}
+	for(int pb = 0; pb <9; pb++)
+		{
+			if(SDL_HasIntersection(&ListofAmmo[pb].PBullet, &Disciples[1].Disciple))
+			{
+				Disciples[1].discipleHealth -=5;
+				ListofAmmo[pb].PBullet.x = 2000;
+				ListofAmmo[pb].PBullet.y = 2000;
+				ListofAmmo[pb].isActive = false;
+				if(Disciples[1].discipleDead == true)
+				{
+					ListofAmmo[pb].PBullet.x = 2000;
+					ListofAmmo[pb].PBullet.y = 2000;
+					ListofAmmo[pb].isActive = false;
+				}
+			}
+		}
+	for(int pb = 0; pb <9; pb++)
+		{
+			if(SDL_HasIntersection(&ListofAmmo[pb].PBullet, &Disciples[2].Disciple))
+			{
+				Disciples[2].discipleHealth -=5;
+				ListofAmmo[pb].PBullet.x = 2000;
+				ListofAmmo[pb].PBullet.y = 2000;
+				ListofAmmo[pb].isActive = false;
+				if(Disciples[2].discipleDead == true)
+				{
+					ListofAmmo[pb].PBullet.x = 2000;
+					ListofAmmo[pb].PBullet.y = 2000;
+					ListofAmmo[pb].isActive = false;
+				}
+			}
+		}
+	for(int pb = 0; pb <9; pb++)
+		{
+			if(SDL_HasIntersection(&ListofAmmo[pb].PBullet, &Disciples[3].Disciple))
+			{
+				Disciples[3].discipleHealth -=5;
+				ListofAmmo[pb].PBullet.x = 2000;
+				ListofAmmo[pb].PBullet.y = 2000;
+				ListofAmmo[pb].isActive = false;
+				if(Disciples[3].discipleDead == true)
+				{
+					ListofAmmo[pb].PBullet.x = 2000;
+					ListofAmmo[pb].PBullet.y = 2000;
+					ListofAmmo[pb].isActive = false;
+				}
+			}
+		}
 	//Collision with Turrets in array with player bullets 
 	for (int pb = 0; pb<9; pb++)
 	{
@@ -1215,11 +1361,10 @@ while(inGame)
 		}
 	}
 	//Player Collision with TurretVision
-
 		if (SDL_HasIntersection(&Player, &Turrets[0].TurretVision))
 		{
 			int random_number = rand() % 5;
-			if (turretDead == false)
+			if (turretDead == false && random_number == 1)
 			{
 				for (int t = 0; t < 4; t++)
 				{
@@ -1232,10 +1377,11 @@ while(inGame)
 				}
 			}
 		}
+		//More turret detectig the player
 		if (SDL_HasIntersection(&Player, &Turrets[1].TurretVision))
 		{
 			int random_number = rand() % 5;
-			if (turretDead == false)
+			if (turretDead == false && random_number == 1)
 			{
 				for (int t = 0; t < 4; t++)
 				{
@@ -1248,10 +1394,11 @@ while(inGame)
 				}
 			}
 		}
+		//Last Turret detection for player
 		if (SDL_HasIntersection(&Player, &Turrets[2].TurretVision))
 		{
 			int random_number = rand() % 5;
-			if (turretDead == false)
+			if (turretDead == false && random_number == 1)
 			{
 				for (int t = 0; t < 4; t++)
 				{
@@ -1348,6 +1495,12 @@ while(inGame)
 				Turrets[2].TurretVision.y -= PlayerVelY;
 				Disciples[0].Disciple.y -= PlayerVelY;
 				Disciples[0].DiscipleVision.y -= PlayerVelY;
+				Disciples[1].Disciple.y -= PlayerVelY;
+				Disciples[1].DiscipleVision.y -= PlayerVelY;
+				Disciples[2].Disciple.y -= PlayerVelY;
+				Disciples[2].DiscipleVision.y -= PlayerVelY;
+				Disciples[3].Disciple.y -= PlayerVelY;
+				Disciples[3].DiscipleVision.y -= PlayerVelY;
 				Platform.y -= PlayerVelY;
 				Platform2.y -= PlayerVelY;
 				Platform3.y -= PlayerVelY;
@@ -1362,6 +1515,7 @@ while(inGame)
 				Platform12.y -= PlayerVelY;
 				Platform13.y -= PlayerVelY;
 				Platform14.y -= PlayerVelY;
+				BottomPlatform.y -= PlayerVelY;
 				Ladder.y -= PlayerVelY;
 				Ladder2.y -= PlayerVelY;
 				Ladder3.y -= PlayerVelY;
@@ -1400,6 +1554,12 @@ while(inGame)
 				Turrets[2].TurretVision.y -= PlayerVelY;
 				Disciples[0].Disciple.y -= PlayerVelY;
 				Disciples[0].DiscipleVision.y -= PlayerVelY;
+				Disciples[1].Disciple.y -= PlayerVelY;
+				Disciples[1].DiscipleVision.y -= PlayerVelY;
+				Disciples[2].Disciple.y -= PlayerVelY;
+				Disciples[2].DiscipleVision.y -= PlayerVelY;
+				Disciples[3].Disciple.y -= PlayerVelY;
+				Disciples[3].DiscipleVision.y -= PlayerVelY;
 				Platform.y -= PlayerVelY;
 				Platform2.y -= PlayerVelY;
 				Platform3.y -= PlayerVelY;
@@ -1414,6 +1574,7 @@ while(inGame)
 				Platform12.y -= PlayerVelY;
 				Platform13.y -= PlayerVelY;
 				Platform14.y -= PlayerVelY;
+				BottomPlatform.y -= PlayerVelY;
 				Ladder.y -= PlayerVelY;
 				Ladder2.y -= PlayerVelY;
 				Ladder3.y -= PlayerVelY;
@@ -1459,6 +1620,12 @@ while(inGame)
 			Turrets[2].TurretVision.y -= PlayerVelY;
 			Disciples[0].Disciple.y -= PlayerVelY;
 			Disciples[0].DiscipleVision.y -= PlayerVelY;
+			Disciples[1].Disciple.y -= PlayerVelY;
+			Disciples[1].DiscipleVision.y -= PlayerVelY;
+			Disciples[2].Disciple.y -= PlayerVelY;
+			Disciples[2].DiscipleVision.y -= PlayerVelY;
+			Disciples[3].Disciple.y -= PlayerVelY;
+			Disciples[3].DiscipleVision.y -= PlayerVelY;
 			Platform.y -= PlayerVelY;
 			Platform2.y -= PlayerVelY;
 			Platform3.y -= PlayerVelY;
@@ -1473,6 +1640,7 @@ while(inGame)
 			Platform12.y -= PlayerVelY;
 			Platform13.y -= PlayerVelY;
 			Platform14.y -= PlayerVelY;
+			BottomPlatform.y -= PlayerVelY;
 			Ladder.y -= PlayerVelY;
 			Ladder2.y -= PlayerVelY;
 			Ladder3.y -= PlayerVelY;
@@ -1511,6 +1679,12 @@ while(inGame)
 			Turrets[2].TurretVision.y -= PlayerVelY;
 			Disciples[0].Disciple.y -= PlayerVelY;
 			Disciples[0].DiscipleVision.y -= PlayerVelY;
+			Disciples[1].Disciple.y -= PlayerVelY;
+			Disciples[1].DiscipleVision.y -= PlayerVelY;
+			Disciples[2].Disciple.y -= PlayerVelY;
+			Disciples[2].DiscipleVision.y -= PlayerVelY;
+			Disciples[3].Disciple.y -= PlayerVelY;
+			Disciples[3].DiscipleVision.y -= PlayerVelY;
 			Platform.y -= PlayerVelY;
 			Platform2.y -= PlayerVelY;
 			Platform3.y -= PlayerVelY;
@@ -1525,6 +1699,7 @@ while(inGame)
 			Platform12.y -= PlayerVelY;
 			Platform13.y -= PlayerVelY;
 			Platform14.y -= PlayerVelY;
+			BottomPlatform.y -= PlayerVelY;
 			Ladder.y -= PlayerVelY;
 			Ladder2.y -= PlayerVelY;
 			Ladder3.y -= PlayerVelY;
@@ -1560,6 +1735,12 @@ while(inGame)
 		Player.y -= PlayerVelY;
 		PlayerVelY = 0;
 
+	}
+	if(SDL_HasIntersection(&Player, &BottomPlatform))
+	{
+		isGrounded = true;
+		Player.y -= PlayerVelY;
+		PlayerVelY = 0;
 	}
 	if(SDL_HasIntersection(&Player,&Ladder) || SDL_HasIntersection(&Player, &Ladder2)||
 	(SDL_HasIntersection(&Player, &Ladder3) || SDL_HasIntersection(&Player, &Ladder4)|| 
@@ -1664,7 +1845,7 @@ for(int eT = 0; eT<3; eT++)
 	}
 }
 //Rendering Disciple in array
-for (int eD = 0; eD < 1; eD++)
+for (int eD = 0; eD < 4; eD++)
 {
 	if (Disciples[eD].discipleDead == false)
 	{
@@ -1738,6 +1919,8 @@ SDL_RenderCopy(r1, p11, NULL, &Platform11);
 SDL_RenderCopy(r1, p12, NULL, &Platform12);
 SDL_RenderCopy(r1, p13, NULL, &Platform13);
 SDL_RenderCopy(r1, p14, NULL, &Platform14);
+//Rendering Bottom Level Platforms
+SDL_RenderCopy(r1, pbm, NULL, &BottomPlatform);
 //Rendering Ladders
 SDL_RenderCopy(r1, l1, NULL, &Ladder);
 SDL_RenderCopy(r1, l2, NULL, &Ladder2);
@@ -1747,6 +1930,13 @@ SDL_RenderCopy(r1, l5, NULL, &Ladder5);
 SDL_RenderPresent(r1);
 //SDL Drawing Process End//
 SDL_Delay(16);
+}
+}
+if(state == Lose)
+{
+	cout << "What state are we in Lose of course" <<state<<endl;
+	SDL_DestroyWindow(window);
+	SDL_Quit();
 }
 //End of Game Loop//
 SDL_DestroyWindow(window);
