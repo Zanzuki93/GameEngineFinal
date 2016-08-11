@@ -305,7 +305,7 @@ string currentWorkingDirectory(getcwd(NULL, 0));
  bool inGame = true;
  srand(time(NULL));
  //Ammo Arrays
- vector <EnemyBullet> BulletList;
+ vector <EnemyBullet> BulletList, BulletList2, BulletList3;
  vector<PlayerBullet> ListofAmmo;
  vector<TurretEnemy>Turrets;
  vector<DiscipleEnemy>Disciples;
@@ -339,7 +339,7 @@ Player.w = 10;
 const int Player_Vel = 5;
 int PlayerVelX = 0;
 int PlayerVelY = 0;
-bool isGrounded = true;
+bool isGrounded = true, onLadder = false;
 SDL_Texture * t2 = IMG_LoadTexture(r1,(images_dir+"TestImage.png").c_str());
 
 //create the background texture
@@ -471,6 +471,54 @@ Platform6.y = 140;
 Platform6.w = 125;
 Platform6.h = 30;
 SDL_Texture *p6 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform7;
+Platform7.x = 740;
+Platform7.y = 240;
+Platform7.w = 125;
+Platform7.h = 30;
+SDL_Texture *p7 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform8;
+Platform8.x = 490;
+Platform8.y = 10;
+Platform8.w = 350;
+Platform8.h = 30;
+SDL_Texture *p8 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform9;
+Platform9.x = 490;
+Platform9.y = -180;
+Platform9.w = 30;
+Platform9.h = 20;
+SDL_Texture *p9 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform10;
+Platform10.x = 600;
+Platform10.y = -180;
+Platform10.w = 250;
+Platform10.h = 20;
+SDL_Texture *p10 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform11;
+Platform11.x = 800;
+Platform11.y = -240;
+Platform11.w = 140;
+Platform11.h = 20;
+SDL_Texture *p11 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform12;
+Platform12.x = 800;
+Platform12.y = -380;
+Platform12.w = 140;
+Platform12.h = 20;
+SDL_Texture *p12 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform13;
+Platform13.x = 825;
+Platform13.y = -330;
+Platform13.w = 140;
+Platform13.h = 20;
+SDL_Texture *p13 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform14;
+Platform14.x = 650;
+Platform14.y = 990;
+Platform14.w = 250;
+Platform14.h = 30;
+SDL_Texture *p14 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Create Ladders Here VVV
 SDL_Rect Ladder;
 Ladder.x = 700;
@@ -478,6 +526,30 @@ Ladder.y = 660;
 Ladder.w = 100;
 Ladder.h = 330;
 SDL_Texture *l1 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
+SDL_Rect Ladder2;
+Ladder2.x = 525;
+Ladder2.y = -200;
+Ladder2.w = 90;
+Ladder2.h = 230;
+SDL_Texture *l2 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
+SDL_Rect Ladder3;
+Ladder3.x = 525;
+Ladder3.y = -800;
+Ladder3.w = 90;
+Ladder3.h = 230;
+SDL_Texture *l3 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
+SDL_Rect Ladder4;
+Ladder4.x = 80;
+Ladder4.y = -800;
+Ladder4.w = 90;
+Ladder4.h = 230;
+SDL_Texture *l4 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
+SDL_Rect Ladder5;
+Ladder5.x = 225;
+Ladder5.y = 100;
+Ladder5.w = 90;
+Ladder5.h = 230;
+SDL_Texture *l5 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
 //End of Creating Ladders^^^
 //Creating a pickup
 SDL_Rect healthPickUp;
@@ -582,11 +654,26 @@ SDL_Texture * BlackKeyTexture = IMG_LoadTexture(r1, (images_dir + "blackKeyPickU
 TurretEnemy tempTurret = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
 tempTurret = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(),r1);
 tempTurret.Turret.x = 800;
-tempTurret.Turret.y = -40;
+tempTurret.Turret.y = -200;
 tempTurret.TurretVision.x = tempTurret.Turret.x;
 tempTurret.TurretVision.y = tempTurret.Turret.y;
 Turrets.push_back(tempTurret);
 
+TurretEnemy tempTurret2 = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
+tempTurret2 = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(), r1);
+tempTurret2.Turret.x = 600;
+tempTurret2.Turret.y = -200;
+tempTurret2.TurretVision.x = tempTurret2.Turret.x;
+tempTurret2.TurretVision.y = tempTurret2.Turret.y;
+Turrets.push_back(tempTurret2);
+
+TurretEnemy tempTurret3 = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
+tempTurret3 = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(), r1);
+tempTurret3.Turret.x = 400;
+tempTurret3.Turret.y = -200;
+tempTurret3.TurretVision.x = tempTurret3.Turret.x;
+tempTurret3.TurretVision.y = tempTurret3.Turret.y;
+Turrets.push_back(tempTurret3);
 //Creating List of Disciples
 DiscipleEnemy tempDisciple = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
 tempDisciple.Disciple.x = 800;
@@ -595,7 +682,7 @@ tempDisciple.DiscipleVision.x = tempDisciple.Disciple.x + 20;
 tempDisciple.DiscipleVision.y = tempDisciple.Disciple.y;
 Disciples.push_back(tempDisciple);
 
-//Creating Enemy Bullet
+//Creating Enemy Bullet List
 EnemyBullet tempBullet = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
 BulletList.push_back(tempBullet);
 //****************1st Enemy Bullet*************//
@@ -612,6 +699,39 @@ EnemyBullet tempBullet5 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png
 BulletList.push_back(tempBullet5);
 //****************5th Enemy Bullet*************//
 
+//Creating Enemy Bullet List
+EnemyBullet tempBullet6 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList2.push_back(tempBullet6);
+//****************1st Enemy Bullet*************//
+EnemyBullet tempBullet7 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList2.push_back(tempBullet7);
+//****************2nd Enemy Bullet*************//
+EnemyBullet tempBullet8 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList2.push_back(tempBullet8);
+//****************3rd Enemy Bullet*************//
+EnemyBullet tempBullet9 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList2.push_back(tempBullet9);
+//****************4th Enemy Bullet*************//
+EnemyBullet tempBullet10 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList2.push_back(tempBullet10);
+//****************5th Enemy Bullet*************//
+
+//Creating Enemy Bullet List
+EnemyBullet tempBullet11 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList3.push_back(tempBullet11);
+//****************1st Enemy Bullet*************//
+EnemyBullet tempBullet12 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList3.push_back(tempBullet12);
+//****************2nd Enemy Bullet*************//
+EnemyBullet tempBullet13 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList3.push_back(tempBullet13);
+//****************3rd Enemy Bullet*************//
+EnemyBullet tempBullet14 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList3.push_back(tempBullet14);
+//****************4th Enemy Bullet*************//
+EnemyBullet tempBullet15 = EnemyBullet((images_dir + "EnemyBulletTextureRight.png").c_str(), r1);
+BulletList3.push_back(tempBullet15);
+//****************5th Enemy Bullet*************//
 
 //Creating Player Bullets
 PlayerBullet tempPBullet = PlayerBullet((images_dir + "EnemyBulletTextureLeft.png").c_str(), r1);
@@ -711,9 +831,18 @@ while(inGame)
 			case SDLK_w:
 				isGrounded = false;
 				PlayerVelY -= Player_Vel;
+				if (onLadder == true)
+				{
+					Player.y += PlayerVelY - 400;
+				}
 				break;
 			case SDLK_s:
+				isGrounded = false;
 				PlayerVelY += Player_Vel;
+				if (onLadder == true)
+				{
+					Player.y -= PlayerVelY - 400;
+				}
 				break;
 			case SDLK_a:
 				PlayerVelX -= Player_Vel;
@@ -749,7 +878,7 @@ while(inGame)
 	}
 	}
 	//Input End//
-	//Update Bullets
+	//Update Player Bullets
 	for (int p = 0; p<9; p++)
 	{
 		if (ListofAmmo[p].isActive == true)
@@ -757,6 +886,7 @@ while(inGame)
 			ListofAmmo[p].Update();
 		}
 	}
+	//Update Enemy Bullets
 	for (int k = 0; k <4; k++)
 	{
 		if (BulletList[k].isActive == true)
@@ -764,8 +894,23 @@ while(inGame)
 			BulletList[k].Update();
 		}
 	}
+	for (int bL = 0; bL <4; bL++)
+	{
+		if (BulletList2[bL].isActive == true)
+		{
+			BulletList2[bL].Update();
+		}
+	}
+	for (int bL1 = 0; bL1 <4; bL1++)
+	{
+		if (BulletList3[bL1].isActive == true)
+		{
+			BulletList3[bL1].Update();
+		}
+	}
 	//Updating Turrets in array
-	if (Player.x > Turrets[0].Turret.x)
+	
+		if (Player.x > Turrets[0].Turret.x)
 		{
 			Turrets[0].TurretVision.x = Turrets[0].Turret.x + 20;
 			for (int eb = 0; eb < 4; eb++)
@@ -773,18 +918,52 @@ while(inGame)
 				BulletList[eb].BulletDir = 1;
 			}
 		}
-	if (Player.x < Turrets[0].Turret.x)
-	{
-		Turrets[0].TurretVision.x = Turrets[0].Turret.x - 200;
-		for (int eb = 0; eb < 4; eb++)
+		if (Player.x < Turrets[0].Turret.x)
 		{
-			BulletList[eb].BulletDir = -1;
+			Turrets[0].TurretVision.x = Turrets[0].Turret.x - 200;
+			for (int eb = 0; eb < 4; eb++)
+			{
+				BulletList[eb].BulletDir = -1;
+			}
 		}
-	}
-	for (int eT = 0; eT < 1; eT++)
+	
+		if (Player.x > Turrets[1].Turret.x)
+		{
+			Turrets[1].TurretVision.x = Turrets[1].Turret.x + 20;
+			for (int eb = 0; eb < 4; eb++)
+			{
+				BulletList2[eb].BulletDir = 1;
+			}
+		}
+		if (Player.x < Turrets[1].Turret.x)
+		{
+			Turrets[1].TurretVision.x = Turrets[1].Turret.x - 200;
+			for (int eb = 0; eb < 4; eb++)
+			{
+				BulletList2[eb].BulletDir = -1;
+			}
+		}
+		if (Player.x > Turrets[2].Turret.x)
+		{
+			Turrets[2].TurretVision.x = Turrets[2].Turret.x + 20;
+			for (int eb = 0; eb < 4; eb++)
+			{
+				BulletList3[eb].BulletDir = 1;
+			}
+		}
+		if (Player.x < Turrets[2].Turret.x)
+		{
+			Turrets[2].TurretVision.x = Turrets[2].Turret.x - 200;
+			for (int eb = 0; eb < 4; eb++)
+			{
+				BulletList3[eb].BulletDir = -1;
+			}
+		}
+	for (int eT = 0; eT < 3; eT++)
 	{
 		Turrets[eT].Update(Player, r1, (images_dir + "KillerPlantLeft.png").c_str(), (images_dir + "KillerPlantRight.png").c_str());
 	}
+
 	//Updating Disciples in array
 	if (Player.x < Disciples[0].Disciple.x)
 	{
@@ -825,6 +1004,10 @@ while(inGame)
 		BlackKey.x -= PlayerVelX;
 		Turrets[0].Turret.x -= PlayerVelX;
 		Turrets[0].TurretVision.x -= PlayerVelX;
+		Turrets[1].Turret.x -= PlayerVelX;
+		Turrets[1].TurretVision.x -= PlayerVelX;
+		Turrets[2].Turret.x -= PlayerVelX;
+		Turrets[2].TurretVision.x -= PlayerVelX;
 		Disciples[0].Disciple.x -= PlayerVelX;
 		Disciples[0].DiscipleVision.x -= PlayerVelX;
 		Platform.x -= PlayerVelX;
@@ -833,7 +1016,19 @@ while(inGame)
 		Platform4.x -= PlayerVelX;
 		Platform5.x -= PlayerVelX;
 		Platform6.x -= PlayerVelX;
+		Platform7.x -= PlayerVelX;
+		Platform8.x -= PlayerVelX;
+		Platform9.x -= PlayerVelX;
+		Platform10.x -= PlayerVelX;
+		Platform11.x -= PlayerVelX;
+		Platform12.x -= PlayerVelX;
+		Platform13.x -= PlayerVelX;
+		Platform14.x -= PlayerVelX;
 		Ladder.x -= PlayerVelX;
+		Ladder2.x -= PlayerVelX;
+		Ladder3.x -= PlayerVelX;
+		Ladder4.x -= PlayerVelX;
+		Ladder5.x -= PlayerVelX;
 	}
 	if (Player.x < 0 + (Player.w * 2))
 	{
@@ -859,6 +1054,10 @@ while(inGame)
 		BlackKey.x -= PlayerVelX;
 		Turrets[0].Turret.x -= PlayerVelX;
 		Turrets[0].TurretVision.x -= PlayerVelX;
+		Turrets[1].Turret.x -= PlayerVelX;
+		Turrets[1].TurretVision.x -= PlayerVelX;
+		Turrets[2].Turret.x -= PlayerVelX;
+		Turrets[2].TurretVision.x -= PlayerVelX;
 		Disciples[0].Disciple.x -= PlayerVelX;
 		Disciples[0].DiscipleVision.x -= PlayerVelX;
 		Platform.x -= PlayerVelX;
@@ -867,7 +1066,19 @@ while(inGame)
 		Platform4.x -= PlayerVelX;
 		Platform5.x -= PlayerVelX;
 		Platform6.x -= PlayerVelX;
+		Platform7.x -= PlayerVelX;
+		Platform8.x -= PlayerVelX;
+		Platform9.x -= PlayerVelX;
+		Platform10.x -= PlayerVelX;
+		Platform11.x -= PlayerVelX;
+		Platform12.x -= PlayerVelX;
+		Platform13.x -= PlayerVelX;
+		Platform14.x -= PlayerVelX;
 		Ladder.x -= PlayerVelX;
+		Ladder2.x -= PlayerVelX;
+		Ladder3.x -= PlayerVelX;
+		Ladder4.x -= PlayerVelX;
+		Ladder5.x -= PlayerVelX;
 	}
 	//Checking For collision with walls and the player Left and Right
 	if (SDL_HasIntersection(&Player, &Wall) || SDL_HasIntersection(&Player, &Wall2) ||
@@ -883,14 +1094,25 @@ while(inGame)
 	//Platform Collision
 	if (SDL_HasIntersection(&Player, &Platform) || SDL_HasIntersection(&Player,&Platform2)||
 		SDL_HasIntersection(&Player, &Platform3) || SDL_HasIntersection(&Player, &Platform4)||
-		SDL_HasIntersection(&Player, &Platform5) || SDL_HasIntersection(&Player, &Platform6))
+		SDL_HasIntersection(&Player, &Platform5) || SDL_HasIntersection(&Player, &Platform6)||
+		SDL_HasIntersection(&Player, &Platform7) || SDL_HasIntersection(&Player, &Platform8)||
+		SDL_HasIntersection(&Player, &Platform9) || SDL_HasIntersection(&Player, &Platform10)||
+		SDL_HasIntersection(&Player, &Platform11) || SDL_HasIntersection(&Player, &Platform12)||
+		SDL_HasIntersection(&Player, &Platform13) || SDL_HasIntersection(&Player, &Platform14))
 	{
 		Player.x -= PlayerVelX;
 	}
 	//Ladder Collision
-	if(SDL_HasIntersection(&Player,&Ladder))
+	if(SDL_HasIntersection(&Player,&Ladder)|| SDL_HasIntersection(&Player, &Ladder2)||
+		SDL_HasIntersection(&Player, &Ladder3) || SDL_HasIntersection(&Player, &Ladder4)||
+		SDL_HasIntersection(&Player, &Ladder5))
 	{
-		Player.x -= PlayerVelX;
+		//Player.x -= PlayerVelX;
+		onLadder = true;
+	}
+	else
+	{
+		onLadder = false;
 	}
 	//Player to Enemy Bullet Collision
 	for (int eb = 0; eb <4; eb++)
@@ -958,23 +1180,88 @@ while(inGame)
 			}
 		}
 	}
-	//Player Collision with TurretVision
-	if(SDL_HasIntersection(&Player, &Turrets[0].TurretVision))
+	for (int pb = 0; pb<9; pb++)
 	{
-		int random_number = rand() % 5;
+		if (SDL_HasIntersection(&Turrets[1].Turret, &ListofAmmo[pb].PBullet))
+		{
+			Turrets[1].turretHealth -= 5;
+			ListofAmmo[pb].PBullet.x = 2000;
+			ListofAmmo[pb].PBullet.y = 2000;
+			ListofAmmo[pb].isActive = false;
+			if (Turrets[1].turretHealth <= 0)
+			{
+				ListofAmmo[pb].PBullet.x = 2000;
+				ListofAmmo[pb].PBullet.y = 2000;
+				ListofAmmo[pb].isActive = false;
+			}
+		}
+	}
+	for (int pb = 0; pb<9; pb++)
+	{
+		if (SDL_HasIntersection(&Turrets[2].Turret, &ListofAmmo[pb].PBullet))
+		{
+			Turrets[2].turretHealth -= 5;
+			ListofAmmo[pb].PBullet.x = 2000;
+			ListofAmmo[pb].PBullet.y = 2000;
+			ListofAmmo[pb].isActive = false;
+			if (Turrets[2].turretHealth <= 0)
+			{
+				ListofAmmo[pb].PBullet.x = 2000;
+				ListofAmmo[pb].PBullet.y = 2000;
+				ListofAmmo[pb].isActive = false;
+			}
+		}
+	}
+	//Player Collision with TurretVision
+
+		if (SDL_HasIntersection(&Player, &Turrets[0].TurretVision))
+		{
+			int random_number = rand() % 5;
 			if (turretDead == false)
 			{
-				for (int t = 0; t<4; t++)
+				for (int t = 0; t < 4; t++)
 				{
 					if (BulletList[t].isActive == false && random_number == 1)
 					{
-					BulletList[t].EnemBullet.x = Turrets[0].Turret.x;
-					BulletList[t].EnemBullet.y = Turrets[0].Turret.y;
-					BulletList[t].isActive = true;
+						BulletList[t].EnemBullet.x = Turrets[0].Turret.x;
+						BulletList[t].EnemBullet.y = Turrets[0].Turret.y;
+						BulletList[t].isActive = true;
 					}
 				}
 			}
-	}
+		}
+		if (SDL_HasIntersection(&Player, &Turrets[1].TurretVision))
+		{
+			int random_number = rand() % 5;
+			if (turretDead == false)
+			{
+				for (int t = 0; t < 4; t++)
+				{
+					if (BulletList2[t].isActive == false)
+					{
+						BulletList2[t].EnemBullet.x = Turrets[1].Turret.x;
+						BulletList2[t].EnemBullet.y = Turrets[1].Turret.y;
+						BulletList2[t].isActive = true;
+					}
+				}
+			}
+		}
+		if (SDL_HasIntersection(&Player, &Turrets[2].TurretVision))
+		{
+			int random_number = rand() % 5;
+			if (turretDead == false)
+			{
+				for (int t = 0; t < 4; t++)
+				{
+					if (BulletList3[t].isActive == false)
+					{
+						BulletList3[t].EnemBullet.x = Turrets[2].Turret.x;
+						BulletList3[t].EnemBullet.y = Turrets[2].Turret.y;
+						BulletList3[t].isActive = true;
+					}
+				}
+			}
+		}
 	//Key Collision
 	if (SDL_HasIntersection(&Player, &PinkKey))
 	{
@@ -1053,6 +1340,10 @@ while(inGame)
 				tempBullet.EnemBullet.y -= PlayerVelY;
 				Turrets[0].Turret.y -= PlayerVelY;
 				Turrets[0].TurretVision.y -= PlayerVelY;
+				Turrets[1].Turret.y -= PlayerVelY;
+				Turrets[1].TurretVision.y -= PlayerVelY;
+				Turrets[2].Turret.y -= PlayerVelY;
+				Turrets[2].TurretVision.y -= PlayerVelY;
 				Disciples[0].Disciple.y -= PlayerVelY;
 				Disciples[0].DiscipleVision.y -= PlayerVelY;
 				Platform.y -= PlayerVelY;
@@ -1061,7 +1352,19 @@ while(inGame)
 				Platform4.y -= PlayerVelY;
 				Platform5.y -= PlayerVelY;
 				Platform6.y -= PlayerVelY;
+				Platform7.y -= PlayerVelY;
+				Platform8.y -= PlayerVelY;
+				Platform9.y -= PlayerVelY;
+				Platform10.y -= PlayerVelY;
+				Platform11.y -= PlayerVelY;
+				Platform12.y -= PlayerVelY;
+				Platform13.y -= PlayerVelY;
+				Platform14.y -= PlayerVelY;
 				Ladder.y -= PlayerVelY;
+				Ladder2.y -= PlayerVelY;
+				Ladder3.y -= PlayerVelY;
+				Ladder4.y -= PlayerVelY; 
+				Ladder5.y -= PlayerVelY;
 			}
 
 			if (Player.y > 768 - (Player.h * 2))
@@ -1089,6 +1392,10 @@ while(inGame)
 				tempBullet.EnemBullet.y -= PlayerVelY;
 				Turrets[0].Turret.y -= PlayerVelY;
 				Turrets[0].TurretVision.y -= PlayerVelY;
+				Turrets[1].Turret.y -= PlayerVelY;
+				Turrets[1].TurretVision.y -= PlayerVelY;
+				Turrets[2].Turret.y -= PlayerVelY;
+				Turrets[2].TurretVision.y -= PlayerVelY;
 				Disciples[0].Disciple.y -= PlayerVelY;
 				Disciples[0].DiscipleVision.y -= PlayerVelY;
 				Platform.y -= PlayerVelY;
@@ -1097,7 +1404,19 @@ while(inGame)
 				Platform4.y -= PlayerVelY;
 				Platform5.y -= PlayerVelY;
 				Platform6.y -= PlayerVelY;
+				Platform7.y -= PlayerVelY;
+				Platform8.y -= PlayerVelY;
+				Platform9.y -= PlayerVelY;
+				Platform10.y -= PlayerVelY;
+				Platform11.y -= PlayerVelY;
+				Platform12.y -= PlayerVelY;
+				Platform13.y -= PlayerVelY;
+				Platform14.y -= PlayerVelY;
 				Ladder.y -= PlayerVelY;
+				Ladder2.y -= PlayerVelY;
+				Ladder3.y -= PlayerVelY;
+				Ladder4.y -= PlayerVelY;
+				Ladder5.y -= PlayerVelY;
 			}
 			if(PlayerVelY >= 5)
 			{
@@ -1132,6 +1451,10 @@ while(inGame)
 			tempBullet.EnemBullet.y -= PlayerVelY;
 			Turrets[0].Turret.y -= PlayerVelY;
 			Turrets[0].TurretVision.y -= PlayerVelY;
+			Turrets[1].Turret.y -= PlayerVelY;
+			Turrets[1].TurretVision.y -= PlayerVelY;
+			Turrets[2].Turret.y -= PlayerVelY;
+			Turrets[2].TurretVision.y -= PlayerVelY;
 			Disciples[0].Disciple.y -= PlayerVelY;
 			Disciples[0].DiscipleVision.y -= PlayerVelY;
 			Platform.y -= PlayerVelY;
@@ -1140,7 +1463,19 @@ while(inGame)
 			Platform4.y -= PlayerVelY;
 			Platform5.y -= PlayerVelY;
 			Platform6.y -= PlayerVelY;
+			Platform7.y -= PlayerVelY;
+			Platform8.y -= PlayerVelY;
+			Platform9.y -= PlayerVelY;
+			Platform10.y -= PlayerVelY;
+			Platform11.y -= PlayerVelY;
+			Platform12.y -= PlayerVelY;
+			Platform13.y -= PlayerVelY;
+			Platform14.y -= PlayerVelY;
 			Ladder.y -= PlayerVelY;
+			Ladder2.y -= PlayerVelY;
+			Ladder3.y -= PlayerVelY;
+			Ladder4.y -= PlayerVelY;
+			Ladder5.y -= PlayerVelY;
 		}
 
 		if (Player.y > 768 - (Player.h * 2))
@@ -1168,6 +1503,10 @@ while(inGame)
 			tempBullet.EnemBullet.y -= PlayerVelY;
 			Turrets[0].Turret.y -= PlayerVelY;
 			Turrets[0].TurretVision.y -= PlayerVelY;
+			Turrets[1].Turret.y -= PlayerVelY;
+			Turrets[1].TurretVision.y -= PlayerVelY;
+			Turrets[2].Turret.y -= PlayerVelY;
+			Turrets[2].TurretVision.y -= PlayerVelY;
 			Disciples[0].Disciple.y -= PlayerVelY;
 			Disciples[0].DiscipleVision.y -= PlayerVelY;
 			Platform.y -= PlayerVelY;
@@ -1176,7 +1515,19 @@ while(inGame)
 			Platform4.y -= PlayerVelY;
 			Platform5.y -= PlayerVelY;
 			Platform6.y -= PlayerVelY;
+			Platform7.y -= PlayerVelY;
+			Platform8.y -= PlayerVelY;
+			Platform9.y -= PlayerVelY;
+			Platform10.y -= PlayerVelY;
+			Platform11.y -= PlayerVelY;
+			Platform12.y -= PlayerVelY;
+			Platform13.y -= PlayerVelY;
+			Platform14.y -= PlayerVelY;
 			Ladder.y -= PlayerVelY;
+			Ladder2.y -= PlayerVelY;
+			Ladder3.y -= PlayerVelY;
+			Ladder4.y -= PlayerVelY;
+			Ladder5.y -= PlayerVelY;
 		}
 	}
 
@@ -1197,16 +1548,27 @@ while(inGame)
 	//Platrform Collision
 	if (SDL_HasIntersection(&Player, &Platform) || SDL_HasIntersection(&Player, &Platform2)||
 		SDL_HasIntersection(&Player, &Platform3) || SDL_HasIntersection(&Player, &Platform4)||
-		SDL_HasIntersection(&Player, &Platform5) || SDL_HasIntersection(&Player, &Platform6))
+		SDL_HasIntersection(&Player, &Platform5) || SDL_HasIntersection(&Player, &Platform6)||
+		SDL_HasIntersection(&Player, &Platform7)|| SDL_HasIntersection(&Player, &Platform8)||
+		SDL_HasIntersection(&Player, &Platform9) || SDL_HasIntersection(&Player, &Platform10)||
+		SDL_HasIntersection(&Player, &Platform11) || SDL_HasIntersection(&Player, &Platform12)||
+		SDL_HasIntersection(&Player, &Platform13) || SDL_HasIntersection(&Player, &Platform14))
 	{
 		isGrounded = true;
 		Player.y -= PlayerVelY;
 		PlayerVelY = 0;
 
 	}
-	if(SDL_HasIntersection(&Player,&Ladder))
+	if(SDL_HasIntersection(&Player,&Ladder) || SDL_HasIntersection(&Player, &Ladder2)||
+	(SDL_HasIntersection(&Player, &Ladder3) || SDL_HasIntersection(&Player, &Ladder4)|| 
+	SDL_HasIntersection(&Player, &Ladder5)))
 	{
 		Player.y -= PlayerVelY;
+		onLadder = true;
+	}
+	else
+	{
+		onLadder = false;
 	}
 	//Key Collision
 	if (SDL_HasIntersection(&Player, &BlackKey) && hasBlackKey != true)
@@ -1272,6 +1634,16 @@ for (int eb = 0; eb <4; eb++)
 	if (BulletList[eb].isActive == true)
 		BulletList[eb].DrawBullet(r1);
 }
+for (int eb = 0; eb <4; eb++)
+{
+	if (BulletList2[eb].isActive == true)
+		BulletList2[eb].DrawBullet(r1);
+}
+for (int eb = 0; eb <4; eb++)
+{
+	if (BulletList3[eb].isActive == true)
+		BulletList3[eb].DrawBullet(r1);
+}
 //PlayerBullets
 for (int l = 0; l<9; l++)
 {
@@ -1282,7 +1654,7 @@ for (int l = 0; l<9; l++)
 }
 /**********Rendering the enemy texture*********/
 //Rendering Turrets in array 
-for(int eT = 0; eT<1; eT++)
+for(int eT = 0; eT<3; eT++)
 {
 	if(Turrets[eT].turretDead == false)
 	{
@@ -1356,8 +1728,20 @@ SDL_RenderCopy(r1, p3, NULL, &Platform3);
 SDL_RenderCopy(r1, p4, NULL, &Platform4);
 SDL_RenderCopy(r1, p5, NULL, &Platform5);
 SDL_RenderCopy(r1, p6, NULL, &Platform6);
+SDL_RenderCopy(r1, p7, NULL, &Platform7);
+SDL_RenderCopy(r1, p8, NULL, &Platform8);
+SDL_RenderCopy(r1, p9, NULL, &Platform9);
+SDL_RenderCopy(r1, p10, NULL, &Platform10);
+SDL_RenderCopy(r1, p11, NULL, &Platform11);
+SDL_RenderCopy(r1, p12, NULL, &Platform12);
+SDL_RenderCopy(r1, p13, NULL, &Platform13);
+SDL_RenderCopy(r1, p14, NULL, &Platform14);
 //Rendering Ladders
 SDL_RenderCopy(r1, l1, NULL, &Ladder);
+SDL_RenderCopy(r1, l2, NULL, &Ladder2);
+SDL_RenderCopy(r1, l3, NULL, &Ladder3);
+SDL_RenderCopy(r1, l4, NULL, &Ladder4);
+SDL_RenderCopy(r1, l5, NULL, &Ladder5);
 SDL_RenderPresent(r1);
 //SDL Drawing Process End//
 SDL_Delay(16);
