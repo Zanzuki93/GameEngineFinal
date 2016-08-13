@@ -519,11 +519,103 @@ Platform13.w = 140;
 Platform13.h = 20;
 SDL_Texture *p13 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect Platform14;
-Platform14.x = 960;
-Platform14.y = -310;
+Platform14.x = 650;
+Platform14.y = -440;
 Platform14.w = 140;
 Platform14.h = 20;
 SDL_Texture *p14 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform15;
+Platform15.x = 505;
+Platform15.y = -535;
+Platform15.w = 190;
+Platform15.h = 20;
+SDL_Texture * p15 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect Platform16;
+Platform16.x = 760;
+Platform16.y = -600;
+Platform16.w = 150;
+Platform16.h = 20;
+SDL_Texture * p16 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//Right Platforms
+SDL_Rect RightPlatform;
+RightPlatform.x = 1500;
+RightPlatform.y = -500;
+RightPlatform.w = 150;
+RightPlatform.h = 20;
+SDL_Texture * rp = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect RightPlatform2;
+RightPlatform2.x = 1250;
+RightPlatform2.y = -300;
+RightPlatform2.w = 150;
+RightPlatform2.h = 20;
+SDL_Texture * rp2 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect RightPlatform3;
+RightPlatform3.x = 1500;
+RightPlatform3.y = -100;
+RightPlatform3.w = 150;
+RightPlatform3.h = 20;
+SDL_Texture * rp3 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect RightPlatform4;
+RightPlatform4.x = 1250;
+RightPlatform4.y = 100;
+RightPlatform4.w = 150;
+RightPlatform4.h = 20;
+SDL_Texture * rp4 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect RightPlatform5;
+RightPlatform5.x = 1500;
+RightPlatform5.y = 300;
+RightPlatform5.w = 150;
+RightPlatform5.h = 20;
+SDL_Texture * rp5 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect RightPlatform6;
+RightPlatform6.x = 1275;
+RightPlatform6.y = 490;
+RightPlatform6.w = 85;
+RightPlatform6.h = 20;
+SDL_Texture * rp6 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect RightPlatform7;
+RightPlatform7.x = 1425;
+RightPlatform7.y = 490;
+RightPlatform7.w = 85;
+RightPlatform7.h = 20;
+SDL_Texture * rp7 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect RightPlatform8;
+RightPlatform8.x = 1575;
+RightPlatform8.y = 490;
+RightPlatform8.w = 85;
+RightPlatform8.h = 20;
+SDL_Texture * rp8 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//Left Platforms
+SDL_Rect LeftPlatform;
+LeftPlatform.x = 100;
+LeftPlatform.y = -600;
+LeftPlatform.w = 150;
+LeftPlatform.h = 20;
+SDL_Texture * lp = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect LeftPlatform2;
+LeftPlatform2.x = 100;
+LeftPlatform2.y = -600;
+LeftPlatform2.w = 150;
+LeftPlatform2.h = 20;
+SDL_Texture * lp2 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect LeftPlatform3;
+LeftPlatform3.x = 100;
+LeftPlatform3.y = -600;
+LeftPlatform3.w = 150;
+LeftPlatform3.h = 20;
+SDL_Texture * lp3 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect LeftPlatform4;
+LeftPlatform4.x = 100;
+LeftPlatform4.y = -600;
+LeftPlatform4.w = 150;
+LeftPlatform4.h = 20;
+SDL_Texture * lp4 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect LeftPlatform5;
+LeftPlatform5.x = 100;
+LeftPlatform5.y = -600;
+LeftPlatform5.w = 150;
+LeftPlatform5.h = 20;
+SDL_Texture * lp5 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Bottom Level Platforms
 SDL_Rect BottomPlatform;
 BottomPlatform.x = 650;
@@ -531,6 +623,13 @@ BottomPlatform.y = 990;
 BottomPlatform.w = 250;
 BottomPlatform.h = 30;
 SDL_Texture *pbm = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+//Top Level Platforms
+SDL_Rect TopPlatform;
+TopPlatform.x = 750;
+TopPlatform.y = -880;
+TopPlatform.w = 700;
+TopPlatform.h = 30;
+SDL_Texture *ptp = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Create Ladders Here VVV
 SDL_Rect Ladder;
 Ladder.x = 700;
@@ -665,8 +764,8 @@ SDL_Texture * BlackKeyTexture = IMG_LoadTexture(r1, (images_dir + "blackKeyPickU
 //Creating List of Turrets
 TurretEnemy tempTurret = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
 tempTurret = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(),r1);
-tempTurret.Turret.x = 800;
-tempTurret.Turret.y = -200;
+tempTurret.Turret.x = 0;
+tempTurret.Turret.y = -700;
 tempTurret.TurretVision.x = tempTurret.Turret.x;
 tempTurret.TurretVision.y = tempTurret.Turret.y;
 Turrets.push_back(tempTurret);
@@ -674,15 +773,15 @@ Turrets.push_back(tempTurret);
 TurretEnemy tempTurret2 = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
 tempTurret2 = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(), r1);
 tempTurret2.Turret.x = 600;
-tempTurret2.Turret.y = -200;
+tempTurret2.Turret.y = -220;
 tempTurret2.TurretVision.x = tempTurret2.Turret.x;
 tempTurret2.TurretVision.y = tempTurret2.Turret.y;
 Turrets.push_back(tempTurret2);
 
 TurretEnemy tempTurret3 = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
 tempTurret3 = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(), r1);
-tempTurret3.Turret.x = 400;
-tempTurret3.Turret.y = -200;
+tempTurret3.Turret.x = 1500;
+tempTurret3.Turret.y = 400;
 tempTurret3.TurretVision.x = tempTurret3.Turret.x;
 tempTurret3.TurretVision.y = tempTurret3.Turret.y;
 Turrets.push_back(tempTurret3);
@@ -1072,7 +1171,23 @@ while(inGame)
 		Platform12.x -= PlayerVelX;
 		Platform13.x -= PlayerVelX;
 		Platform14.x -= PlayerVelX;
+		Platform15.x -= PlayerVelX;
+		Platform16.x -= PlayerVelX;
 		BottomPlatform.x -= PlayerVelX;
+		TopPlatform.x -= PlayerVelX;
+		RightPlatform.x -= PlayerVelX;
+		RightPlatform2.x -= PlayerVelX;
+		RightPlatform3.x -= PlayerVelX;
+		RightPlatform4.x -= PlayerVelX;
+		RightPlatform5.x -= PlayerVelX;
+		RightPlatform6.x -= PlayerVelX;
+		RightPlatform7.x -= PlayerVelX;
+		RightPlatform8.x -= PlayerVelX;
+		LeftPlatform.x -= PlayerVelX;
+		LeftPlatform2.x -= PlayerVelX;
+		LeftPlatform3.x -= PlayerVelX;
+		LeftPlatform4.x -= PlayerVelX;
+		LeftPlatform5.x -= PlayerVelX;
 		Ladder.x -= PlayerVelX;
 		Ladder2.x -= PlayerVelX;
 		Ladder3.x -= PlayerVelX;
@@ -1129,7 +1244,23 @@ while(inGame)
 		Platform12.x -= PlayerVelX;
 		Platform13.x -= PlayerVelX;
 		Platform14.x -= PlayerVelX;
+		Platform15.x -= PlayerVelX;
+		Platform16.x -= PlayerVelX;
 		BottomPlatform.x -= PlayerVelX;
+		TopPlatform.x -= PlayerVelX;
+		RightPlatform.x -= PlayerVelX;
+		RightPlatform2.x -= PlayerVelX;
+		RightPlatform3.x -= PlayerVelX;
+		RightPlatform4.x -= PlayerVelX;
+		RightPlatform5.x -= PlayerVelX;
+		RightPlatform6.x -= PlayerVelX;
+		RightPlatform7.x -= PlayerVelX;
+		RightPlatform8.x -= PlayerVelX;
+		LeftPlatform.x -= PlayerVelX;
+		LeftPlatform2.x -= PlayerVelX;
+		LeftPlatform3.x -= PlayerVelX;
+		LeftPlatform4.x -= PlayerVelX;
+		LeftPlatform5.x -= PlayerVelX;
 		Ladder.x -= PlayerVelX;
 		Ladder2.x -= PlayerVelX;
 		Ladder3.x -= PlayerVelX;
@@ -1154,11 +1285,33 @@ while(inGame)
 		SDL_HasIntersection(&Player, &Platform7) || SDL_HasIntersection(&Player, &Platform8)||
 		SDL_HasIntersection(&Player, &Platform9) || SDL_HasIntersection(&Player, &Platform10)||
 		SDL_HasIntersection(&Player, &Platform11) || SDL_HasIntersection(&Player, &Platform12)||
-		SDL_HasIntersection(&Player, &Platform13) || SDL_HasIntersection(&Player, &Platform14))
+		SDL_HasIntersection(&Player, &Platform13) || SDL_HasIntersection(&Player, &Platform14)||
+		SDL_HasIntersection(&Player, &Platform15)|| SDL_HasIntersection(&Player, &Platform16))
 	{
 		Player.x -= PlayerVelX;
 	}
+	//Player to Bottom Platform Collision
 	if(SDL_HasIntersection(&Player, &BottomPlatform))
+	{
+		Player.x -= PlayerVelX;
+	}
+	//Player to Top Platform Collision
+	if (SDL_HasIntersection(&Player, &TopPlatform))
+	{
+		Player.x -= PlayerVelX;
+	}
+	//Player to Right Platforms Collision
+	if (SDL_HasIntersection(&Player, &RightPlatform) || SDL_HasIntersection(&Player, &RightPlatform2)||
+		SDL_HasIntersection(&Player, &RightPlatform3) || SDL_HasIntersection(&Player, &RightPlatform4)||
+		SDL_HasIntersection(&Player,&RightPlatform5) || SDL_HasIntersection(&Player, &RightPlatform6)||
+		SDL_HasIntersection(&Player, &RightPlatform7) || SDL_HasIntersection(&Player, &RightPlatform8))
+	{
+		Player.x -= PlayerVelX;
+	}
+	//Player to Left Platforms Collision
+	if (SDL_HasIntersection(&Player, &LeftPlatform) || SDL_HasIntersection(&Player, &LeftPlatform2) ||
+		SDL_HasIntersection(&Player, &LeftPlatform3)|| SDL_HasIntersection(&Player, &LeftPlatform4) ||
+		SDL_HasIntersection(&Player, &LeftPlatform5))
 	{
 		Player.x -= PlayerVelX;
 	}
@@ -1196,14 +1349,40 @@ while(inGame)
 					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform7) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform8) ||
 					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform9) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform10) ||
 					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform11) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform12)||
-					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform13) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform14))
+					SDL_HasIntersection(&Disciples[eD].Disciple, &Platform13) || SDL_HasIntersection(&Disciples[eD].Disciple, &Platform14)||
+					SDL_HasIntersection (&Disciples[eD].Disciple, &Platform15)|| SDL_HasIntersection(&Disciples[eD].Disciple, &Platform16))
 				{
 					Disciples[eD].Disciple.x -= 2;
 				}
 			}
+			//Enemy to Bottom Platforms Collision
 			for(int eD = 0; eD <4; eD++)
 			{
 				if(SDL_HasIntersection(&Disciples[eD].Disciple, &BottomPlatform))
+				{
+					Disciples[eD].Disciple.x -= 2;
+				}
+			}
+			//Enemy to Top Platform Collision
+			for (int eD = 0; eD < 4; eD++)
+			{
+				if (SDL_HasIntersection(&Disciples[eD].Disciple, &TopPlatform))
+				{
+					Disciples[eD].Disciple.x -= 2;
+				}
+			}
+			//Enemy to Right Platforms Collision
+			for (int eD = 0; eD < 4; eD++)
+			{
+				if (SDL_HasIntersection(&Disciples[eD].Disciple, &RightPlatform))
+				{
+					Disciples[eD].Disciple.x -= 2;
+				}
+			}
+			//Enemy to Left Platforms Collision
+			for (int eD = 0; eD < 4; eD++)
+			{
+				if (SDL_HasIntersection(&Disciples[eD].Disciple, &LeftPlatform))
 				{
 					Disciples[eD].Disciple.x -= 2;
 				}
@@ -1220,8 +1399,162 @@ while(inGame)
 			BulletList[eb].isActive = false;
 		}
 	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList[1].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList[eb].EnemBullet.x = -1000;
+			BulletList[eb].EnemBullet.y = -1000;
+			BulletList[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList[2].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList[eb].EnemBullet.x = -1000;
+			BulletList[eb].EnemBullet.y = -1000;
+			BulletList[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList[3].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList[eb].EnemBullet.x = -1000;
+			BulletList[eb].EnemBullet.y = -1000;
+			BulletList[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList[4].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList[eb].EnemBullet.x = -1000;
+			BulletList[eb].EnemBullet.y = -1000;
+			BulletList[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList2[0].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList2[eb].EnemBullet.x = -1000;
+			BulletList2[eb].EnemBullet.y = -1000;
+			BulletList2[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList2[1].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList2[eb].EnemBullet.x = -1000;
+			BulletList2[eb].EnemBullet.y = -1000;
+			BulletList2[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList2[2].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList2[eb].EnemBullet.x = -1000;
+			BulletList2[eb].EnemBullet.y = -1000;
+			BulletList2[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList2[3].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList2[eb].EnemBullet.x = -1000;
+			BulletList2[eb].EnemBullet.y = -1000;
+			BulletList2[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList2[4].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList2[eb].EnemBullet.x = -1000;
+			BulletList2[eb].EnemBullet.y = -1000;
+			BulletList2[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList3[0].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList3[eb].EnemBullet.x = -1000;
+			BulletList3[eb].EnemBullet.y = -1000;
+			BulletList3[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList3[1].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList3[eb].EnemBullet.x = -1000;
+			BulletList3[eb].EnemBullet.y = -1000;
+			BulletList3[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList3[2].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList3[eb].EnemBullet.x = -1000;
+			BulletList3[eb].EnemBullet.y = -1000;
+			BulletList3[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList3[3].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList3[eb].EnemBullet.x = -1000;
+			BulletList3[eb].EnemBullet.y = -1000;
+			BulletList3[eb].isActive = false;
+		}
+	}
+	for (int eb = 0; eb <4; eb++)
+	{
+		if (SDL_HasIntersection(&Player, &BulletList3[4].EnemBullet))
+		{
+			HealthBarFront.w -= 10;
+			playerHealth -= 5;
+			BulletList3[eb].EnemBullet.x = -1000;
+			BulletList3[eb].EnemBullet.y = -1000;
+			BulletList3[eb].isActive = false;
+		}
+	}
 	//Player Collision with DiscipleVision
-	for(int eD =0; eD<4; eD++)
+	for(int eD = 0; eD<4; eD++)
 	{
 		if(SDL_HasIntersection(&Player,&Disciples[eD].DiscipleVision))
 		{
@@ -1377,7 +1710,7 @@ while(inGame)
 				}
 			}
 		}
-		//More turret detectig the player
+		//More turret detecting the player
 		if (SDL_HasIntersection(&Player, &Turrets[1].TurretVision))
 		{
 			int random_number = rand() % 5;
@@ -1515,7 +1848,19 @@ while(inGame)
 				Platform12.y -= PlayerVelY;
 				Platform13.y -= PlayerVelY;
 				Platform14.y -= PlayerVelY;
+				Platform15.y -= PlayerVelY;
+				Platform16.y -= PlayerVelY;
 				BottomPlatform.y -= PlayerVelY;
+				TopPlatform.y -= PlayerVelY;
+				RightPlatform.y -= PlayerVelY;
+				RightPlatform2.y -= PlayerVelY;
+				RightPlatform3.y -= PlayerVelY;
+				RightPlatform4.y -= PlayerVelY;
+				RightPlatform5.y -= PlayerVelY;
+				RightPlatform6.y -= PlayerVelY;
+				RightPlatform7.y -= PlayerVelY;
+				RightPlatform8.y -= PlayerVelY;
+				LeftPlatform.y -= PlayerVelY;
 				Ladder.y -= PlayerVelY;
 				Ladder2.y -= PlayerVelY;
 				Ladder3.y -= PlayerVelY;
@@ -1574,7 +1919,19 @@ while(inGame)
 				Platform12.y -= PlayerVelY;
 				Platform13.y -= PlayerVelY;
 				Platform14.y -= PlayerVelY;
+				Platform15.y -= PlayerVelY;
+				Platform16.y -= PlayerVelY;
 				BottomPlatform.y -= PlayerVelY;
+				TopPlatform.y -= PlayerVelY;
+				RightPlatform.y -= PlayerVelY;
+				RightPlatform2.y -= PlayerVelY;
+				RightPlatform3.y -= PlayerVelY;
+				RightPlatform4.y -= PlayerVelY;
+				RightPlatform5.y -= PlayerVelY;
+				RightPlatform6.y -= PlayerVelY;
+				RightPlatform7.y -= PlayerVelY;
+				RightPlatform8.y -= PlayerVelY;
+				LeftPlatform.y -= PlayerVelY;
 				Ladder.y -= PlayerVelY;
 				Ladder2.y -= PlayerVelY;
 				Ladder3.y -= PlayerVelY;
@@ -1640,7 +1997,19 @@ while(inGame)
 			Platform12.y -= PlayerVelY;
 			Platform13.y -= PlayerVelY;
 			Platform14.y -= PlayerVelY;
+			Platform15.y -= PlayerVelY;
+			Platform16.y -= PlayerVelY;
 			BottomPlatform.y -= PlayerVelY;
+			TopPlatform.y -= PlayerVelY;
+			RightPlatform.y -= PlayerVelY;
+			RightPlatform2.y -= PlayerVelY;
+			RightPlatform3.y -= PlayerVelY;
+			RightPlatform4.y -= PlayerVelY;
+			RightPlatform5.y -= PlayerVelY;
+			RightPlatform6.y -= PlayerVelY;
+			RightPlatform7.y -= PlayerVelY;
+			RightPlatform8.y -= PlayerVelY;
+			LeftPlatform.y -= PlayerVelY;
 			Ladder.y -= PlayerVelY;
 			Ladder2.y -= PlayerVelY;
 			Ladder3.y -= PlayerVelY;
@@ -1699,7 +2068,19 @@ while(inGame)
 			Platform12.y -= PlayerVelY;
 			Platform13.y -= PlayerVelY;
 			Platform14.y -= PlayerVelY;
+			Platform15.y -= PlayerVelY;
+			Platform16.y -= PlayerVelY;
 			BottomPlatform.y -= PlayerVelY;
+			TopPlatform.y -= PlayerVelY;
+			RightPlatform.y -= PlayerVelY;
+			RightPlatform2.y -= PlayerVelY;
+			RightPlatform3.y -= PlayerVelY;
+			RightPlatform4.y -= PlayerVelY;
+			RightPlatform5.y -= PlayerVelY;
+			RightPlatform6.y -= PlayerVelY;
+			RightPlatform7.y -= PlayerVelY;
+			RightPlatform8.y -= PlayerVelY;
+			LeftPlatform.y -= PlayerVelY;
 			Ladder.y -= PlayerVelY;
 			Ladder2.y -= PlayerVelY;
 			Ladder3.y -= PlayerVelY;
@@ -1729,14 +2110,40 @@ while(inGame)
 		SDL_HasIntersection(&Player, &Platform7)|| SDL_HasIntersection(&Player, &Platform8)||
 		SDL_HasIntersection(&Player, &Platform9) || SDL_HasIntersection(&Player, &Platform10)||
 		SDL_HasIntersection(&Player, &Platform11) || SDL_HasIntersection(&Player, &Platform12)||
-		SDL_HasIntersection(&Player, &Platform13) || SDL_HasIntersection(&Player, &Platform14))
+		SDL_HasIntersection(&Player, &Platform13) || SDL_HasIntersection(&Player, &Platform14)||
+		SDL_HasIntersection(&Player, &Platform15) || SDL_HasIntersection(&Player, &Platform16))
 	{
 		isGrounded = true;
 		Player.y -= PlayerVelY;
 		PlayerVelY = 0;
 
 	}
+	//Player Colliding with Bottom Platforms from the top
 	if(SDL_HasIntersection(&Player, &BottomPlatform))
+	{
+		isGrounded = true;
+		Player.y -= PlayerVelY;
+		PlayerVelY = 0;
+	}
+	//Player Colliding with Top Platforms from the top
+	if (SDL_HasIntersection(&Player, &TopPlatform))
+	{
+		isGrounded = true;
+		Player.y -= PlayerVelY;
+		PlayerVelY = 0;
+	}
+	//Player Colliding with Left Platforms from the top
+	if (SDL_HasIntersection(&Player, &LeftPlatform))
+	{
+		isGrounded = true;
+		Player.y -= PlayerVelY;
+		PlayerVelY = 0;
+	}
+	//Player Colliding with Right Platforms from the top
+	if (SDL_HasIntersection(&Player, &RightPlatform)|| SDL_HasIntersection(&Player, &RightPlatform2)||
+		SDL_HasIntersection(&Player, &RightPlatform3)|| SDL_HasIntersection(&Player, &RightPlatform4)||
+		SDL_HasIntersection(&Player, &RightPlatform5)|| SDL_HasIntersection(&Player, &RightPlatform6)||
+		SDL_HasIntersection(&Player, &RightPlatform7)|| SDL_HasIntersection(&Player, &RightPlatform8))
 	{
 		isGrounded = true;
 		Player.y -= PlayerVelY;
@@ -1919,8 +2326,23 @@ SDL_RenderCopy(r1, p11, NULL, &Platform11);
 SDL_RenderCopy(r1, p12, NULL, &Platform12);
 SDL_RenderCopy(r1, p13, NULL, &Platform13);
 SDL_RenderCopy(r1, p14, NULL, &Platform14);
+SDL_RenderCopy(r1, p15, NULL, &Platform15);
+SDL_RenderCopy(r1, p16, NULL, &Platform16);
 //Rendering Bottom Level Platforms
 SDL_RenderCopy(r1, pbm, NULL, &BottomPlatform);
+//Rendering Top Level Platforms
+SDL_RenderCopy(r1, ptp, NULL, &TopPlatform);
+//Rendering Left Platform
+SDL_RenderCopy(r1, lp, NULL, &LeftPlatform);
+//Rendering Right Platform
+SDL_RenderCopy(r1, rp, NULL, &RightPlatform);
+SDL_RenderCopy(r1, rp2, NULL, &RightPlatform2);
+SDL_RenderCopy(r1, rp3, NULL, &RightPlatform3);
+SDL_RenderCopy(r1, rp4, NULL, &RightPlatform4);
+SDL_RenderCopy(r1, rp5, NULL, &RightPlatform5);
+SDL_RenderCopy(r1, rp6, NULL, &RightPlatform6);
+SDL_RenderCopy(r1, rp7, NULL, &RightPlatform7);
+SDL_RenderCopy(r1, rp8, NULL, &RightPlatform8);
 //Rendering Ladders
 SDL_RenderCopy(r1, l1, NULL, &Ladder);
 SDL_RenderCopy(r1, l2, NULL, &Ladder2);
@@ -1934,7 +2356,6 @@ SDL_Delay(16);
 }
 if(state == Lose)
 {
-	cout << "What state are we in Lose of course" <<state<<endl;
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
