@@ -587,31 +587,31 @@ RightPlatform8.h = 20;
 SDL_Texture * rp8 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Left Platforms
 SDL_Rect LeftPlatform;
-LeftPlatform.x = 80;
-LeftPlatform.y = -610;
+LeftPlatform.x = 50;
+LeftPlatform.y = -630;
 LeftPlatform.w = 150;
 LeftPlatform.h = 20;
 SDL_Texture * lp = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect LeftPlatform2;
-LeftPlatform2.x = 150;
-LeftPlatform2.y = -560;
-LeftPlatform2.w = 150;
+LeftPlatform2.x = 225;
+LeftPlatform2.y = -570;
+LeftPlatform2.w = 125;
 LeftPlatform2.h = 20;
 SDL_Texture * lp2 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect LeftPlatform3;
-LeftPlatform3.x = 175;
-LeftPlatform3.y = -500;
-LeftPlatform3.w = 150;
+LeftPlatform3.x = 370;
+LeftPlatform3.y = -490;
+LeftPlatform3.w = 75;
 LeftPlatform3.h = 20;
 SDL_Texture * lp3 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect LeftPlatform4;
 LeftPlatform4.x = 100;
-LeftPlatform4.y = -200;
-LeftPlatform4.w = 150;
+LeftPlatform4.y = -350;
+LeftPlatform4.w = 100;
 LeftPlatform4.h = 20;
 SDL_Texture * lp4 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 SDL_Rect LeftPlatform5;
-LeftPlatform5.x = 120;
+LeftPlatform5.x = 225;
 LeftPlatform5.y = -420;
 LeftPlatform5.w = 75;
 LeftPlatform5.h = 20;
@@ -664,6 +664,12 @@ LeftPlatform13.y = 350;
 LeftPlatform13.w = 125;
 LeftPlatform13.h = 20;
 SDL_Texture * lp13 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
+SDL_Rect LeftPlatform14;
+LeftPlatform14.x = 170;
+LeftPlatform14.y = 190;
+LeftPlatform14.w = 75;
+LeftPlatform14.h = 20;
+SDL_Texture * lp14 = IMG_LoadTexture(r1, (images_dir + "WallTexturePlaceholder.png").c_str());
 //Bottom Level Platforms
 SDL_Rect BottomPlatform;
 BottomPlatform.x = 650;
@@ -1244,6 +1250,7 @@ while(inGame)
 		LeftPlatform11.x -= PlayerVelX;
 		LeftPlatform12.x -= PlayerVelX;
 		LeftPlatform13.x -= PlayerVelX;
+		LeftPlatform14.x -= PlayerVelX;
 		Ladder.x -= PlayerVelX;
 		Ladder2.x -= PlayerVelX;
 		Ladder3.x -= PlayerVelX;
@@ -1325,6 +1332,7 @@ while(inGame)
 		LeftPlatform11.x -= PlayerVelX;
 		LeftPlatform12.x -= PlayerVelX;
 		LeftPlatform13.x -= PlayerVelX;
+		LeftPlatform14.x -= PlayerVelX;
 		Ladder.x -= PlayerVelX;
 		Ladder2.x -= PlayerVelX;
 		Ladder3.x -= PlayerVelX;
@@ -1379,7 +1387,7 @@ while(inGame)
 		SDL_HasIntersection(&Player, &LeftPlatform7) ||	SDL_HasIntersection(&Player, &LeftPlatform8) || 
 		SDL_HasIntersection(&Player, &LeftPlatform9) ||SDL_HasIntersection(&Player, &LeftPlatform10)||
 		SDL_HasIntersection(&Player, &LeftPlatform11) || SDL_HasIntersection(&Player, &LeftPlatform12) ||
-		SDL_HasIntersection(&Player, &LeftPlatform13))
+		SDL_HasIntersection(&Player, &LeftPlatform13) || SDL_HasIntersection(&Player, &LeftPlatform14))
 	{
 		Player.x -= PlayerVelX;
 	}
@@ -1941,6 +1949,7 @@ while(inGame)
 				LeftPlatform11.y -= PlayerVelY;
 				LeftPlatform12.y -= PlayerVelY;
 				LeftPlatform13.y -= PlayerVelY;
+				LeftPlatform14.y -= PlayerVelY;
 				Ladder.y -= PlayerVelY;
 				Ladder2.y -= PlayerVelY;
 				Ladder3.y -= PlayerVelY;
@@ -2024,6 +2033,7 @@ while(inGame)
 				LeftPlatform11.y -= PlayerVelY;
 				LeftPlatform12.y -= PlayerVelY;
 				LeftPlatform13.y -= PlayerVelY;
+				LeftPlatform14.y -= PlayerVelY;
 				Ladder.y -= PlayerVelY;
 				Ladder2.y -= PlayerVelY;
 				Ladder3.y -= PlayerVelY;
@@ -2114,6 +2124,7 @@ while(inGame)
 			LeftPlatform11.y -= PlayerVelY;
 			LeftPlatform12.y -= PlayerVelY;
 			LeftPlatform13.y -= PlayerVelY;
+			LeftPlatform14.y -= PlayerVelY;
 			Ladder.y -= PlayerVelY;
 			Ladder2.y -= PlayerVelY;
 			Ladder3.y -= PlayerVelY;
@@ -2197,6 +2208,7 @@ while(inGame)
 			LeftPlatform11.y -= PlayerVelY;
 			LeftPlatform12.y -= PlayerVelY;
 			LeftPlatform13.y -= PlayerVelY;
+			LeftPlatform14.y -= PlayerVelY;
 			Ladder.y -= PlayerVelY;
 			Ladder2.y -= PlayerVelY;
 			Ladder3.y -= PlayerVelY;
@@ -2255,7 +2267,7 @@ while(inGame)
 		SDL_HasIntersection(&Player, &LeftPlatform7) ||	SDL_HasIntersection(&Player, &LeftPlatform8) || 
 		SDL_HasIntersection(&Player, &LeftPlatform9) ||	SDL_HasIntersection(&Player, &LeftPlatform10)||
 		SDL_HasIntersection(&Player, &LeftPlatform11) || SDL_HasIntersection(&Player, &LeftPlatform12) ||
-		SDL_HasIntersection(&Player, &LeftPlatform13))
+		SDL_HasIntersection(&Player, &LeftPlatform13) || SDL_HasIntersection(&Player, &LeftPlatform14))
 	{
 		isGrounded = true;
 		Player.y -= PlayerVelY;
@@ -2460,14 +2472,15 @@ SDL_RenderCopy(r1, lp2, NULL, &LeftPlatform2);
 SDL_RenderCopy(r1, lp3, NULL, &LeftPlatform3);
 SDL_RenderCopy(r1, lp4, NULL, &LeftPlatform4);
 SDL_RenderCopy(r1, lp5, NULL, &LeftPlatform5);
-SDL_RenderCopy(r1, lp, NULL, &LeftPlatform6);
-SDL_RenderCopy(r1, lp2, NULL, &LeftPlatform7);
-SDL_RenderCopy(r1, lp3, NULL, &LeftPlatform8);
-SDL_RenderCopy(r1, lp4, NULL, &LeftPlatform9);
-SDL_RenderCopy(r1, lp5, NULL, &LeftPlatform10);
-SDL_RenderCopy(r1, lp, NULL, &LeftPlatform11);
-SDL_RenderCopy(r1, lp2, NULL, &LeftPlatform12);
-SDL_RenderCopy(r1, lp3, NULL, &LeftPlatform13);
+SDL_RenderCopy(r1, lp6, NULL, &LeftPlatform6);
+SDL_RenderCopy(r1, lp7, NULL, &LeftPlatform7);
+SDL_RenderCopy(r1, lp8, NULL, &LeftPlatform8);
+SDL_RenderCopy(r1, lp9, NULL, &LeftPlatform9);
+SDL_RenderCopy(r1, lp10, NULL, &LeftPlatform10);
+SDL_RenderCopy(r1, lp11, NULL, &LeftPlatform11);
+SDL_RenderCopy(r1, lp12, NULL, &LeftPlatform12);
+SDL_RenderCopy(r1, lp13, NULL, &LeftPlatform13);
+SDL_RenderCopy(r1, lp14, NULL, &LeftPlatform14);
 //Rendering Right Platform
 SDL_RenderCopy(r1, rp, NULL, &RightPlatform);
 SDL_RenderCopy(r1, rp2, NULL, &RightPlatform2);
