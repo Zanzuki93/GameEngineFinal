@@ -276,6 +276,7 @@ public:
 	}
 };
 
+
 int main(int argc, char* argv[])
 {
 #if defined(_WIN32) || (WIN64) //this code is used to make sure this window that uses
@@ -302,7 +303,7 @@ string currentWorkingDirectory(getcwd(NULL, 0));
  int playerHealth = 100;
  int ammoCount = 10;
  bool hasBlackKey = false, hasPurpleKey = false, hasPinkKey = false;
- bool inGame = true;
+ bool inGame = true , inLose = false , inWin = false;
  int state;
  enum state{ingame,Lose,Win};
  srand(time(NULL));
@@ -354,6 +355,14 @@ int w,h;
 SDL_QueryTexture(t1,NULL,NULL,&w,&h);
 Background.h = h;
 Background.w = w;
+
+//Winning Rect
+SDL_Rect WinningCondition;
+WinningCondition.x = 550;
+WinningCondition.y = 590;
+WinningCondition.h = 175;
+WinningCondition.w = 175;
+SDL_Texture * WinningConditionTexture = IMG_LoadTexture(r1, (images_dir + "placeholder.png").c_str());
 
 //Setting Up Walls
 //Right Wall
@@ -716,6 +725,31 @@ Ladder5.w = 120;
 Ladder5.h = 350;
 SDL_Texture *l5 = IMG_LoadTexture(r1, (images_dir + "LadderTexture.png").c_str());
 //End of Creating Ladders^^^
+//Creating Secondary assets
+SDL_Rect Table;
+Table.x = 30;
+Table.y = 50;
+Table.w = 75;
+Table.h = 75;
+SDL_Texture * TableTexture = IMG_LoadTexture(r1, (images_dir + "TableWithBook.png").c_str());
+SDL_Rect BookCase;
+BookCase.x = 180;
+BookCase.y = -70;
+BookCase.w = 75;
+BookCase.h = 100;
+SDL_Texture * BookCaseTexture = IMG_LoadTexture(r1, (images_dir + "BookCaseTexture.png").c_str());
+SDL_Rect Staff;
+Staff.x = 10;
+Staff.y = 90;
+Staff.w = 32;
+Staff.h = 32;
+SDL_Texture * StaffTexture = IMG_LoadTexture(r1, (images_dir + "StaffTexture.png").c_str());
+SDL_Rect Shield;
+Shield.x = 300;
+Shield.y = 500;
+Shield.w = 50;
+Shield.h = 50;
+SDL_Texture * ShieldTexture = IMG_LoadTexture(r1, (images_dir + "ShieldTexture.png").c_str());
 //Creating a pickup
 SDL_Rect healthPickUp;
 healthPickUp.x = 700;
@@ -1256,6 +1290,11 @@ while(inGame)
 		Ladder3.x -= PlayerVelX;
 		Ladder4.x -= PlayerVelX;
 		Ladder5.x -= PlayerVelX;
+		Table.x -= PlayerVelX;
+		BookCase.x -= PlayerVelX;
+		Staff.x -= PlayerVelX;
+		Shield.x -= PlayerVelX;
+		WinningCondition.x -= PlayerVelX;
 	}
 	if (Player.x < 0 + (Player.w * 2))
 	{
@@ -1338,6 +1377,11 @@ while(inGame)
 		Ladder3.x -= PlayerVelX;
 		Ladder4.x -= PlayerVelX;
 		Ladder5.x -= PlayerVelX;
+		Table.x -= PlayerVelX;
+		BookCase.x -= PlayerVelX;
+		Staff.x -= PlayerVelX;
+		Shield.x -= PlayerVelX;
+		WinningCondition.x -= PlayerVelX;
 	}
 	//Checking For collision with walls and the player Left and Right
 	if (SDL_HasIntersection(&Player, &Wall) || SDL_HasIntersection(&Player, &Wall2) ||
@@ -1390,6 +1434,21 @@ while(inGame)
 		SDL_HasIntersection(&Player, &LeftPlatform13) || SDL_HasIntersection(&Player, &LeftPlatform14))
 	{
 		Player.x -= PlayerVelX;
+	}
+	//Checking the player's health to see if it is empty
+	if (playerHealth <= 0)
+	{
+		playerHealth = 0;
+		state = Lose;
+		inGame = false;
+		inLose = true;
+	}
+	//Winning Condition Colliison
+	if (SDL_HasIntersection(&Player, &WinningCondition) && hasBlackKey == true && hasPinkKey == true && hasBlackKey == true)
+	{
+		state = Win;
+		inGame = false;
+		inWin = true;
 	}
 	//Ladder Collision
 	if(SDL_HasIntersection(&Player,&Ladder)|| SDL_HasIntersection(&Player, &Ladder2)||
@@ -1955,6 +2014,11 @@ while(inGame)
 				Ladder3.y -= PlayerVelY;
 				Ladder4.y -= PlayerVelY; 
 				Ladder5.y -= PlayerVelY;
+				Table.y -= PlayerVelY;
+				BookCase.y -= PlayerVelY;
+				Staff.y -= PlayerVelY;
+				Shield.y -= PlayerVelY;
+				WinningCondition.y -= PlayerVelY;
 			}
 
 			if (Player.y > 768 - (Player.h * 2))
@@ -2039,6 +2103,11 @@ while(inGame)
 				Ladder3.y -= PlayerVelY;
 				Ladder4.y -= PlayerVelY;
 				Ladder5.y -= PlayerVelY;
+				Table.y -= PlayerVelY;
+				BookCase.y -= PlayerVelY;
+				Staff.y -= PlayerVelY;
+				Shield.y -= PlayerVelY;
+				WinningCondition.y -= PlayerVelY;
 			}
 			if(PlayerVelY >= 5)
 			{
@@ -2130,6 +2199,11 @@ while(inGame)
 			Ladder3.y -= PlayerVelY;
 			Ladder4.y -= PlayerVelY;
 			Ladder5.y -= PlayerVelY;
+			Table.y -= PlayerVelY;
+			BookCase.y -= PlayerVelY;
+			Staff.y -= PlayerVelY;
+			Shield.y -= PlayerVelY;
+			WinningCondition.y -= PlayerVelY;
 		}
 
 		if (Player.y > 768 - (Player.h * 2))
@@ -2214,6 +2288,11 @@ while(inGame)
 			Ladder3.y -= PlayerVelY;
 			Ladder4.y -= PlayerVelY;
 			Ladder5.y -= PlayerVelY;
+			Table.y -= PlayerVelY;
+			BookCase.y -= PlayerVelY;
+			Staff.y -= PlayerVelY;
+			Shield.y -= PlayerVelY;
+			WinningCondition.y -= PlayerVelY;
 		}
 	}
 
@@ -2229,6 +2308,13 @@ while(inGame)
 		Player.y -= PlayerVelY;
 		PlayerVelY = 0;
 
+	}
+	//Winning Condition Colliison
+	if (SDL_HasIntersection(&Player, &WinningCondition) && hasBlackKey == true && hasPinkKey == true && hasBlackKey == true)
+	{
+		state = Win;
+		inGame = false;
+		inWin = true;
 	}
 
 	//Platrform Collision
@@ -2283,6 +2369,7 @@ while(inGame)
 		Player.y -= PlayerVelY;
 		PlayerVelY = 0;
 	}
+	//Collision with ladders to player vertically 
 	if(SDL_HasIntersection(&Player,&Ladder) || SDL_HasIntersection(&Player, &Ladder2)||
 	(SDL_HasIntersection(&Player, &Ladder3) || SDL_HasIntersection(&Player, &Ladder4)|| 
 	SDL_HasIntersection(&Player, &Ladder5)))
@@ -2420,6 +2507,7 @@ if (hasPurpleKey == true)
 {
 	SDL_RenderCopy(r1, PurpleKeyGUITexture, NULL, &PurpleKeyGUI);
 }
+SDL_RenderCopy(r1, WinningConditionTexture, NULL, &WinningCondition);
 //Wall Texture Code
 SDL_RenderCopy(r1, w1, NULL, &Wall);
 
@@ -2496,16 +2584,779 @@ SDL_RenderCopy(r1, l2, NULL, &Ladder2);
 SDL_RenderCopy(r1, l3, NULL, &Ladder3);
 SDL_RenderCopy(r1, l4, NULL, &Ladder4);
 SDL_RenderCopy(r1, l5, NULL, &Ladder5);
+//Rendering Secondary Assets
+SDL_RenderCopy(r1, TableTexture, NULL, &Table);
+SDL_RenderCopy(r1, BookCaseTexture, NULL, &BookCase);
+SDL_RenderCopy(r1, StaffTexture, NULL, &Staff);
+SDL_RenderCopy(r1, ShieldTexture, NULL, &Shield);
 SDL_RenderPresent(r1);
+
 //SDL Drawing Process End//
 SDL_Delay(16);
 }
-}
-if(state == Lose)
+if (state == Lose)
 {
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	while (inLose)
+	{
+		cout << "We are in the lose state :(" << endl;
+		//Input for Game//
+		while (SDL_PollEvent(&event) != 0)
+		{
+			if (event.type == SDL_QUIT)
+			{
+				inLose = false;
+			}
+			else
+			{
+				if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+				{
+
+					switch (event.key.keysym.sym)
+					{
+					case SDLK_ESCAPE:
+						inLose = false;
+						inGame = false;
+						SDL_DestroyWindow(window);
+						SDL_Quit();
+						break;
+					case SDLK_1:
+					{
+						hasBlackKey = false;
+						hasPinkKey = false;
+						hasPurpleKey = false;
+						inLose = false;
+						state = ingame;
+						inGame = true;
+						playerHealth = 100;
+						HealthBarFront.w = 200;
+						ammoCount = 10;
+						ManaBarFront.w = 200;
+						Player.x = 750;
+						Player.y = 620;
+						//Checking for player to be on the edge of the screen horizontally
+						if (Player.x > 1024 - (Player.w * 2))
+						{
+							Player.x = 1024 - (Player.w * 2);
+							Background.x -= PlayerVelX;
+
+							Wall.x -= PlayerVelX;
+							Wall2.x -= PlayerVelX;
+							Wall3.x -= PlayerVelX;
+							Wall4.x -= PlayerVelX;
+							Wall5.x -= PlayerVelX;
+							Wall6.x -= PlayerVelX;
+							Wall7.x -= PlayerVelX;
+							Wall8.x -= PlayerVelX;
+							Wall9.x -= PlayerVelX;
+							Wall10.x -= PlayerVelX;
+							Wall11.x -= PlayerVelX;
+							Wall12.x -= PlayerVelX;
+							healthPickUp.x -= PlayerVelX;
+							ammoPickUp.x -= PlayerVelX;
+							PinkKey.x -= PlayerVelX;
+							PurpleKey.x -= PlayerVelX;
+							BlackKey.x -= PlayerVelX;
+							Turrets[0].Turret.x -= PlayerVelX;
+							Turrets[0].TurretVision.x -= PlayerVelX;
+							Turrets[1].Turret.x -= PlayerVelX;
+							Turrets[1].TurretVision.x -= PlayerVelX;
+							Turrets[2].Turret.x -= PlayerVelX;
+							Turrets[2].TurretVision.x -= PlayerVelX;
+							Disciples[0].Disciple.x -= PlayerVelX;
+							Disciples[0].DiscipleVision.x -= PlayerVelX;
+							Disciples[1].Disciple.x -= PlayerVelX;
+							Disciples[1].DiscipleVision.x -= PlayerVelX;
+							Disciples[2].Disciple.x -= PlayerVelX;
+							Disciples[2].DiscipleVision.x -= PlayerVelX;
+							Disciples[3].Disciple.x -= PlayerVelX;
+							Disciples[3].DiscipleVision.x -= PlayerVelX;
+							Platform.x -= PlayerVelX;
+							Platform2.x -= PlayerVelX;
+							Platform3.x -= PlayerVelX;
+							Platform4.x -= PlayerVelX;
+							Platform5.x -= PlayerVelX;
+							Platform6.x -= PlayerVelX;
+							Platform7.x -= PlayerVelX;
+							Platform8.x -= PlayerVelX;
+							Platform9.x -= PlayerVelX;
+							Platform10.x -= PlayerVelX;
+							Platform11.x -= PlayerVelX;
+							Platform12.x -= PlayerVelX;
+							Platform13.x -= PlayerVelX;
+							Platform14.x -= PlayerVelX;
+							Platform15.x -= PlayerVelX;
+							Platform16.x -= PlayerVelX;
+							BottomPlatform.x -= PlayerVelX;
+							TopPlatform.x -= PlayerVelX;
+							RightPlatform.x -= PlayerVelX;
+							RightPlatform2.x -= PlayerVelX;
+							RightPlatform3.x -= PlayerVelX;
+							RightPlatform4.x -= PlayerVelX;
+							RightPlatform5.x -= PlayerVelX;
+							RightPlatform6.x -= PlayerVelX;
+							RightPlatform7.x -= PlayerVelX;
+							RightPlatform8.x -= PlayerVelX;
+							LeftPlatform.x -= PlayerVelX;
+							LeftPlatform2.x -= PlayerVelX;
+							LeftPlatform3.x -= PlayerVelX;
+							LeftPlatform4.x -= PlayerVelX;
+							LeftPlatform5.x -= PlayerVelX;
+							LeftPlatform6.x -= PlayerVelX;
+							LeftPlatform7.x -= PlayerVelX;
+							LeftPlatform8.x -= PlayerVelX;
+							LeftPlatform9.x -= PlayerVelX;
+							LeftPlatform10.x -= PlayerVelX;
+							LeftPlatform11.x -= PlayerVelX;
+							LeftPlatform12.x -= PlayerVelX;
+							LeftPlatform13.x -= PlayerVelX;
+							LeftPlatform14.x -= PlayerVelX;
+							Ladder.x -= PlayerVelX;
+							Ladder2.x -= PlayerVelX;
+							Ladder3.x -= PlayerVelX;
+							Ladder4.x -= PlayerVelX;
+							Ladder5.x -= PlayerVelX;
+						}
+						if (Player.x < 0 + (Player.w * 2))
+						{
+							Player.x = 0 + (Player.w * 2);
+							Background.x -= PlayerVelX;
+
+							Wall.x -= PlayerVelX;
+							Wall2.x -= PlayerVelX;
+							Wall3.x -= PlayerVelX;
+							Wall4.x -= PlayerVelX;
+							Wall5.x -= PlayerVelX;
+							Wall6.x -= PlayerVelX;
+							Wall7.x -= PlayerVelX;
+							Wall8.x -= PlayerVelX;
+							Wall9.x -= PlayerVelX;
+							Wall10.x -= PlayerVelX;
+							Wall11.x -= PlayerVelX;
+							Wall12.x -= PlayerVelX;
+							healthPickUp.x -= PlayerVelX;
+							ammoPickUp.x -= PlayerVelX;
+							PinkKey.x -= PlayerVelX;
+							PurpleKey.x -= PlayerVelX;
+							BlackKey.x -= PlayerVelX;
+							Turrets[0].Turret.x -= PlayerVelX;
+							Turrets[0].TurretVision.x -= PlayerVelX;
+							Turrets[1].Turret.x -= PlayerVelX;
+							Turrets[1].TurretVision.x -= PlayerVelX;
+							Turrets[2].Turret.x -= PlayerVelX;
+							Turrets[2].TurretVision.x -= PlayerVelX;
+							Disciples[0].Disciple.x -= PlayerVelX;
+							Disciples[0].DiscipleVision.x -= PlayerVelX;
+							Disciples[1].Disciple.x -= PlayerVelX;
+							Disciples[1].DiscipleVision.x -= PlayerVelX;
+							Disciples[2].Disciple.x -= PlayerVelX;
+							Disciples[2].DiscipleVision.x -= PlayerVelX;
+							Disciples[3].Disciple.x -= PlayerVelX;
+							Disciples[3].DiscipleVision.x -= PlayerVelX;
+							Platform.x -= PlayerVelX;
+							Platform2.x -= PlayerVelX;
+							Platform3.x -= PlayerVelX;
+							Platform4.x -= PlayerVelX;
+							Platform5.x -= PlayerVelX;
+							Platform6.x -= PlayerVelX;
+							Platform7.x -= PlayerVelX;
+							Platform8.x -= PlayerVelX;
+							Platform9.x -= PlayerVelX;
+							Platform10.x -= PlayerVelX;
+							Platform11.x -= PlayerVelX;
+							Platform12.x -= PlayerVelX;
+							Platform13.x -= PlayerVelX;
+							Platform14.x -= PlayerVelX;
+							Platform15.x -= PlayerVelX;
+							Platform16.x -= PlayerVelX;
+							BottomPlatform.x -= PlayerVelX;
+							TopPlatform.x -= PlayerVelX;
+							RightPlatform.x -= PlayerVelX;
+							RightPlatform2.x -= PlayerVelX;
+							RightPlatform3.x -= PlayerVelX;
+							RightPlatform4.x -= PlayerVelX;
+							RightPlatform5.x -= PlayerVelX;
+							RightPlatform6.x -= PlayerVelX;
+							RightPlatform7.x -= PlayerVelX;
+							RightPlatform8.x -= PlayerVelX;
+							LeftPlatform.x -= PlayerVelX;
+							LeftPlatform2.x -= PlayerVelX;
+							LeftPlatform3.x -= PlayerVelX;
+							LeftPlatform4.x -= PlayerVelX;
+							LeftPlatform5.x -= PlayerVelX;
+							LeftPlatform6.x -= PlayerVelX;
+							LeftPlatform7.x -= PlayerVelX;
+							LeftPlatform8.x -= PlayerVelX;
+							LeftPlatform9.x -= PlayerVelX;
+							LeftPlatform10.x -= PlayerVelX;
+							LeftPlatform11.x -= PlayerVelX;
+							LeftPlatform12.x -= PlayerVelX;
+							LeftPlatform13.x -= PlayerVelX;
+							LeftPlatform14.x -= PlayerVelX;
+							Ladder.x -= PlayerVelX;
+							Ladder2.x -= PlayerVelX;
+							Ladder3.x -= PlayerVelX;
+							Ladder4.x -= PlayerVelX;
+							Ladder5.x -= PlayerVelX;
+						}
+						if (Player.y < 0 + (Player.h * 2))
+						{
+							Player.y = 0 + (Player.h * 2);
+							Background.y -= PlayerVelY;
+
+							Wall.y -= PlayerVelY;
+							Wall2.y -= PlayerVelY;
+							Wall3.y -= PlayerVelY;
+							Wall4.y -= PlayerVelY;
+							Wall5.y -= PlayerVelY;
+							Wall6.y -= PlayerVelY;
+							Wall7.y -= PlayerVelY;
+							Wall8.y -= PlayerVelY;
+							Wall9.y -= PlayerVelY;
+							Wall10.y -= PlayerVelY;
+							Wall11.y -= PlayerVelY;
+							Wall12.y -= PlayerVelY;
+							healthPickUp.y -= PlayerVelY;
+							ammoPickUp.y -= PlayerVelY;
+							PinkKey.y -= PlayerVelY;
+							PurpleKey.y -= PlayerVelY;
+							BlackKey.y -= PlayerVelY;
+							tempBullet.EnemBullet.y -= PlayerVelY;
+							Turrets[0].Turret.y -= PlayerVelY;
+							Turrets[0].TurretVision.y -= PlayerVelY;
+							Turrets[1].Turret.y -= PlayerVelY;
+							Turrets[1].TurretVision.y -= PlayerVelY;
+							Turrets[2].Turret.y -= PlayerVelY;
+							Turrets[2].TurretVision.y -= PlayerVelY;
+							Disciples[0].Disciple.y -= PlayerVelY;
+							Disciples[0].DiscipleVision.y -= PlayerVelY;
+							Disciples[1].Disciple.y -= PlayerVelY;
+							Disciples[1].DiscipleVision.y -= PlayerVelY;
+							Disciples[2].Disciple.y -= PlayerVelY;
+							Disciples[2].DiscipleVision.y -= PlayerVelY;
+							Disciples[3].Disciple.y -= PlayerVelY;
+							Disciples[3].DiscipleVision.y -= PlayerVelY;
+							Platform.y -= PlayerVelY;
+							Platform2.y -= PlayerVelY;
+							Platform3.y -= PlayerVelY;
+							Platform4.y -= PlayerVelY;
+							Platform5.y -= PlayerVelY;
+							Platform6.y -= PlayerVelY;
+							Platform7.y -= PlayerVelY;
+							Platform8.y -= PlayerVelY;
+							Platform9.y -= PlayerVelY;
+							Platform10.y -= PlayerVelY;
+							Platform11.y -= PlayerVelY;
+							Platform12.y -= PlayerVelY;
+							Platform13.y -= PlayerVelY;
+							Platform14.y -= PlayerVelY;
+							Platform15.y -= PlayerVelY;
+							Platform16.y -= PlayerVelY;
+							BottomPlatform.y -= PlayerVelY;
+							TopPlatform.y -= PlayerVelY;
+							RightPlatform.y -= PlayerVelY;
+							RightPlatform2.y -= PlayerVelY;
+							RightPlatform3.y -= PlayerVelY;
+							RightPlatform4.y -= PlayerVelY;
+							RightPlatform5.y -= PlayerVelY;
+							RightPlatform6.y -= PlayerVelY;
+							RightPlatform7.y -= PlayerVelY;
+							RightPlatform8.y -= PlayerVelY;
+							LeftPlatform.y -= PlayerVelY;
+							LeftPlatform2.y -= PlayerVelY;
+							LeftPlatform3.y -= PlayerVelY;
+							LeftPlatform4.y -= PlayerVelY;
+							LeftPlatform5.y -= PlayerVelY;
+							LeftPlatform6.y -= PlayerVelY;
+							LeftPlatform7.y -= PlayerVelY;
+							LeftPlatform8.y -= PlayerVelY;
+							LeftPlatform9.y -= PlayerVelY;
+							LeftPlatform10.y -= PlayerVelY;
+							LeftPlatform11.y -= PlayerVelY;
+							LeftPlatform12.y -= PlayerVelY;
+							LeftPlatform13.y -= PlayerVelY;
+							LeftPlatform14.y -= PlayerVelY;
+							Ladder.y -= PlayerVelY;
+							Ladder2.y -= PlayerVelY;
+							Ladder3.y -= PlayerVelY;
+							Ladder4.y -= PlayerVelY;
+							Ladder5.y -= PlayerVelY;
+						}
+						//Checking for player to be on the edge of the screen vertically
+						if (Player.y > 768 - (Player.h * 2))
+						{
+							Player.y = 768 - (Player.h * 2);
+							Background.y -= PlayerVelY;
+
+							Wall.y -= PlayerVelY;
+							Wall2.y -= PlayerVelY;
+							Wall3.y -= PlayerVelY;
+							Wall4.y -= PlayerVelY;
+							Wall5.y -= PlayerVelY;
+							Wall6.y -= PlayerVelY;
+							Wall7.y -= PlayerVelY;
+							Wall8.y -= PlayerVelY;
+							Wall9.y -= PlayerVelY;
+							Wall10.y -= PlayerVelY;
+							Wall11.y -= PlayerVelY;
+							Wall12.y -= PlayerVelY;
+							healthPickUp.y -= PlayerVelY;
+							ammoPickUp.y -= PlayerVelY;
+							PinkKey.y -= PlayerVelY;
+							PurpleKey.y -= PlayerVelY;
+							BlackKey.y -= PlayerVelY;
+							tempBullet.EnemBullet.y -= PlayerVelY;
+							Turrets[0].Turret.y -= PlayerVelY;
+							Turrets[0].TurretVision.y -= PlayerVelY;
+							Turrets[1].Turret.y -= PlayerVelY;
+							Turrets[1].TurretVision.y -= PlayerVelY;
+							Turrets[2].Turret.y -= PlayerVelY;
+							Turrets[2].TurretVision.y -= PlayerVelY;
+							Disciples[0].Disciple.y -= PlayerVelY;
+							Disciples[0].DiscipleVision.y -= PlayerVelY;
+							Disciples[1].Disciple.y -= PlayerVelY;
+							Disciples[1].DiscipleVision.y -= PlayerVelY;
+							Disciples[2].Disciple.y -= PlayerVelY;
+							Disciples[2].DiscipleVision.y -= PlayerVelY;
+							Disciples[3].Disciple.y -= PlayerVelY;
+							Disciples[3].DiscipleVision.y -= PlayerVelY;
+							Platform.y -= PlayerVelY;
+							Platform2.y -= PlayerVelY;
+							Platform3.y -= PlayerVelY;
+							Platform4.y -= PlayerVelY;
+							Platform5.y -= PlayerVelY;
+							Platform6.y -= PlayerVelY;
+							Platform7.y -= PlayerVelY;
+							Platform8.y -= PlayerVelY;
+							Platform9.y -= PlayerVelY;
+							Platform10.y -= PlayerVelY;
+							Platform11.y -= PlayerVelY;
+							Platform12.y -= PlayerVelY;
+							Platform13.y -= PlayerVelY;
+							Platform14.y -= PlayerVelY;
+							Platform15.y -= PlayerVelY;
+							Platform16.y -= PlayerVelY;
+							BottomPlatform.y -= PlayerVelY;
+							TopPlatform.y -= PlayerVelY;
+							RightPlatform.y -= PlayerVelY;
+							RightPlatform2.y -= PlayerVelY;
+							RightPlatform3.y -= PlayerVelY;
+							RightPlatform4.y -= PlayerVelY;
+							RightPlatform5.y -= PlayerVelY;
+							RightPlatform6.y -= PlayerVelY;
+							RightPlatform7.y -= PlayerVelY;
+							RightPlatform8.y -= PlayerVelY;
+							LeftPlatform.y -= PlayerVelY;
+							LeftPlatform2.y -= PlayerVelY;
+							LeftPlatform3.y -= PlayerVelY;
+							LeftPlatform4.y -= PlayerVelY;
+							LeftPlatform5.y -= PlayerVelY;
+							LeftPlatform6.y -= PlayerVelY;
+							LeftPlatform7.y -= PlayerVelY;
+							LeftPlatform8.y -= PlayerVelY;
+							LeftPlatform9.y -= PlayerVelY;
+							LeftPlatform10.y -= PlayerVelY;
+							LeftPlatform11.y -= PlayerVelY;
+							LeftPlatform12.y -= PlayerVelY;
+							LeftPlatform13.y -= PlayerVelY;
+							LeftPlatform14.y -= PlayerVelY;
+							Ladder.y -= PlayerVelY;
+							Ladder2.y -= PlayerVelY;
+							Ladder3.y -= PlayerVelY;
+							Ladder4.y -= PlayerVelY;
+							Ladder5.y -= PlayerVelY;
+						}
+
+						break;
+					}
+					}
+				}
+			}
+		}
+	}
 }
+if (state == Win)
+{
+	while (inWin)
+	{
+		cout << "We are in the Win state :)" << endl;
+		//Input for Game//
+		while (SDL_PollEvent(&event) != 0)
+		{
+			if (event.type == SDL_QUIT)
+			{
+				inWin = false;
+			}
+			else
+			{
+				if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+				{
+
+					switch (event.key.keysym.sym)
+					{
+					case SDLK_ESCAPE:
+						inWin = false;
+						inGame = false;
+						SDL_DestroyWindow(window);
+						SDL_Quit();
+						break;
+					case SDLK_1:
+					{
+						hasBlackKey = false;
+						hasPinkKey = false;
+						hasPurpleKey = false;
+						inWin = false;
+						inLose = false;
+						state = ingame;
+						inGame = true;
+						playerHealth = 100;
+						HealthBarFront.w = 200;
+						ammoCount = 10;
+						ManaBarFront.w = 200;
+						Player.x = 750;
+						Player.y = 620;
+						//Checking for player to be on the edge of the screen horizontally
+						if (Player.x > 1024 - (Player.w * 2))
+						{
+							Player.x = 1024 - (Player.w * 2);
+							Background.x -= PlayerVelX;
+
+							Wall.x -= PlayerVelX;
+							Wall2.x -= PlayerVelX;
+							Wall3.x -= PlayerVelX;
+							Wall4.x -= PlayerVelX;
+							Wall5.x -= PlayerVelX;
+							Wall6.x -= PlayerVelX;
+							Wall7.x -= PlayerVelX;
+							Wall8.x -= PlayerVelX;
+							Wall9.x -= PlayerVelX;
+							Wall10.x -= PlayerVelX;
+							Wall11.x -= PlayerVelX;
+							Wall12.x -= PlayerVelX;
+							healthPickUp.x -= PlayerVelX;
+							ammoPickUp.x -= PlayerVelX;
+							PinkKey.x -= PlayerVelX;
+							PurpleKey.x -= PlayerVelX;
+							BlackKey.x -= PlayerVelX;
+							Turrets[0].Turret.x -= PlayerVelX;
+							Turrets[0].TurretVision.x -= PlayerVelX;
+							Turrets[1].Turret.x -= PlayerVelX;
+							Turrets[1].TurretVision.x -= PlayerVelX;
+							Turrets[2].Turret.x -= PlayerVelX;
+							Turrets[2].TurretVision.x -= PlayerVelX;
+							Disciples[0].Disciple.x -= PlayerVelX;
+							Disciples[0].DiscipleVision.x -= PlayerVelX;
+							Disciples[1].Disciple.x -= PlayerVelX;
+							Disciples[1].DiscipleVision.x -= PlayerVelX;
+							Disciples[2].Disciple.x -= PlayerVelX;
+							Disciples[2].DiscipleVision.x -= PlayerVelX;
+							Disciples[3].Disciple.x -= PlayerVelX;
+							Disciples[3].DiscipleVision.x -= PlayerVelX;
+							Platform.x -= PlayerVelX;
+							Platform2.x -= PlayerVelX;
+							Platform3.x -= PlayerVelX;
+							Platform4.x -= PlayerVelX;
+							Platform5.x -= PlayerVelX;
+							Platform6.x -= PlayerVelX;
+							Platform7.x -= PlayerVelX;
+							Platform8.x -= PlayerVelX;
+							Platform9.x -= PlayerVelX;
+							Platform10.x -= PlayerVelX;
+							Platform11.x -= PlayerVelX;
+							Platform12.x -= PlayerVelX;
+							Platform13.x -= PlayerVelX;
+							Platform14.x -= PlayerVelX;
+							Platform15.x -= PlayerVelX;
+							Platform16.x -= PlayerVelX;
+							BottomPlatform.x -= PlayerVelX;
+							TopPlatform.x -= PlayerVelX;
+							RightPlatform.x -= PlayerVelX;
+							RightPlatform2.x -= PlayerVelX;
+							RightPlatform3.x -= PlayerVelX;
+							RightPlatform4.x -= PlayerVelX;
+							RightPlatform5.x -= PlayerVelX;
+							RightPlatform6.x -= PlayerVelX;
+							RightPlatform7.x -= PlayerVelX;
+							RightPlatform8.x -= PlayerVelX;
+							LeftPlatform.x -= PlayerVelX;
+							LeftPlatform2.x -= PlayerVelX;
+							LeftPlatform3.x -= PlayerVelX;
+							LeftPlatform4.x -= PlayerVelX;
+							LeftPlatform5.x -= PlayerVelX;
+							LeftPlatform6.x -= PlayerVelX;
+							LeftPlatform7.x -= PlayerVelX;
+							LeftPlatform8.x -= PlayerVelX;
+							LeftPlatform9.x -= PlayerVelX;
+							LeftPlatform10.x -= PlayerVelX;
+							LeftPlatform11.x -= PlayerVelX;
+							LeftPlatform12.x -= PlayerVelX;
+							LeftPlatform13.x -= PlayerVelX;
+							LeftPlatform14.x -= PlayerVelX;
+							Ladder.x -= PlayerVelX;
+							Ladder2.x -= PlayerVelX;
+							Ladder3.x -= PlayerVelX;
+							Ladder4.x -= PlayerVelX;
+							Ladder5.x -= PlayerVelX;
+						}
+						if (Player.x < 0 + (Player.w * 2))
+						{
+							Player.x = 0 + (Player.w * 2);
+							Background.x -= PlayerVelX;
+
+							Wall.x -= PlayerVelX;
+							Wall2.x -= PlayerVelX;
+							Wall3.x -= PlayerVelX;
+							Wall4.x -= PlayerVelX;
+							Wall5.x -= PlayerVelX;
+							Wall6.x -= PlayerVelX;
+							Wall7.x -= PlayerVelX;
+							Wall8.x -= PlayerVelX;
+							Wall9.x -= PlayerVelX;
+							Wall10.x -= PlayerVelX;
+							Wall11.x -= PlayerVelX;
+							Wall12.x -= PlayerVelX;
+							healthPickUp.x -= PlayerVelX;
+							ammoPickUp.x -= PlayerVelX;
+							PinkKey.x -= PlayerVelX;
+							PurpleKey.x -= PlayerVelX;
+							BlackKey.x -= PlayerVelX;
+							Turrets[0].Turret.x -= PlayerVelX;
+							Turrets[0].TurretVision.x -= PlayerVelX;
+							Turrets[1].Turret.x -= PlayerVelX;
+							Turrets[1].TurretVision.x -= PlayerVelX;
+							Turrets[2].Turret.x -= PlayerVelX;
+							Turrets[2].TurretVision.x -= PlayerVelX;
+							Disciples[0].Disciple.x -= PlayerVelX;
+							Disciples[0].DiscipleVision.x -= PlayerVelX;
+							Disciples[1].Disciple.x -= PlayerVelX;
+							Disciples[1].DiscipleVision.x -= PlayerVelX;
+							Disciples[2].Disciple.x -= PlayerVelX;
+							Disciples[2].DiscipleVision.x -= PlayerVelX;
+							Disciples[3].Disciple.x -= PlayerVelX;
+							Disciples[3].DiscipleVision.x -= PlayerVelX;
+							Platform.x -= PlayerVelX;
+							Platform2.x -= PlayerVelX;
+							Platform3.x -= PlayerVelX;
+							Platform4.x -= PlayerVelX;
+							Platform5.x -= PlayerVelX;
+							Platform6.x -= PlayerVelX;
+							Platform7.x -= PlayerVelX;
+							Platform8.x -= PlayerVelX;
+							Platform9.x -= PlayerVelX;
+							Platform10.x -= PlayerVelX;
+							Platform11.x -= PlayerVelX;
+							Platform12.x -= PlayerVelX;
+							Platform13.x -= PlayerVelX;
+							Platform14.x -= PlayerVelX;
+							Platform15.x -= PlayerVelX;
+							Platform16.x -= PlayerVelX;
+							BottomPlatform.x -= PlayerVelX;
+							TopPlatform.x -= PlayerVelX;
+							RightPlatform.x -= PlayerVelX;
+							RightPlatform2.x -= PlayerVelX;
+							RightPlatform3.x -= PlayerVelX;
+							RightPlatform4.x -= PlayerVelX;
+							RightPlatform5.x -= PlayerVelX;
+							RightPlatform6.x -= PlayerVelX;
+							RightPlatform7.x -= PlayerVelX;
+							RightPlatform8.x -= PlayerVelX;
+							LeftPlatform.x -= PlayerVelX;
+							LeftPlatform2.x -= PlayerVelX;
+							LeftPlatform3.x -= PlayerVelX;
+							LeftPlatform4.x -= PlayerVelX;
+							LeftPlatform5.x -= PlayerVelX;
+							LeftPlatform6.x -= PlayerVelX;
+							LeftPlatform7.x -= PlayerVelX;
+							LeftPlatform8.x -= PlayerVelX;
+							LeftPlatform9.x -= PlayerVelX;
+							LeftPlatform10.x -= PlayerVelX;
+							LeftPlatform11.x -= PlayerVelX;
+							LeftPlatform12.x -= PlayerVelX;
+							LeftPlatform13.x -= PlayerVelX;
+							LeftPlatform14.x -= PlayerVelX;
+							Ladder.x -= PlayerVelX;
+							Ladder2.x -= PlayerVelX;
+							Ladder3.x -= PlayerVelX;
+							Ladder4.x -= PlayerVelX;
+							Ladder5.x -= PlayerVelX;
+						}
+						if (Player.y < 0 + (Player.h * 2))
+						{
+							Player.y = 0 + (Player.h * 2);
+							Background.y -= PlayerVelY;
+
+							Wall.y -= PlayerVelY;
+							Wall2.y -= PlayerVelY;
+							Wall3.y -= PlayerVelY;
+							Wall4.y -= PlayerVelY;
+							Wall5.y -= PlayerVelY;
+							Wall6.y -= PlayerVelY;
+							Wall7.y -= PlayerVelY;
+							Wall8.y -= PlayerVelY;
+							Wall9.y -= PlayerVelY;
+							Wall10.y -= PlayerVelY;
+							Wall11.y -= PlayerVelY;
+							Wall12.y -= PlayerVelY;
+							healthPickUp.y -= PlayerVelY;
+							ammoPickUp.y -= PlayerVelY;
+							PinkKey.y -= PlayerVelY;
+							PurpleKey.y -= PlayerVelY;
+							BlackKey.y -= PlayerVelY;
+							tempBullet.EnemBullet.y -= PlayerVelY;
+							Turrets[0].Turret.y -= PlayerVelY;
+							Turrets[0].TurretVision.y -= PlayerVelY;
+							Turrets[1].Turret.y -= PlayerVelY;
+							Turrets[1].TurretVision.y -= PlayerVelY;
+							Turrets[2].Turret.y -= PlayerVelY;
+							Turrets[2].TurretVision.y -= PlayerVelY;
+							Disciples[0].Disciple.y -= PlayerVelY;
+							Disciples[0].DiscipleVision.y -= PlayerVelY;
+							Disciples[1].Disciple.y -= PlayerVelY;
+							Disciples[1].DiscipleVision.y -= PlayerVelY;
+							Disciples[2].Disciple.y -= PlayerVelY;
+							Disciples[2].DiscipleVision.y -= PlayerVelY;
+							Disciples[3].Disciple.y -= PlayerVelY;
+							Disciples[3].DiscipleVision.y -= PlayerVelY;
+							Platform.y -= PlayerVelY;
+							Platform2.y -= PlayerVelY;
+							Platform3.y -= PlayerVelY;
+							Platform4.y -= PlayerVelY;
+							Platform5.y -= PlayerVelY;
+							Platform6.y -= PlayerVelY;
+							Platform7.y -= PlayerVelY;
+							Platform8.y -= PlayerVelY;
+							Platform9.y -= PlayerVelY;
+							Platform10.y -= PlayerVelY;
+							Platform11.y -= PlayerVelY;
+							Platform12.y -= PlayerVelY;
+							Platform13.y -= PlayerVelY;
+							Platform14.y -= PlayerVelY;
+							Platform15.y -= PlayerVelY;
+							Platform16.y -= PlayerVelY;
+							BottomPlatform.y -= PlayerVelY;
+							TopPlatform.y -= PlayerVelY;
+							RightPlatform.y -= PlayerVelY;
+							RightPlatform2.y -= PlayerVelY;
+							RightPlatform3.y -= PlayerVelY;
+							RightPlatform4.y -= PlayerVelY;
+							RightPlatform5.y -= PlayerVelY;
+							RightPlatform6.y -= PlayerVelY;
+							RightPlatform7.y -= PlayerVelY;
+							RightPlatform8.y -= PlayerVelY;
+							LeftPlatform.y -= PlayerVelY;
+							LeftPlatform2.y -= PlayerVelY;
+							LeftPlatform3.y -= PlayerVelY;
+							LeftPlatform4.y -= PlayerVelY;
+							LeftPlatform5.y -= PlayerVelY;
+							LeftPlatform6.y -= PlayerVelY;
+							LeftPlatform7.y -= PlayerVelY;
+							LeftPlatform8.y -= PlayerVelY;
+							LeftPlatform9.y -= PlayerVelY;
+							LeftPlatform10.y -= PlayerVelY;
+							LeftPlatform11.y -= PlayerVelY;
+							LeftPlatform12.y -= PlayerVelY;
+							LeftPlatform13.y -= PlayerVelY;
+							LeftPlatform14.y -= PlayerVelY;
+							Ladder.y -= PlayerVelY;
+							Ladder2.y -= PlayerVelY;
+							Ladder3.y -= PlayerVelY;
+							Ladder4.y -= PlayerVelY;
+							Ladder5.y -= PlayerVelY;
+						}
+						//Checking for player to be on the edge of the screen vertically
+						if (Player.y > 768 - (Player.h * 2))
+						{
+							Player.y = 768 - (Player.h * 2);
+							Background.y -= PlayerVelY;
+
+							Wall.y -= PlayerVelY;
+							Wall2.y -= PlayerVelY;
+							Wall3.y -= PlayerVelY;
+							Wall4.y -= PlayerVelY;
+							Wall5.y -= PlayerVelY;
+							Wall6.y -= PlayerVelY;
+							Wall7.y -= PlayerVelY;
+							Wall8.y -= PlayerVelY;
+							Wall9.y -= PlayerVelY;
+							Wall10.y -= PlayerVelY;
+							Wall11.y -= PlayerVelY;
+							Wall12.y -= PlayerVelY;
+							healthPickUp.y -= PlayerVelY;
+							ammoPickUp.y -= PlayerVelY;
+							PinkKey.y -= PlayerVelY;
+							PurpleKey.y -= PlayerVelY;
+							BlackKey.y -= PlayerVelY;
+							tempBullet.EnemBullet.y -= PlayerVelY;
+							Turrets[0].Turret.y -= PlayerVelY;
+							Turrets[0].TurretVision.y -= PlayerVelY;
+							Turrets[1].Turret.y -= PlayerVelY;
+							Turrets[1].TurretVision.y -= PlayerVelY;
+							Turrets[2].Turret.y -= PlayerVelY;
+							Turrets[2].TurretVision.y -= PlayerVelY;
+							Disciples[0].Disciple.y -= PlayerVelY;
+							Disciples[0].DiscipleVision.y -= PlayerVelY;
+							Disciples[1].Disciple.y -= PlayerVelY;
+							Disciples[1].DiscipleVision.y -= PlayerVelY;
+							Disciples[2].Disciple.y -= PlayerVelY;
+							Disciples[2].DiscipleVision.y -= PlayerVelY;
+							Disciples[3].Disciple.y -= PlayerVelY;
+							Disciples[3].DiscipleVision.y -= PlayerVelY;
+							Platform.y -= PlayerVelY;
+							Platform2.y -= PlayerVelY;
+							Platform3.y -= PlayerVelY;
+							Platform4.y -= PlayerVelY;
+							Platform5.y -= PlayerVelY;
+							Platform6.y -= PlayerVelY;
+							Platform7.y -= PlayerVelY;
+							Platform8.y -= PlayerVelY;
+							Platform9.y -= PlayerVelY;
+							Platform10.y -= PlayerVelY;
+							Platform11.y -= PlayerVelY;
+							Platform12.y -= PlayerVelY;
+							Platform13.y -= PlayerVelY;
+							Platform14.y -= PlayerVelY;
+							Platform15.y -= PlayerVelY;
+							Platform16.y -= PlayerVelY;
+							BottomPlatform.y -= PlayerVelY;
+							TopPlatform.y -= PlayerVelY;
+							RightPlatform.y -= PlayerVelY;
+							RightPlatform2.y -= PlayerVelY;
+							RightPlatform3.y -= PlayerVelY;
+							RightPlatform4.y -= PlayerVelY;
+							RightPlatform5.y -= PlayerVelY;
+							RightPlatform6.y -= PlayerVelY;
+							RightPlatform7.y -= PlayerVelY;
+							RightPlatform8.y -= PlayerVelY;
+							LeftPlatform.y -= PlayerVelY;
+							LeftPlatform2.y -= PlayerVelY;
+							LeftPlatform3.y -= PlayerVelY;
+							LeftPlatform4.y -= PlayerVelY;
+							LeftPlatform5.y -= PlayerVelY;
+							LeftPlatform6.y -= PlayerVelY;
+							LeftPlatform7.y -= PlayerVelY;
+							LeftPlatform8.y -= PlayerVelY;
+							LeftPlatform9.y -= PlayerVelY;
+							LeftPlatform10.y -= PlayerVelY;
+							LeftPlatform11.y -= PlayerVelY;
+							LeftPlatform12.y -= PlayerVelY;
+							LeftPlatform13.y -= PlayerVelY;
+							LeftPlatform14.y -= PlayerVelY;
+							Ladder.y -= PlayerVelY;
+							Ladder2.y -= PlayerVelY;
+							Ladder3.y -= PlayerVelY;
+							Ladder4.y -= PlayerVelY;
+							Ladder5.y -= PlayerVelY;
+						}
+
+						break;
+					}
+					}
+				}
+			}
+		}
+	}
+}
+}
+
 //End of Game Loop//
 SDL_DestroyWindow(window);
 
