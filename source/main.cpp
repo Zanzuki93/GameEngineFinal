@@ -363,9 +363,9 @@ WinningCondition.w = 175;
 SDL_Texture * WinningConditionTexture = IMG_LoadTexture(r1, (images_dir + "placeholder.png").c_str());
 //Spike Trap
 SDL_Rect SpikeTrap;
-SpikeTrap.x = 1200;
-SpikeTrap.y = 500;
-SpikeTrap.w = 300;
+SpikeTrap.x = 1250;
+SpikeTrap.y = 550;
+SpikeTrap.w = 450;
 SpikeTrap.h = 50;
 SDL_Texture * SpikeTrapTexture = IMG_LoadTexture(r1,(images_dir+ "placeholder.png").c_str());
 //Setting Up Walls
@@ -1905,6 +1905,8 @@ while(inGame)
 		Player.x -= PlayerVelX;
 		HealthBarFront.w += 10;
 		playerHealth += 5;
+		healthPickUp.x = 2000;
+		healthPickUp.y = 2000;
 	}
 	if (playerHealth >= 100)
 	{
@@ -2870,6 +2872,8 @@ if (state == Lose)
 						Disciples[3].Disciple.y = 570;
 						Disciples[3].DiscipleVision.x = Disciples[3].Disciple.x + 20;
 						Disciples[3].DiscipleVision.y = Disciples[3].Disciple.y;
+						SpikeTrap.x = 1250;
+						SpikeTrap.y = 550;
 						}
 					}
 				}
@@ -3105,6 +3109,8 @@ if (state == Win)
 				tempDisciple4.Disciple.y = 570;
 				tempDisciple4.DiscipleVision.x = tempDisciple4.Disciple.x + 20;
 				tempDisciple4.DiscipleVision.y = tempDisciple4.Disciple.y;
+				SpikeTrap.x = 1250;
+				SpikeTrap.y = 550;
 				}
 					}
 				}
