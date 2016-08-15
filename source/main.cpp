@@ -33,9 +33,7 @@ using namespace std;
 #include <string>
 #include <ctime>
 
-//Reminder me !!!!!!!!!!!
-//Comapre the the y of the player of the floating platoforms as a check to see if the player should be grounded or not
-//Create an utilze enum states to make a win/lose condition and make sure they both work
+
 class PlayerBullet
 {
 public:
@@ -231,7 +229,7 @@ public:
 		DiscipleVision.x = 0;
 		DiscipleVision.y = 0;
 		DiscipleVision.w = 400;
-		DiscipleVision.h = 50;
+		DiscipleVision.h = 100;
 		discipleHealth = rand() % 20;
 		discipleDead = false;
 		isRight = false;
@@ -363,7 +361,13 @@ WinningCondition.y = 590;
 WinningCondition.h = 175;
 WinningCondition.w = 175;
 SDL_Texture * WinningConditionTexture = IMG_LoadTexture(r1, (images_dir + "placeholder.png").c_str());
-
+//Spike Trap
+SDL_Rect SpikeTrap;
+SpikeTrap.x = 1200;
+SpikeTrap.y = 500;
+SpikeTrap.w = 300;
+SpikeTrap.h = 50;
+SDL_Texture * SpikeTrapTexture = IMG_LoadTexture(r1,(images_dir+ "placeholder.png").c_str());
 //Setting Up Walls
 //Right Wall
 SDL_Rect Wall;
@@ -831,20 +835,20 @@ BlackKeyGUI.h = 50;
 SDL_Texture * BlackKeyGUITexture = IMG_LoadTexture(r1, (images_dir + "blackKeyPickUp.png").c_str());
 //Creating the Keys 
 SDL_Rect PinkKey;
-PinkKey.x = 500;
+PinkKey.x = 395;
 PinkKey.y = 550;
 PinkKey.w = 30;
 PinkKey.h = 30;
 SDL_Texture * PinkKeyTexture = IMG_LoadTexture(r1, (images_dir + "pinkKeyPickUp.png").c_str());
 SDL_Rect PurpleKey;
-PurpleKey.x = 700;
-PurpleKey.y = 550;
+PurpleKey.x = 1600;
+PurpleKey.y = 400;
 PurpleKey.w = 30;
 PurpleKey.h = 30;
 SDL_Texture * PurpleKeyTexture = IMG_LoadTexture(r1, (images_dir + "purpleKeyPickUp.png").c_str());
 SDL_Rect BlackKey;
-BlackKey.x = 600;
-BlackKey.y = 550;
+BlackKey.x = 1400;
+BlackKey.y = -975;
 BlackKey.w = 30;
 BlackKey.h = 30;
 SDL_Texture * BlackKeyTexture = IMG_LoadTexture(r1, (images_dir + "blackKeyPickUp.png").c_str());
@@ -853,51 +857,51 @@ SDL_Texture * BlackKeyTexture = IMG_LoadTexture(r1, (images_dir + "blackKeyPickU
 TurretEnemy tempTurret = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
 tempTurret = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(),r1);
 tempTurret.Turret.x = 0;
-tempTurret.Turret.y = -700;
+tempTurret.Turret.y = -890;
 tempTurret.TurretVision.x = tempTurret.Turret.x;
 tempTurret.TurretVision.y = tempTurret.Turret.y;
 Turrets.push_back(tempTurret);
 
 TurretEnemy tempTurret2 = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
 tempTurret2 = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(), r1);
-tempTurret2.Turret.x = 600;
-tempTurret2.Turret.y = -220;
+tempTurret2.Turret.x = 700;
+tempTurret2.Turret.y = -270;
 tempTurret2.TurretVision.x = tempTurret2.Turret.x;
 tempTurret2.TurretVision.y = tempTurret2.Turret.y;
 Turrets.push_back(tempTurret2);
 
 TurretEnemy tempTurret3 = TurretEnemy((images_dir + "KillerPlantRight.png").c_str(), r1);
 tempTurret3 = TurretEnemy((images_dir + "KillerPlantLeft.png").c_str(), r1);
-tempTurret3.Turret.x = 1500;
-tempTurret3.Turret.y = 400;
+tempTurret3.Turret.x = 1480;
+tempTurret3.Turret.y = 380;
 tempTurret3.TurretVision.x = tempTurret3.Turret.x;
 tempTurret3.TurretVision.y = tempTurret3.Turret.y;
 Turrets.push_back(tempTurret3);
 //Creating List of Disciples
 DiscipleEnemy tempDisciple = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
-tempDisciple.Disciple.x = 800;
-tempDisciple.Disciple.y = 300;
+tempDisciple.Disciple.x = 725;
+tempDisciple.Disciple.y = -100;
 tempDisciple.DiscipleVision.x = tempDisciple.Disciple.x + 20;
 tempDisciple.DiscipleVision.y = tempDisciple.Disciple.y;
 Disciples.push_back(tempDisciple);
 
 DiscipleEnemy tempDisciple2 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
-tempDisciple2.Disciple.x = 100;
-tempDisciple2.Disciple.y = 100;
+tempDisciple2.Disciple.x = 140;
+tempDisciple2.Disciple.y = -78;
 tempDisciple2.DiscipleVision.x = tempDisciple2.Disciple.x + 20;
 tempDisciple2.DiscipleVision.y = tempDisciple2.Disciple.y;
 Disciples.push_back(tempDisciple2);
 
 DiscipleEnemy tempDisciple3 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
-tempDisciple3.Disciple.x = 1000;
-tempDisciple3.Disciple.y = -100;
+tempDisciple3.Disciple.x = 1300;
+tempDisciple3.Disciple.y = -980;
 tempDisciple3.DiscipleVision.x = tempDisciple3.Disciple.x + 20;
 tempDisciple3.DiscipleVision.y = tempDisciple3.Disciple.y;
 Disciples.push_back(tempDisciple3);
 
 DiscipleEnemy tempDisciple4 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
-tempDisciple4.Disciple.x = 800;
-tempDisciple4.Disciple.y = 0;
+tempDisciple4.Disciple.x = 180;
+tempDisciple4.Disciple.y = 570;
 tempDisciple4.DiscipleVision.x = tempDisciple4.Disciple.x + 20;
 tempDisciple4.DiscipleVision.y = tempDisciple4.Disciple.y;
 Disciples.push_back(tempDisciple4);
@@ -1023,7 +1027,7 @@ while(inGame)
 					}
 				}
 			}
-			if (State[SDL_SCANCODE_D] && State[SDL_SCANCODE_P] >0)
+			if (State[SDL_SCANCODE_D] && State[SDL_SCANCODE_P] && ammoCount >0)
 			{
 				//cout << "The D Key and P are pressed down" << endl;
 				ManaBarFront.w -= 20;
@@ -1049,7 +1053,7 @@ while(inGame)
 			{
 			case SDLK_ESCAPE:
 				inGame = false;
-				state = Lose;
+				 state = Lose;
 				break;
 			case SDLK_w:
 				isGrounded = false;
@@ -1295,6 +1299,7 @@ while(inGame)
 		Staff.x -= PlayerVelX;
 		Shield.x -= PlayerVelX;
 		WinningCondition.x -= PlayerVelX;
+		SpikeTrap.x -= PlayerVelX;
 	}
 	if (Player.x < 0 + (Player.w * 2))
 	{
@@ -1382,6 +1387,7 @@ while(inGame)
 		Staff.x -= PlayerVelX;
 		Shield.x -= PlayerVelX;
 		WinningCondition.x -= PlayerVelX;
+		SpikeTrap.x -= PlayerVelX;
 	}
 	//Checking For collision with walls and the player Left and Right
 	if (SDL_HasIntersection(&Player, &Wall) || SDL_HasIntersection(&Player, &Wall2) ||
@@ -1455,7 +1461,6 @@ while(inGame)
 		SDL_HasIntersection(&Player, &Ladder3) || SDL_HasIntersection(&Player, &Ladder4)||
 		SDL_HasIntersection(&Player, &Ladder5))
 	{
-		//Player.x -= PlayerVelX;
 		onLadder = true;
 	}
 	else
@@ -2019,6 +2024,7 @@ while(inGame)
 				Staff.y -= PlayerVelY;
 				Shield.y -= PlayerVelY;
 				WinningCondition.y -= PlayerVelY;
+				SpikeTrap.y -= PlayerVelY;
 			}
 
 			if (Player.y > 768 - (Player.h * 2))
@@ -2108,6 +2114,7 @@ while(inGame)
 				Staff.y -= PlayerVelY;
 				Shield.y -= PlayerVelY;
 				WinningCondition.y -= PlayerVelY;
+				SpikeTrap.y -= PlayerVelY;
 			}
 			if(PlayerVelY >= 5)
 			{
@@ -2309,6 +2316,15 @@ while(inGame)
 		PlayerVelY = 0;
 
 	}
+	if(Player.y < Wall.y ||Player.y < Wall2.y ||
+			Player.y < Wall3.y ||Player.y < Wall4.y ||
+			Player.y < Wall5.y ||Player.y < Wall6.y ||
+			Player.y < Wall7.y ||Player.y < Wall8.y ||
+			Player.y < Wall9.y ||Player.y < Wall10.y ||
+			Player.y < Wall11.y ||Player.y < Wall12.y)
+	{
+		isGrounded = false;
+	}
 	//Winning Condition Colliison
 	if (SDL_HasIntersection(&Player, &WinningCondition) && hasBlackKey == true && hasPinkKey == true && hasBlackKey == true)
 	{
@@ -2317,7 +2333,7 @@ while(inGame)
 		inWin = true;
 	}
 
-	//Platrform Collision
+	//Platform Collision
 	if (SDL_HasIntersection(&Player, &Platform) || SDL_HasIntersection(&Player, &Platform2)||
 		SDL_HasIntersection(&Player, &Platform3) || SDL_HasIntersection(&Player, &Platform4)||
 		SDL_HasIntersection(&Player, &Platform5) || SDL_HasIntersection(&Player, &Platform6)||
@@ -2331,6 +2347,17 @@ while(inGame)
 		Player.y -= PlayerVelY;
 		PlayerVelY = 0;
 
+	}
+	if(Player.y < Platform.y ||Player.y < Platform2.y ||
+		Player.y < Platform3.y ||Player.y < Platform4.y ||
+		Player.y < Platform5.y ||Player.y < Platform6.y ||
+		Player.y < Platform7.y ||Player.y < Platform8.y ||
+		Player.y < Platform9.y ||Player.y < Platform10.y ||
+		Player.y < Platform11.y ||Player.y < Platform12.y ||
+		Player.y < Platform13.y ||Player.y < Platform14.y ||
+		Player.y < Platform15.y ||Player.y < Platform16.y)
+	{
+		isGrounded = false;
 	}
 	//Player Colliding with Bottom Platforms from the top
 	if(SDL_HasIntersection(&Player, &BottomPlatform))
@@ -2359,6 +2386,16 @@ while(inGame)
 		Player.y -= PlayerVelY;
 		PlayerVelY = 0;
 	}
+	if(Player.y < LeftPlatform.y ||Player.y < LeftPlatform2.y ||
+		Player.y < LeftPlatform3.y ||Player.y < LeftPlatform4.y ||
+		Player.y < LeftPlatform5.y ||Player.y < LeftPlatform6.y ||
+		Player.y < LeftPlatform7.y ||Player.y < LeftPlatform8.y ||
+		Player.y < LeftPlatform9.y ||Player.y < LeftPlatform10.y ||
+		Player.y < LeftPlatform11.y ||Player.y < LeftPlatform12.y ||
+		Player.y < LeftPlatform13.y ||Player.y < LeftPlatform14.y)
+		{
+			isGrounded = false;
+		}
 	//Player Colliding with Right Platforms from the top
 	if (SDL_HasIntersection(&Player, &RightPlatform)|| SDL_HasIntersection(&Player, &RightPlatform2)||
 		SDL_HasIntersection(&Player, &RightPlatform3)|| SDL_HasIntersection(&Player, &RightPlatform4)||
@@ -2369,6 +2406,13 @@ while(inGame)
 		Player.y -= PlayerVelY;
 		PlayerVelY = 0;
 	}
+	if(Player.y < RightPlatform.y ||Player.y < RightPlatform2.y ||
+	   Player.y < RightPlatform3.y ||Player.y < RightPlatform4.y ||
+	   Player.y < RightPlatform5.y ||Player.y < RightPlatform6.y ||
+	   Player.y < RightPlatform7.y ||Player.y < RightPlatform8.y)
+		{
+		 isGrounded = false;
+		}
 	//Collision with ladders to player vertically 
 	if(SDL_HasIntersection(&Player,&Ladder) || SDL_HasIntersection(&Player, &Ladder2)||
 	(SDL_HasIntersection(&Player, &Ladder3) || SDL_HasIntersection(&Player, &Ladder4)|| 
@@ -2416,6 +2460,11 @@ while(inGame)
 		Player.y -= PlayerVelY;
 		ManaBarFront.w += 20;
 		ammoCount += 1;
+	}
+	if(SDL_HasIntersection(&Player, &SpikeTrap))
+	{
+		playerHealth = 0;
+		isGrounded = true;
 	}
 	//Update Player End//
 
@@ -2589,6 +2638,7 @@ SDL_RenderCopy(r1, TableTexture, NULL, &Table);
 SDL_RenderCopy(r1, BookCaseTexture, NULL, &BookCase);
 SDL_RenderCopy(r1, StaffTexture, NULL, &Staff);
 SDL_RenderCopy(r1, ShieldTexture, NULL, &Shield);
+SDL_RenderCopy(r1,SpikeTrapTexture,NULL,&SpikeTrap);
 SDL_RenderPresent(r1);
 
 //SDL Drawing Process End//
@@ -2599,6 +2649,9 @@ if (state == Lose)
 	while (inLose)
 	{
 		cout << "We are in the lose state :(" << endl;
+		SDL_RenderClear(r1);
+		//SDL_RenderCopy();
+		SDL_RenderPresent(r1);
 		//Input for Game//
 		while (SDL_PollEvent(&event) != 0)
 		{
@@ -2633,341 +2686,191 @@ if (state == Lose)
 						ManaBarFront.w = 200;
 						Player.x = 750;
 						Player.y = 620;
-						//Checking for player to be on the edge of the screen horizontally
-						if (Player.x > 1024 - (Player.w * 2))
-						{
-							Player.x = 1024 - (Player.w * 2);
-							Background.x -= PlayerVelX;
-
-							Wall.x -= PlayerVelX;
-							Wall2.x -= PlayerVelX;
-							Wall3.x -= PlayerVelX;
-							Wall4.x -= PlayerVelX;
-							Wall5.x -= PlayerVelX;
-							Wall6.x -= PlayerVelX;
-							Wall7.x -= PlayerVelX;
-							Wall8.x -= PlayerVelX;
-							Wall9.x -= PlayerVelX;
-							Wall10.x -= PlayerVelX;
-							Wall11.x -= PlayerVelX;
-							Wall12.x -= PlayerVelX;
-							healthPickUp.x -= PlayerVelX;
-							ammoPickUp.x -= PlayerVelX;
-							PinkKey.x -= PlayerVelX;
-							PurpleKey.x -= PlayerVelX;
-							BlackKey.x -= PlayerVelX;
-							Turrets[0].Turret.x -= PlayerVelX;
-							Turrets[0].TurretVision.x -= PlayerVelX;
-							Turrets[1].Turret.x -= PlayerVelX;
-							Turrets[1].TurretVision.x -= PlayerVelX;
-							Turrets[2].Turret.x -= PlayerVelX;
-							Turrets[2].TurretVision.x -= PlayerVelX;
-							Disciples[0].Disciple.x -= PlayerVelX;
-							Disciples[0].DiscipleVision.x -= PlayerVelX;
-							Disciples[1].Disciple.x -= PlayerVelX;
-							Disciples[1].DiscipleVision.x -= PlayerVelX;
-							Disciples[2].Disciple.x -= PlayerVelX;
-							Disciples[2].DiscipleVision.x -= PlayerVelX;
-							Disciples[3].Disciple.x -= PlayerVelX;
-							Disciples[3].DiscipleVision.x -= PlayerVelX;
-							Platform.x -= PlayerVelX;
-							Platform2.x -= PlayerVelX;
-							Platform3.x -= PlayerVelX;
-							Platform4.x -= PlayerVelX;
-							Platform5.x -= PlayerVelX;
-							Platform6.x -= PlayerVelX;
-							Platform7.x -= PlayerVelX;
-							Platform8.x -= PlayerVelX;
-							Platform9.x -= PlayerVelX;
-							Platform10.x -= PlayerVelX;
-							Platform11.x -= PlayerVelX;
-							Platform12.x -= PlayerVelX;
-							Platform13.x -= PlayerVelX;
-							Platform14.x -= PlayerVelX;
-							Platform15.x -= PlayerVelX;
-							Platform16.x -= PlayerVelX;
-							BottomPlatform.x -= PlayerVelX;
-							TopPlatform.x -= PlayerVelX;
-							RightPlatform.x -= PlayerVelX;
-							RightPlatform2.x -= PlayerVelX;
-							RightPlatform3.x -= PlayerVelX;
-							RightPlatform4.x -= PlayerVelX;
-							RightPlatform5.x -= PlayerVelX;
-							RightPlatform6.x -= PlayerVelX;
-							RightPlatform7.x -= PlayerVelX;
-							RightPlatform8.x -= PlayerVelX;
-							LeftPlatform.x -= PlayerVelX;
-							LeftPlatform2.x -= PlayerVelX;
-							LeftPlatform3.x -= PlayerVelX;
-							LeftPlatform4.x -= PlayerVelX;
-							LeftPlatform5.x -= PlayerVelX;
-							LeftPlatform6.x -= PlayerVelX;
-							LeftPlatform7.x -= PlayerVelX;
-							LeftPlatform8.x -= PlayerVelX;
-							LeftPlatform9.x -= PlayerVelX;
-							LeftPlatform10.x -= PlayerVelX;
-							LeftPlatform11.x -= PlayerVelX;
-							LeftPlatform12.x -= PlayerVelX;
-							LeftPlatform13.x -= PlayerVelX;
-							LeftPlatform14.x -= PlayerVelX;
-							Ladder.x -= PlayerVelX;
-							Ladder2.x -= PlayerVelX;
-							Ladder3.x -= PlayerVelX;
-							Ladder4.x -= PlayerVelX;
-							Ladder5.x -= PlayerVelX;
+						PlayerVelX = 0;
+						PlayerVelY = 0;
+						Background.x = 0;
+						Background.y = -1468;
+						Wall.x = 1220;
+						Wall.y = -620;
+						Wall2.x = 0;
+						Wall2.y = -1270;
+						Wall3.x = 0;
+						Wall3.y = -1270;
+						Wall4.x = 0;
+						Wall4.y = 1080;
+						Wall5.x = 460;
+						Wall5.y = -790;
+						Wall6.x = 1650;
+						Wall6.y = -1270;
+						Wall7.x = 0;
+						Wall7.y = -790;
+						Wall8.x = 150;
+						Wall8.y = -790;
+						Wall9.x = 650;
+						Wall9.y = -790;
+						Wall10.x = 990;
+						Wall10.y = -620;
+						Wall11.x = 0;
+						Wall11.y = 670;
+						Wall12.x = 785;
+						Wall12.y = 670;
+						Platform.x = 840;
+						Platform.y = 630;
+						Platform2.x = 840;
+						Platform2.y = 590;
+						Platform3.x = 940;
+						Platform3.y = 540;
+						Platform4.x = 1040;
+						Platform4.y = 490;
+						Platform5.x = 940;
+						Platform5.y = 340;
+						Platform6.x = 940;
+						Platform6.y = 140;
+						Platform7.x = 740;
+						Platform7.y = 240;
+						Platform8.x = 490;
+						Platform8.y = 10;
+						Platform9.x = 490;
+						Platform9.y = -180;
+						Platform10.x = 600;
+						Platform10.y = -180;
+						Platform11.x = 800;
+						Platform11.y = -240;
+						Platform12.x = 800;
+						Platform12.y = -380;
+						Platform13.x = 960;
+						Platform13.y = -310;
+						Platform14.x = 650;
+						Platform14.y = -440;
+						Platform15.x = 505;
+						Platform15.y = -535;
+						Platform16.x = 760;
+						Platform16.y = -600;
+						RightPlatform.x = 1500;
+						RightPlatform.y = -500;
+						RightPlatform2.x = 1250;
+						RightPlatform2.y = -300;
+						RightPlatform3.x = 1500;
+						RightPlatform3.y = -100;
+						RightPlatform4.x = 1250;
+						RightPlatform4.y = 100;
+						RightPlatform5.x = 1500;
+						RightPlatform5.y = 300;
+						RightPlatform6.x = 1275;
+						RightPlatform6.y = 490;
+						RightPlatform7.x = 1425;
+						RightPlatform7.y = 490;
+						RightPlatform8.x = 1575;
+						RightPlatform8.y = 490;
+						LeftPlatform.x = 50;
+						LeftPlatform.y = -630;
+						LeftPlatform2.x = 225;
+						LeftPlatform2.y = -570;
+						LeftPlatform3.x = 370;
+						LeftPlatform3.y = -490;
+						LeftPlatform4.x = 100;
+						LeftPlatform4.y = -350;
+						LeftPlatform5.x = 225;
+						LeftPlatform5.y = -420;
+						LeftPlatform6.x = 20;
+						LeftPlatform6.y = -260;
+						LeftPlatform7.x = 140;
+						LeftPlatform7.y = -150;
+						LeftPlatform8.x = 380;
+						LeftPlatform8.y = -60;
+						LeftPlatform9.x = 170;
+						LeftPlatform9.y = 35;
+						LeftPlatform10.x = 0;
+						LeftPlatform10.y = 120;
+						LeftPlatform11.x = 290;
+						LeftPlatform11.y = 270;
+						LeftPlatform12.x = 100;
+						LeftPlatform12.y = 350;
+						LeftPlatform13.x = 350;
+						LeftPlatform13.y = 350;
+						LeftPlatform14.x = 170;
+						LeftPlatform14.y = 190;
+						BottomPlatform.x = 650;
+						BottomPlatform.y = 990;
+						TopPlatform.x = 750;
+						TopPlatform.y = -880;
+						Ladder.x = 700;
+						Ladder.y = 660;
+						Ladder2.x = 525;
+						Ladder2.y = -200;
+						Ladder3.x = 500;
+						Ladder3.y = -800;
+						Ladder4.x = 30;
+						Ladder4.y = -800;
+						Ladder5.x = 10;
+						Ladder5.y = 325;
+						Table.x = 30;
+						Table.y = 50;
+						BookCase.x = 180;
+						BookCase.y = -70;
+						Staff.x = 10;
+						Staff.y = 90;
+						Shield.x = 300;
+						Shield.y = 500;
+						healthPickUp.x = 700;
+						healthPickUp.y = 620;
+						ammoPickUp.x = 600;
+						ammoPickUp.y = 620;
+						HealthBarFront.x = 100;
+						HealthBarFront.y = 50;
+						HealthBarBack.x = 100;
+						HealthBarBack.y = 50;
+						Windmill.x = 53;
+						Windmill.y = 30;
+						Windmill2.x = 290;
+						Windmill2.y = 30;
+						ManaBarFront.x = 100;
+						ManaBarFront.y = 125;
+						ManaBarBack.x = 100;
+						ManaBarBack.y = 125;
+						ManaPotion.x = 53;
+						ManaPotion.y = 110;
+						PinkKeyGUI.x = 100;
+						PinkKeyGUI.y = 200;
+						PurpleKeyGUI.x = 150;
+						PurpleKeyGUI.y = 200;
+						BlackKeyGUI.x = 200;
+						BlackKeyGUI.y = 200;
+						PinkKey.x = 395;
+						PinkKey.y = 550;
+						PurpleKey.x = 1600;
+						PurpleKey.y = 400;
+						BlackKey.x = 1400;
+						BlackKey.y = -975;
+						Turrets[0].Turret.x = 0;
+						Turrets[0].Turret.y = -890;
+						Turrets[0].TurretVision.x = Turrets[0].Turret.x;
+						Turrets[0].TurretVision.y = Turrets[0].Turret.y;
+						Turrets[1].Turret.x = 700;
+						Turrets[1].Turret.y = -270;
+						Turrets[1].TurretVision.x = Turrets[1].Turret.x;
+						Turrets[1].TurretVision.y = Turrets[1].Turret.y;
+						Turrets[2].Turret.x = 1480;
+						Turrets[2].Turret.y = 380;
+						Turrets[2].TurretVision.x = Turrets[2].Turret.x;
+						Turrets[2].TurretVision.y = Turrets[2].Turret.y;
+						Disciples[0].Disciple.x = 725;
+						Disciples[0].Disciple.y = -100;
+						Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x + 20;
+						Disciples[0].DiscipleVision.y = Disciples[0].Disciple.y;
+						Disciples[1].Disciple.x = 140;
+						Disciples[1].Disciple.y = -78;
+						Disciples[1].DiscipleVision.x = Disciples[1].Disciple.x + 20;
+						Disciples[1].DiscipleVision.y = Disciples[1].Disciple.y;
+						Disciples[2].Disciple.x = 1300;
+						Disciples[2].Disciple.y = -980;
+						Disciples[2].DiscipleVision.x = Disciples[2].Disciple.x + 20;
+						Disciples[2].DiscipleVision.y = Disciples[2].Disciple.y;
+						Disciples[3].Disciple.x = 180;
+						Disciples[3].Disciple.y = 570;
+						Disciples[3].DiscipleVision.x = Disciples[3].Disciple.x + 20;
+						Disciples[3].DiscipleVision.y = Disciples[3].Disciple.y;
 						}
-						if (Player.x < 0 + (Player.w * 2))
-						{
-							Player.x = 0 + (Player.w * 2);
-							Background.x -= PlayerVelX;
-
-							Wall.x -= PlayerVelX;
-							Wall2.x -= PlayerVelX;
-							Wall3.x -= PlayerVelX;
-							Wall4.x -= PlayerVelX;
-							Wall5.x -= PlayerVelX;
-							Wall6.x -= PlayerVelX;
-							Wall7.x -= PlayerVelX;
-							Wall8.x -= PlayerVelX;
-							Wall9.x -= PlayerVelX;
-							Wall10.x -= PlayerVelX;
-							Wall11.x -= PlayerVelX;
-							Wall12.x -= PlayerVelX;
-							healthPickUp.x -= PlayerVelX;
-							ammoPickUp.x -= PlayerVelX;
-							PinkKey.x -= PlayerVelX;
-							PurpleKey.x -= PlayerVelX;
-							BlackKey.x -= PlayerVelX;
-							Turrets[0].Turret.x -= PlayerVelX;
-							Turrets[0].TurretVision.x -= PlayerVelX;
-							Turrets[1].Turret.x -= PlayerVelX;
-							Turrets[1].TurretVision.x -= PlayerVelX;
-							Turrets[2].Turret.x -= PlayerVelX;
-							Turrets[2].TurretVision.x -= PlayerVelX;
-							Disciples[0].Disciple.x -= PlayerVelX;
-							Disciples[0].DiscipleVision.x -= PlayerVelX;
-							Disciples[1].Disciple.x -= PlayerVelX;
-							Disciples[1].DiscipleVision.x -= PlayerVelX;
-							Disciples[2].Disciple.x -= PlayerVelX;
-							Disciples[2].DiscipleVision.x -= PlayerVelX;
-							Disciples[3].Disciple.x -= PlayerVelX;
-							Disciples[3].DiscipleVision.x -= PlayerVelX;
-							Platform.x -= PlayerVelX;
-							Platform2.x -= PlayerVelX;
-							Platform3.x -= PlayerVelX;
-							Platform4.x -= PlayerVelX;
-							Platform5.x -= PlayerVelX;
-							Platform6.x -= PlayerVelX;
-							Platform7.x -= PlayerVelX;
-							Platform8.x -= PlayerVelX;
-							Platform9.x -= PlayerVelX;
-							Platform10.x -= PlayerVelX;
-							Platform11.x -= PlayerVelX;
-							Platform12.x -= PlayerVelX;
-							Platform13.x -= PlayerVelX;
-							Platform14.x -= PlayerVelX;
-							Platform15.x -= PlayerVelX;
-							Platform16.x -= PlayerVelX;
-							BottomPlatform.x -= PlayerVelX;
-							TopPlatform.x -= PlayerVelX;
-							RightPlatform.x -= PlayerVelX;
-							RightPlatform2.x -= PlayerVelX;
-							RightPlatform3.x -= PlayerVelX;
-							RightPlatform4.x -= PlayerVelX;
-							RightPlatform5.x -= PlayerVelX;
-							RightPlatform6.x -= PlayerVelX;
-							RightPlatform7.x -= PlayerVelX;
-							RightPlatform8.x -= PlayerVelX;
-							LeftPlatform.x -= PlayerVelX;
-							LeftPlatform2.x -= PlayerVelX;
-							LeftPlatform3.x -= PlayerVelX;
-							LeftPlatform4.x -= PlayerVelX;
-							LeftPlatform5.x -= PlayerVelX;
-							LeftPlatform6.x -= PlayerVelX;
-							LeftPlatform7.x -= PlayerVelX;
-							LeftPlatform8.x -= PlayerVelX;
-							LeftPlatform9.x -= PlayerVelX;
-							LeftPlatform10.x -= PlayerVelX;
-							LeftPlatform11.x -= PlayerVelX;
-							LeftPlatform12.x -= PlayerVelX;
-							LeftPlatform13.x -= PlayerVelX;
-							LeftPlatform14.x -= PlayerVelX;
-							Ladder.x -= PlayerVelX;
-							Ladder2.x -= PlayerVelX;
-							Ladder3.x -= PlayerVelX;
-							Ladder4.x -= PlayerVelX;
-							Ladder5.x -= PlayerVelX;
-						}
-						if (Player.y < 0 + (Player.h * 2))
-						{
-							Player.y = 0 + (Player.h * 2);
-							Background.y -= PlayerVelY;
-
-							Wall.y -= PlayerVelY;
-							Wall2.y -= PlayerVelY;
-							Wall3.y -= PlayerVelY;
-							Wall4.y -= PlayerVelY;
-							Wall5.y -= PlayerVelY;
-							Wall6.y -= PlayerVelY;
-							Wall7.y -= PlayerVelY;
-							Wall8.y -= PlayerVelY;
-							Wall9.y -= PlayerVelY;
-							Wall10.y -= PlayerVelY;
-							Wall11.y -= PlayerVelY;
-							Wall12.y -= PlayerVelY;
-							healthPickUp.y -= PlayerVelY;
-							ammoPickUp.y -= PlayerVelY;
-							PinkKey.y -= PlayerVelY;
-							PurpleKey.y -= PlayerVelY;
-							BlackKey.y -= PlayerVelY;
-							tempBullet.EnemBullet.y -= PlayerVelY;
-							Turrets[0].Turret.y -= PlayerVelY;
-							Turrets[0].TurretVision.y -= PlayerVelY;
-							Turrets[1].Turret.y -= PlayerVelY;
-							Turrets[1].TurretVision.y -= PlayerVelY;
-							Turrets[2].Turret.y -= PlayerVelY;
-							Turrets[2].TurretVision.y -= PlayerVelY;
-							Disciples[0].Disciple.y -= PlayerVelY;
-							Disciples[0].DiscipleVision.y -= PlayerVelY;
-							Disciples[1].Disciple.y -= PlayerVelY;
-							Disciples[1].DiscipleVision.y -= PlayerVelY;
-							Disciples[2].Disciple.y -= PlayerVelY;
-							Disciples[2].DiscipleVision.y -= PlayerVelY;
-							Disciples[3].Disciple.y -= PlayerVelY;
-							Disciples[3].DiscipleVision.y -= PlayerVelY;
-							Platform.y -= PlayerVelY;
-							Platform2.y -= PlayerVelY;
-							Platform3.y -= PlayerVelY;
-							Platform4.y -= PlayerVelY;
-							Platform5.y -= PlayerVelY;
-							Platform6.y -= PlayerVelY;
-							Platform7.y -= PlayerVelY;
-							Platform8.y -= PlayerVelY;
-							Platform9.y -= PlayerVelY;
-							Platform10.y -= PlayerVelY;
-							Platform11.y -= PlayerVelY;
-							Platform12.y -= PlayerVelY;
-							Platform13.y -= PlayerVelY;
-							Platform14.y -= PlayerVelY;
-							Platform15.y -= PlayerVelY;
-							Platform16.y -= PlayerVelY;
-							BottomPlatform.y -= PlayerVelY;
-							TopPlatform.y -= PlayerVelY;
-							RightPlatform.y -= PlayerVelY;
-							RightPlatform2.y -= PlayerVelY;
-							RightPlatform3.y -= PlayerVelY;
-							RightPlatform4.y -= PlayerVelY;
-							RightPlatform5.y -= PlayerVelY;
-							RightPlatform6.y -= PlayerVelY;
-							RightPlatform7.y -= PlayerVelY;
-							RightPlatform8.y -= PlayerVelY;
-							LeftPlatform.y -= PlayerVelY;
-							LeftPlatform2.y -= PlayerVelY;
-							LeftPlatform3.y -= PlayerVelY;
-							LeftPlatform4.y -= PlayerVelY;
-							LeftPlatform5.y -= PlayerVelY;
-							LeftPlatform6.y -= PlayerVelY;
-							LeftPlatform7.y -= PlayerVelY;
-							LeftPlatform8.y -= PlayerVelY;
-							LeftPlatform9.y -= PlayerVelY;
-							LeftPlatform10.y -= PlayerVelY;
-							LeftPlatform11.y -= PlayerVelY;
-							LeftPlatform12.y -= PlayerVelY;
-							LeftPlatform13.y -= PlayerVelY;
-							LeftPlatform14.y -= PlayerVelY;
-							Ladder.y -= PlayerVelY;
-							Ladder2.y -= PlayerVelY;
-							Ladder3.y -= PlayerVelY;
-							Ladder4.y -= PlayerVelY;
-							Ladder5.y -= PlayerVelY;
-						}
-						//Checking for player to be on the edge of the screen vertically
-						if (Player.y > 768 - (Player.h * 2))
-						{
-							Player.y = 768 - (Player.h * 2);
-							Background.y -= PlayerVelY;
-
-							Wall.y -= PlayerVelY;
-							Wall2.y -= PlayerVelY;
-							Wall3.y -= PlayerVelY;
-							Wall4.y -= PlayerVelY;
-							Wall5.y -= PlayerVelY;
-							Wall6.y -= PlayerVelY;
-							Wall7.y -= PlayerVelY;
-							Wall8.y -= PlayerVelY;
-							Wall9.y -= PlayerVelY;
-							Wall10.y -= PlayerVelY;
-							Wall11.y -= PlayerVelY;
-							Wall12.y -= PlayerVelY;
-							healthPickUp.y -= PlayerVelY;
-							ammoPickUp.y -= PlayerVelY;
-							PinkKey.y -= PlayerVelY;
-							PurpleKey.y -= PlayerVelY;
-							BlackKey.y -= PlayerVelY;
-							tempBullet.EnemBullet.y -= PlayerVelY;
-							Turrets[0].Turret.y -= PlayerVelY;
-							Turrets[0].TurretVision.y -= PlayerVelY;
-							Turrets[1].Turret.y -= PlayerVelY;
-							Turrets[1].TurretVision.y -= PlayerVelY;
-							Turrets[2].Turret.y -= PlayerVelY;
-							Turrets[2].TurretVision.y -= PlayerVelY;
-							Disciples[0].Disciple.y -= PlayerVelY;
-							Disciples[0].DiscipleVision.y -= PlayerVelY;
-							Disciples[1].Disciple.y -= PlayerVelY;
-							Disciples[1].DiscipleVision.y -= PlayerVelY;
-							Disciples[2].Disciple.y -= PlayerVelY;
-							Disciples[2].DiscipleVision.y -= PlayerVelY;
-							Disciples[3].Disciple.y -= PlayerVelY;
-							Disciples[3].DiscipleVision.y -= PlayerVelY;
-							Platform.y -= PlayerVelY;
-							Platform2.y -= PlayerVelY;
-							Platform3.y -= PlayerVelY;
-							Platform4.y -= PlayerVelY;
-							Platform5.y -= PlayerVelY;
-							Platform6.y -= PlayerVelY;
-							Platform7.y -= PlayerVelY;
-							Platform8.y -= PlayerVelY;
-							Platform9.y -= PlayerVelY;
-							Platform10.y -= PlayerVelY;
-							Platform11.y -= PlayerVelY;
-							Platform12.y -= PlayerVelY;
-							Platform13.y -= PlayerVelY;
-							Platform14.y -= PlayerVelY;
-							Platform15.y -= PlayerVelY;
-							Platform16.y -= PlayerVelY;
-							BottomPlatform.y -= PlayerVelY;
-							TopPlatform.y -= PlayerVelY;
-							RightPlatform.y -= PlayerVelY;
-							RightPlatform2.y -= PlayerVelY;
-							RightPlatform3.y -= PlayerVelY;
-							RightPlatform4.y -= PlayerVelY;
-							RightPlatform5.y -= PlayerVelY;
-							RightPlatform6.y -= PlayerVelY;
-							RightPlatform7.y -= PlayerVelY;
-							RightPlatform8.y -= PlayerVelY;
-							LeftPlatform.y -= PlayerVelY;
-							LeftPlatform2.y -= PlayerVelY;
-							LeftPlatform3.y -= PlayerVelY;
-							LeftPlatform4.y -= PlayerVelY;
-							LeftPlatform5.y -= PlayerVelY;
-							LeftPlatform6.y -= PlayerVelY;
-							LeftPlatform7.y -= PlayerVelY;
-							LeftPlatform8.y -= PlayerVelY;
-							LeftPlatform9.y -= PlayerVelY;
-							LeftPlatform10.y -= PlayerVelY;
-							LeftPlatform11.y -= PlayerVelY;
-							LeftPlatform12.y -= PlayerVelY;
-							LeftPlatform13.y -= PlayerVelY;
-							LeftPlatform14.y -= PlayerVelY;
-							Ladder.y -= PlayerVelY;
-							Ladder2.y -= PlayerVelY;
-							Ladder3.y -= PlayerVelY;
-							Ladder4.y -= PlayerVelY;
-							Ladder5.y -= PlayerVelY;
-						}
-
-						break;
-					}
 					}
 				}
 			}
@@ -2979,7 +2882,9 @@ if (state == Win)
 	while (inWin)
 	{
 		cout << "We are in the Win state :)" << endl;
-		//Input for Game//
+		SDL_RenderClear(r1);
+		//SDL_RenderCopy();
+		SDL_RenderPresent(r1);
 		while (SDL_PollEvent(&event) != 0)
 		{
 			if (event.type == SDL_QUIT)
@@ -2988,367 +2893,219 @@ if (state == Win)
 			}
 			else
 			{
-				if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+			if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
 				{
 
-					switch (event.key.keysym.sym)
+				switch (event.key.keysym.sym)
 					{
 					case SDLK_ESCAPE:
-						inWin = false;
-						inGame = false;
-						SDL_DestroyWindow(window);
-						SDL_Quit();
-						break;
-					case SDLK_1:
 					{
-						hasBlackKey = false;
-						hasPinkKey = false;
-						hasPurpleKey = false;
-						inWin = false;
-						inLose = false;
-						state = ingame;
-						inGame = true;
-						playerHealth = 100;
-						HealthBarFront.w = 200;
-						ammoCount = 10;
-						ManaBarFront.w = 200;
-						Player.x = 750;
-						Player.y = 620;
-						//Checking for player to be on the edge of the screen horizontally
-						if (Player.x > 1024 - (Player.w * 2))
-						{
-							Player.x = 1024 - (Player.w * 2);
-							Background.x -= PlayerVelX;
-
-							Wall.x -= PlayerVelX;
-							Wall2.x -= PlayerVelX;
-							Wall3.x -= PlayerVelX;
-							Wall4.x -= PlayerVelX;
-							Wall5.x -= PlayerVelX;
-							Wall6.x -= PlayerVelX;
-							Wall7.x -= PlayerVelX;
-							Wall8.x -= PlayerVelX;
-							Wall9.x -= PlayerVelX;
-							Wall10.x -= PlayerVelX;
-							Wall11.x -= PlayerVelX;
-							Wall12.x -= PlayerVelX;
-							healthPickUp.x -= PlayerVelX;
-							ammoPickUp.x -= PlayerVelX;
-							PinkKey.x -= PlayerVelX;
-							PurpleKey.x -= PlayerVelX;
-							BlackKey.x -= PlayerVelX;
-							Turrets[0].Turret.x -= PlayerVelX;
-							Turrets[0].TurretVision.x -= PlayerVelX;
-							Turrets[1].Turret.x -= PlayerVelX;
-							Turrets[1].TurretVision.x -= PlayerVelX;
-							Turrets[2].Turret.x -= PlayerVelX;
-							Turrets[2].TurretVision.x -= PlayerVelX;
-							Disciples[0].Disciple.x -= PlayerVelX;
-							Disciples[0].DiscipleVision.x -= PlayerVelX;
-							Disciples[1].Disciple.x -= PlayerVelX;
-							Disciples[1].DiscipleVision.x -= PlayerVelX;
-							Disciples[2].Disciple.x -= PlayerVelX;
-							Disciples[2].DiscipleVision.x -= PlayerVelX;
-							Disciples[3].Disciple.x -= PlayerVelX;
-							Disciples[3].DiscipleVision.x -= PlayerVelX;
-							Platform.x -= PlayerVelX;
-							Platform2.x -= PlayerVelX;
-							Platform3.x -= PlayerVelX;
-							Platform4.x -= PlayerVelX;
-							Platform5.x -= PlayerVelX;
-							Platform6.x -= PlayerVelX;
-							Platform7.x -= PlayerVelX;
-							Platform8.x -= PlayerVelX;
-							Platform9.x -= PlayerVelX;
-							Platform10.x -= PlayerVelX;
-							Platform11.x -= PlayerVelX;
-							Platform12.x -= PlayerVelX;
-							Platform13.x -= PlayerVelX;
-							Platform14.x -= PlayerVelX;
-							Platform15.x -= PlayerVelX;
-							Platform16.x -= PlayerVelX;
-							BottomPlatform.x -= PlayerVelX;
-							TopPlatform.x -= PlayerVelX;
-							RightPlatform.x -= PlayerVelX;
-							RightPlatform2.x -= PlayerVelX;
-							RightPlatform3.x -= PlayerVelX;
-							RightPlatform4.x -= PlayerVelX;
-							RightPlatform5.x -= PlayerVelX;
-							RightPlatform6.x -= PlayerVelX;
-							RightPlatform7.x -= PlayerVelX;
-							RightPlatform8.x -= PlayerVelX;
-							LeftPlatform.x -= PlayerVelX;
-							LeftPlatform2.x -= PlayerVelX;
-							LeftPlatform3.x -= PlayerVelX;
-							LeftPlatform4.x -= PlayerVelX;
-							LeftPlatform5.x -= PlayerVelX;
-							LeftPlatform6.x -= PlayerVelX;
-							LeftPlatform7.x -= PlayerVelX;
-							LeftPlatform8.x -= PlayerVelX;
-							LeftPlatform9.x -= PlayerVelX;
-							LeftPlatform10.x -= PlayerVelX;
-							LeftPlatform11.x -= PlayerVelX;
-							LeftPlatform12.x -= PlayerVelX;
-							LeftPlatform13.x -= PlayerVelX;
-							LeftPlatform14.x -= PlayerVelX;
-							Ladder.x -= PlayerVelX;
-							Ladder2.x -= PlayerVelX;
-							Ladder3.x -= PlayerVelX;
-							Ladder4.x -= PlayerVelX;
-							Ladder5.x -= PlayerVelX;
-						}
-						if (Player.x < 0 + (Player.w * 2))
-						{
-							Player.x = 0 + (Player.w * 2);
-							Background.x -= PlayerVelX;
-
-							Wall.x -= PlayerVelX;
-							Wall2.x -= PlayerVelX;
-							Wall3.x -= PlayerVelX;
-							Wall4.x -= PlayerVelX;
-							Wall5.x -= PlayerVelX;
-							Wall6.x -= PlayerVelX;
-							Wall7.x -= PlayerVelX;
-							Wall8.x -= PlayerVelX;
-							Wall9.x -= PlayerVelX;
-							Wall10.x -= PlayerVelX;
-							Wall11.x -= PlayerVelX;
-							Wall12.x -= PlayerVelX;
-							healthPickUp.x -= PlayerVelX;
-							ammoPickUp.x -= PlayerVelX;
-							PinkKey.x -= PlayerVelX;
-							PurpleKey.x -= PlayerVelX;
-							BlackKey.x -= PlayerVelX;
-							Turrets[0].Turret.x -= PlayerVelX;
-							Turrets[0].TurretVision.x -= PlayerVelX;
-							Turrets[1].Turret.x -= PlayerVelX;
-							Turrets[1].TurretVision.x -= PlayerVelX;
-							Turrets[2].Turret.x -= PlayerVelX;
-							Turrets[2].TurretVision.x -= PlayerVelX;
-							Disciples[0].Disciple.x -= PlayerVelX;
-							Disciples[0].DiscipleVision.x -= PlayerVelX;
-							Disciples[1].Disciple.x -= PlayerVelX;
-							Disciples[1].DiscipleVision.x -= PlayerVelX;
-							Disciples[2].Disciple.x -= PlayerVelX;
-							Disciples[2].DiscipleVision.x -= PlayerVelX;
-							Disciples[3].Disciple.x -= PlayerVelX;
-							Disciples[3].DiscipleVision.x -= PlayerVelX;
-							Platform.x -= PlayerVelX;
-							Platform2.x -= PlayerVelX;
-							Platform3.x -= PlayerVelX;
-							Platform4.x -= PlayerVelX;
-							Platform5.x -= PlayerVelX;
-							Platform6.x -= PlayerVelX;
-							Platform7.x -= PlayerVelX;
-							Platform8.x -= PlayerVelX;
-							Platform9.x -= PlayerVelX;
-							Platform10.x -= PlayerVelX;
-							Platform11.x -= PlayerVelX;
-							Platform12.x -= PlayerVelX;
-							Platform13.x -= PlayerVelX;
-							Platform14.x -= PlayerVelX;
-							Platform15.x -= PlayerVelX;
-							Platform16.x -= PlayerVelX;
-							BottomPlatform.x -= PlayerVelX;
-							TopPlatform.x -= PlayerVelX;
-							RightPlatform.x -= PlayerVelX;
-							RightPlatform2.x -= PlayerVelX;
-							RightPlatform3.x -= PlayerVelX;
-							RightPlatform4.x -= PlayerVelX;
-							RightPlatform5.x -= PlayerVelX;
-							RightPlatform6.x -= PlayerVelX;
-							RightPlatform7.x -= PlayerVelX;
-							RightPlatform8.x -= PlayerVelX;
-							LeftPlatform.x -= PlayerVelX;
-							LeftPlatform2.x -= PlayerVelX;
-							LeftPlatform3.x -= PlayerVelX;
-							LeftPlatform4.x -= PlayerVelX;
-							LeftPlatform5.x -= PlayerVelX;
-							LeftPlatform6.x -= PlayerVelX;
-							LeftPlatform7.x -= PlayerVelX;
-							LeftPlatform8.x -= PlayerVelX;
-							LeftPlatform9.x -= PlayerVelX;
-							LeftPlatform10.x -= PlayerVelX;
-							LeftPlatform11.x -= PlayerVelX;
-							LeftPlatform12.x -= PlayerVelX;
-							LeftPlatform13.x -= PlayerVelX;
-							LeftPlatform14.x -= PlayerVelX;
-							Ladder.x -= PlayerVelX;
-							Ladder2.x -= PlayerVelX;
-							Ladder3.x -= PlayerVelX;
-							Ladder4.x -= PlayerVelX;
-							Ladder5.x -= PlayerVelX;
-						}
-						if (Player.y < 0 + (Player.h * 2))
-						{
-							Player.y = 0 + (Player.h * 2);
-							Background.y -= PlayerVelY;
-
-							Wall.y -= PlayerVelY;
-							Wall2.y -= PlayerVelY;
-							Wall3.y -= PlayerVelY;
-							Wall4.y -= PlayerVelY;
-							Wall5.y -= PlayerVelY;
-							Wall6.y -= PlayerVelY;
-							Wall7.y -= PlayerVelY;
-							Wall8.y -= PlayerVelY;
-							Wall9.y -= PlayerVelY;
-							Wall10.y -= PlayerVelY;
-							Wall11.y -= PlayerVelY;
-							Wall12.y -= PlayerVelY;
-							healthPickUp.y -= PlayerVelY;
-							ammoPickUp.y -= PlayerVelY;
-							PinkKey.y -= PlayerVelY;
-							PurpleKey.y -= PlayerVelY;
-							BlackKey.y -= PlayerVelY;
-							tempBullet.EnemBullet.y -= PlayerVelY;
-							Turrets[0].Turret.y -= PlayerVelY;
-							Turrets[0].TurretVision.y -= PlayerVelY;
-							Turrets[1].Turret.y -= PlayerVelY;
-							Turrets[1].TurretVision.y -= PlayerVelY;
-							Turrets[2].Turret.y -= PlayerVelY;
-							Turrets[2].TurretVision.y -= PlayerVelY;
-							Disciples[0].Disciple.y -= PlayerVelY;
-							Disciples[0].DiscipleVision.y -= PlayerVelY;
-							Disciples[1].Disciple.y -= PlayerVelY;
-							Disciples[1].DiscipleVision.y -= PlayerVelY;
-							Disciples[2].Disciple.y -= PlayerVelY;
-							Disciples[2].DiscipleVision.y -= PlayerVelY;
-							Disciples[3].Disciple.y -= PlayerVelY;
-							Disciples[3].DiscipleVision.y -= PlayerVelY;
-							Platform.y -= PlayerVelY;
-							Platform2.y -= PlayerVelY;
-							Platform3.y -= PlayerVelY;
-							Platform4.y -= PlayerVelY;
-							Platform5.y -= PlayerVelY;
-							Platform6.y -= PlayerVelY;
-							Platform7.y -= PlayerVelY;
-							Platform8.y -= PlayerVelY;
-							Platform9.y -= PlayerVelY;
-							Platform10.y -= PlayerVelY;
-							Platform11.y -= PlayerVelY;
-							Platform12.y -= PlayerVelY;
-							Platform13.y -= PlayerVelY;
-							Platform14.y -= PlayerVelY;
-							Platform15.y -= PlayerVelY;
-							Platform16.y -= PlayerVelY;
-							BottomPlatform.y -= PlayerVelY;
-							TopPlatform.y -= PlayerVelY;
-							RightPlatform.y -= PlayerVelY;
-							RightPlatform2.y -= PlayerVelY;
-							RightPlatform3.y -= PlayerVelY;
-							RightPlatform4.y -= PlayerVelY;
-							RightPlatform5.y -= PlayerVelY;
-							RightPlatform6.y -= PlayerVelY;
-							RightPlatform7.y -= PlayerVelY;
-							RightPlatform8.y -= PlayerVelY;
-							LeftPlatform.y -= PlayerVelY;
-							LeftPlatform2.y -= PlayerVelY;
-							LeftPlatform3.y -= PlayerVelY;
-							LeftPlatform4.y -= PlayerVelY;
-							LeftPlatform5.y -= PlayerVelY;
-							LeftPlatform6.y -= PlayerVelY;
-							LeftPlatform7.y -= PlayerVelY;
-							LeftPlatform8.y -= PlayerVelY;
-							LeftPlatform9.y -= PlayerVelY;
-							LeftPlatform10.y -= PlayerVelY;
-							LeftPlatform11.y -= PlayerVelY;
-							LeftPlatform12.y -= PlayerVelY;
-							LeftPlatform13.y -= PlayerVelY;
-							LeftPlatform14.y -= PlayerVelY;
-							Ladder.y -= PlayerVelY;
-							Ladder2.y -= PlayerVelY;
-							Ladder3.y -= PlayerVelY;
-							Ladder4.y -= PlayerVelY;
-							Ladder5.y -= PlayerVelY;
-						}
-						//Checking for player to be on the edge of the screen vertically
-						if (Player.y > 768 - (Player.h * 2))
-						{
-							Player.y = 768 - (Player.h * 2);
-							Background.y -= PlayerVelY;
-
-							Wall.y -= PlayerVelY;
-							Wall2.y -= PlayerVelY;
-							Wall3.y -= PlayerVelY;
-							Wall4.y -= PlayerVelY;
-							Wall5.y -= PlayerVelY;
-							Wall6.y -= PlayerVelY;
-							Wall7.y -= PlayerVelY;
-							Wall8.y -= PlayerVelY;
-							Wall9.y -= PlayerVelY;
-							Wall10.y -= PlayerVelY;
-							Wall11.y -= PlayerVelY;
-							Wall12.y -= PlayerVelY;
-							healthPickUp.y -= PlayerVelY;
-							ammoPickUp.y -= PlayerVelY;
-							PinkKey.y -= PlayerVelY;
-							PurpleKey.y -= PlayerVelY;
-							BlackKey.y -= PlayerVelY;
-							tempBullet.EnemBullet.y -= PlayerVelY;
-							Turrets[0].Turret.y -= PlayerVelY;
-							Turrets[0].TurretVision.y -= PlayerVelY;
-							Turrets[1].Turret.y -= PlayerVelY;
-							Turrets[1].TurretVision.y -= PlayerVelY;
-							Turrets[2].Turret.y -= PlayerVelY;
-							Turrets[2].TurretVision.y -= PlayerVelY;
-							Disciples[0].Disciple.y -= PlayerVelY;
-							Disciples[0].DiscipleVision.y -= PlayerVelY;
-							Disciples[1].Disciple.y -= PlayerVelY;
-							Disciples[1].DiscipleVision.y -= PlayerVelY;
-							Disciples[2].Disciple.y -= PlayerVelY;
-							Disciples[2].DiscipleVision.y -= PlayerVelY;
-							Disciples[3].Disciple.y -= PlayerVelY;
-							Disciples[3].DiscipleVision.y -= PlayerVelY;
-							Platform.y -= PlayerVelY;
-							Platform2.y -= PlayerVelY;
-							Platform3.y -= PlayerVelY;
-							Platform4.y -= PlayerVelY;
-							Platform5.y -= PlayerVelY;
-							Platform6.y -= PlayerVelY;
-							Platform7.y -= PlayerVelY;
-							Platform8.y -= PlayerVelY;
-							Platform9.y -= PlayerVelY;
-							Platform10.y -= PlayerVelY;
-							Platform11.y -= PlayerVelY;
-							Platform12.y -= PlayerVelY;
-							Platform13.y -= PlayerVelY;
-							Platform14.y -= PlayerVelY;
-							Platform15.y -= PlayerVelY;
-							Platform16.y -= PlayerVelY;
-							BottomPlatform.y -= PlayerVelY;
-							TopPlatform.y -= PlayerVelY;
-							RightPlatform.y -= PlayerVelY;
-							RightPlatform2.y -= PlayerVelY;
-							RightPlatform3.y -= PlayerVelY;
-							RightPlatform4.y -= PlayerVelY;
-							RightPlatform5.y -= PlayerVelY;
-							RightPlatform6.y -= PlayerVelY;
-							RightPlatform7.y -= PlayerVelY;
-							RightPlatform8.y -= PlayerVelY;
-							LeftPlatform.y -= PlayerVelY;
-							LeftPlatform2.y -= PlayerVelY;
-							LeftPlatform3.y -= PlayerVelY;
-							LeftPlatform4.y -= PlayerVelY;
-							LeftPlatform5.y -= PlayerVelY;
-							LeftPlatform6.y -= PlayerVelY;
-							LeftPlatform7.y -= PlayerVelY;
-							LeftPlatform8.y -= PlayerVelY;
-							LeftPlatform9.y -= PlayerVelY;
-							LeftPlatform10.y -= PlayerVelY;
-							LeftPlatform11.y -= PlayerVelY;
-							LeftPlatform12.y -= PlayerVelY;
-							LeftPlatform13.y -= PlayerVelY;
-							LeftPlatform14.y -= PlayerVelY;
-							Ladder.y -= PlayerVelY;
-							Ladder2.y -= PlayerVelY;
-							Ladder3.y -= PlayerVelY;
-							Ladder4.y -= PlayerVelY;
-							Ladder5.y -= PlayerVelY;
-						}
-
-						break;
+					inWin = false;
+					inGame = false;
+					SDL_DestroyWindow(window);
+					SDL_Quit();
+					break;
 					}
+				case SDLK_1:
+				{
+				hasBlackKey = false;
+				hasPinkKey = false;
+				hasPurpleKey = false;
+				inWin = false;
+				inLose = false;
+				state = ingame;
+				inGame = true;
+				playerHealth = 100;
+				HealthBarFront.w = 200;
+				ammoCount = 10;
+				ManaBarFront.w = 200;
+				Player.x = 750;
+				Player.y = 620;
+				PlayerVelX = 0;
+				PlayerVelY = 0;
+				Background.x = 0;
+				Background.y = -1468;
+				Wall.x = 1220;
+				Wall.y = -620;
+				Wall2.x = 0;
+				Wall2.y = -1270;
+				Wall3.x = 0;
+				Wall3.y = -1270;
+				Wall4.x = 0;
+				Wall4.y = 1080;
+				Wall5.x = 460;
+				Wall5.y = -790;
+				Wall6.x = 1650;
+				Wall6.y = -1270;
+				Wall7.x = 0;
+				Wall7.y = -790;
+				Wall8.x = 150;
+				Wall8.y = -790;
+				Wall9.x = 650;
+				Wall9.y = -790;
+				Wall10.x = 990;
+				Wall10.y = -620;
+				Wall11.x = 0;
+				Wall11.y = 670;
+				Wall12.x = 785;
+				Wall12.y = 670;
+				Platform.x = 840;
+				Platform.y = 630;
+				Platform2.x = 840;
+				Platform2.y = 590;
+				Platform3.x = 940;
+				Platform3.y = 540;
+				Platform4.x = 1040;
+				Platform4.y = 490;
+				Platform5.x = 940;
+				Platform5.y = 340;
+				Platform6.x = 940;
+				Platform6.y = 140;
+				Platform7.x = 740;
+				Platform7.y = 240;
+				Platform8.x = 490;
+				Platform8.y = 10;
+				Platform9.x = 490;
+				Platform9.y = -180;
+				Platform10.x = 600;
+				Platform10.y = -180;
+				Platform11.x = 800;
+				Platform11.y = -240;
+				Platform12.x = 800;
+				Platform12.y = -380;
+				Platform13.x = 960;
+				Platform13.y = -310;
+				Platform14.x = 650;
+				Platform14.y = -440;
+				Platform15.x = 505;
+				Platform15.y = -535;
+				Platform16.x = 760;
+				Platform16.y = -600;
+				RightPlatform.x = 1500;
+				RightPlatform.y = -500;
+				RightPlatform2.x = 1250;
+				RightPlatform2.y = -300;
+				RightPlatform3.x = 1500;
+				RightPlatform3.y = -100;
+				RightPlatform4.x = 1250;
+				RightPlatform4.y = 100;
+				RightPlatform5.x = 1500;
+				RightPlatform5.y = 300;
+				RightPlatform6.x = 1275;
+				RightPlatform6.y = 490;
+				RightPlatform7.x = 1425;
+				RightPlatform7.y = 490;
+				RightPlatform8.x = 1575;
+				RightPlatform8.y = 490;
+				LeftPlatform.x = 50;
+				LeftPlatform.y = -630;
+				LeftPlatform2.x = 225;
+				LeftPlatform2.y = -570;
+				LeftPlatform3.x = 370;
+				LeftPlatform3.y = -490;
+				LeftPlatform4.x = 100;
+				LeftPlatform4.y = -350;
+				LeftPlatform5.x = 225;
+				LeftPlatform5.y = -420;
+				LeftPlatform6.x = 20;
+				LeftPlatform6.y = -260;
+				LeftPlatform7.x = 140;
+				LeftPlatform7.y = -150;
+				LeftPlatform8.x = 380;
+				LeftPlatform8.y = -60;
+				LeftPlatform9.x = 170;
+				LeftPlatform9.y = 35;
+				LeftPlatform10.x = 0;
+				LeftPlatform10.y = 120;
+				LeftPlatform11.x = 290;
+				LeftPlatform11.y = 270;
+				LeftPlatform12.x = 100;
+				LeftPlatform12.y = 350;
+				LeftPlatform13.x = 350;
+				LeftPlatform13.y = 350;
+				LeftPlatform14.x = 170;
+				LeftPlatform14.y = 190;
+				BottomPlatform.x = 650;
+				BottomPlatform.y = 990;
+				TopPlatform.x = 750;
+				TopPlatform.y = -880;
+				Ladder.x = 700;
+				Ladder.y = 660;
+				Ladder2.x = 525;
+				Ladder2.y = -200;
+				Ladder3.x = 500;
+				Ladder3.y = -800;
+				Ladder4.x = 30;
+				Ladder4.y = -800;
+				Ladder5.x = 10;
+				Ladder5.y = 325;
+				Table.x = 30;
+				Table.y = 50;
+				BookCase.x = 180;
+				BookCase.y = -70;
+				Staff.x = 10;
+				Staff.y = 90;
+				Shield.x = 300;
+				Shield.y = 500;
+				healthPickUp.x = 700;
+				healthPickUp.y = 620;
+				ammoPickUp.x = 600;
+				ammoPickUp.y = 620;
+				HealthBarFront.x = 100;
+				HealthBarFront.y = 50;
+				HealthBarBack.x = 100;
+				HealthBarBack.y = 50;
+				Windmill.x = 53;
+				Windmill.y = 30;
+				Windmill2.x = 290;
+				Windmill2.y = 30;
+				ManaBarFront.x = 100;
+				ManaBarFront.y = 125;
+				ManaBarBack.x = 100;
+				ManaBarBack.y = 125;
+				ManaPotion.x = 53;
+				ManaPotion.y = 110;
+				PinkKeyGUI.x = 100;
+				PinkKeyGUI.y = 200;
+				PurpleKeyGUI.x = 150;
+				PurpleKeyGUI.y = 200;
+				BlackKeyGUI.x = 200;
+				BlackKeyGUI.y = 200;
+				PinkKey.x = 395;
+				PinkKey.y = 550;
+				PurpleKey.x = 1600;
+				PurpleKey.y = 400;
+				BlackKey.x = 1400;
+				BlackKey.y = -975;
+				tempTurret.Turret.x = 0;
+				tempTurret.Turret.y = -890;
+				tempTurret.TurretVision.x = tempTurret.Turret.x;
+				tempTurret.TurretVision.y = tempTurret.Turret.y;
+				tempTurret2.Turret.x = 700;
+				tempTurret2.Turret.y = -270;
+				tempTurret2.TurretVision.x = tempTurret2.Turret.x;
+				tempTurret2.TurretVision.y = tempTurret2.Turret.y;
+				tempTurret3.Turret.x = 1480;
+				tempTurret3.Turret.y = 380;
+				tempTurret3.TurretVision.x = tempTurret3.Turret.x;
+				tempTurret3.TurretVision.y = tempTurret3.Turret.y;
+				tempDisciple.Disciple.x = 725;
+				tempDisciple.Disciple.y = -100;
+				tempDisciple.DiscipleVision.x = tempDisciple.Disciple.x + 20;
+				tempDisciple.DiscipleVision.y = tempDisciple.Disciple.y;
+				tempDisciple2.Disciple.x = 140;
+				tempDisciple2.Disciple.y = -78;
+				tempDisciple2.DiscipleVision.x = tempDisciple2.Disciple.x + 20;
+				tempDisciple2.DiscipleVision.y = tempDisciple2.Disciple.y;
+				tempDisciple3.Disciple.x = 1300;
+				tempDisciple3.Disciple.y = -980;
+				tempDisciple3.DiscipleVision.x = tempDisciple3.Disciple.x + 20;
+				tempDisciple3.DiscipleVision.y = tempDisciple3.Disciple.y;
+				tempDisciple4.Disciple.x = 180;
+				tempDisciple4.Disciple.y = 570;
+				tempDisciple4.DiscipleVision.x = tempDisciple4.Disciple.x + 20;
+				tempDisciple4.DiscipleVision.y = tempDisciple4.Disciple.y;
+				}
 					}
 				}
 			}
