@@ -356,11 +356,23 @@ Background.w = w;
 
 //Winning Rect
 SDL_Rect WinningCondition;
-WinningCondition.x = 550;
-WinningCondition.y = 590;
-WinningCondition.h = 175;
+WinningCondition.x = 520;
+WinningCondition.y = 550;
+WinningCondition.h = 125;
 WinningCondition.w = 175;
 SDL_Texture * WinningConditionTexture = IMG_LoadTexture(r1, (images_dir + "placeholder.png").c_str());
+SDL_Rect LoseScreen;
+LoseScreen.x = 0;
+LoseScreen.y = 0;
+LoseScreen.h = 768;
+LoseScreen.w = 1024;
+SDL_Texture * LoseScreenTexture = IMG_LoadTexture(r1, (images_dir + "GameOverTexture.png").c_str());
+SDL_Rect WinScreen;
+WinScreen.x = 0;
+WinScreen.y = 0;
+WinScreen.h = 768;
+WinScreen.w = 1024;
+SDL_Texture * WinScreenTexture = IMG_LoadTexture(r1, (images_dir + "WinningSceneTexture.png").c_str());
 //Spike Trap
 SDL_Rect SpikeTrap;
 SpikeTrap.x = 1250;
@@ -756,18 +768,54 @@ Shield.h = 50;
 SDL_Texture * ShieldTexture = IMG_LoadTexture(r1, (images_dir + "ShieldTexture.png").c_str());
 //Creating a pickup
 SDL_Rect healthPickUp;
-healthPickUp.x = 700;
-healthPickUp.y = 620;
+healthPickUp.x = 1325;
+healthPickUp.y = 464;
 healthPickUp.w = 30;
 healthPickUp.h = 30;
 SDL_Texture * HealthPkUp1 = IMG_LoadTexture(r1,(images_dir+"healthPickUp.png").c_str());
+SDL_Rect healthPickUp2;
+healthPickUp2.x = 700;
+healthPickUp2.y = -100;
+healthPickUp2.w = 30;
+healthPickUp2.h = 30;
+SDL_Texture * HealthPkUp2 = IMG_LoadTexture(r1, (images_dir + "healthPickUp.png").c_str());
+SDL_Rect healthPickUp3;
+healthPickUp3.x = 250;
+healthPickUp3.y = -25;
+healthPickUp3.w = 30;
+healthPickUp3.h = 30;
+SDL_Texture * HealthPkUp3 = IMG_LoadTexture(r1, (images_dir + "healthPickUp.png").c_str());
+SDL_Rect healthPickUp4;
+healthPickUp4.x = 800;
+healthPickUp4.y = -980;
+healthPickUp4.w = 30;
+healthPickUp4.h = 30;
+SDL_Texture * HealthPkUp4 = IMG_LoadTexture(r1, (images_dir + "healthPickUp.png").c_str());
 //Creating a ammo pickup
 SDL_Rect ammoPickUp;
-ammoPickUp.x = 600;
-ammoPickUp.y = 620;
+ammoPickUp.x = 1275;
+ammoPickUp.y = 464;
 ammoPickUp.w = 30;
 ammoPickUp.h = 30;
 SDL_Texture * AmmoPkUp1 = IMG_LoadTexture(r1,(images_dir+"ammoPickUp.png").c_str());
+SDL_Rect ammoPickUp2;
+ammoPickUp2.x = 600;
+ammoPickUp2.y = -100;
+ammoPickUp2.w = 30;
+ammoPickUp2.h = 30;
+SDL_Texture * AmmoPkUp2 = IMG_LoadTexture(r1, (images_dir + "ammoPickUp.png").c_str());
+SDL_Rect ammoPickUp3;
+ammoPickUp3.x = 150;
+ammoPickUp3.y = -25;
+ammoPickUp3.w = 30;
+ammoPickUp3.h = 30;
+SDL_Texture * AmmoPkUp3 = IMG_LoadTexture(r1, (images_dir + "ammoPickUp.png").c_str());
+SDL_Rect ammoPickUp4;
+ammoPickUp4.x = 700;
+ammoPickUp4.y = -980;
+ammoPickUp4.w = 30;
+ammoPickUp4.h = 30;
+SDL_Texture * AmmoPkUp4 = IMG_LoadTexture(r1, (images_dir + "ammoPickUp.png").c_str());
 //Creating the Health Bar
 SDL_Rect HealthBarFront;
 HealthBarFront.x = 100;
@@ -881,28 +929,28 @@ Turrets.push_back(tempTurret3);
 DiscipleEnemy tempDisciple = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
 tempDisciple.Disciple.x = 725;
 tempDisciple.Disciple.y = -100;
-tempDisciple.DiscipleVision.x = tempDisciple.Disciple.x + 20;
+tempDisciple.DiscipleVision.x = tempDisciple.Disciple.x;
 tempDisciple.DiscipleVision.y = tempDisciple.Disciple.y;
 Disciples.push_back(tempDisciple);
 
 DiscipleEnemy tempDisciple2 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
 tempDisciple2.Disciple.x = 140;
 tempDisciple2.Disciple.y = -78;
-tempDisciple2.DiscipleVision.x = tempDisciple2.Disciple.x + 20;
+tempDisciple2.DiscipleVision.x = tempDisciple2.Disciple.x;
 tempDisciple2.DiscipleVision.y = tempDisciple2.Disciple.y;
 Disciples.push_back(tempDisciple2);
 
 DiscipleEnemy tempDisciple3 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
 tempDisciple3.Disciple.x = 1300;
 tempDisciple3.Disciple.y = -980;
-tempDisciple3.DiscipleVision.x = tempDisciple3.Disciple.x + 20;
+tempDisciple3.DiscipleVision.x = tempDisciple3.Disciple.x;
 tempDisciple3.DiscipleVision.y = tempDisciple3.Disciple.y;
 Disciples.push_back(tempDisciple3);
 
 DiscipleEnemy tempDisciple4 = DiscipleEnemy((images_dir + "DiscipleLeft.png").c_str(), r1,((images_dir + "DiscipleRight.png").c_str()));
 tempDisciple4.Disciple.x = 180;
 tempDisciple4.Disciple.y = 570;
-tempDisciple4.DiscipleVision.x = tempDisciple4.Disciple.x + 20;
+tempDisciple4.DiscipleVision.x = tempDisciple4.Disciple.x;
 tempDisciple4.DiscipleVision.y = tempDisciple4.Disciple.y;
 Disciples.push_back(tempDisciple4);
 
@@ -1232,6 +1280,12 @@ while(inGame)
 		Wall12.x -= PlayerVelX;
 		healthPickUp.x -= PlayerVelX;
 		ammoPickUp.x -= PlayerVelX;
+		healthPickUp2.x -= PlayerVelX;
+		ammoPickUp2.x -= PlayerVelX;
+		healthPickUp3.x -= PlayerVelX;
+		ammoPickUp3.x -= PlayerVelX;
+		healthPickUp4.x -= PlayerVelX;
+		ammoPickUp4.x -= PlayerVelX;
 		PinkKey.x -= PlayerVelX;
 		PurpleKey.x -= PlayerVelX;
 		BlackKey.x -= PlayerVelX;
@@ -1320,6 +1374,12 @@ while(inGame)
 		Wall12.x -= PlayerVelX;
 		healthPickUp.x -= PlayerVelX;
 		ammoPickUp.x -= PlayerVelX;
+		healthPickUp2.x -= PlayerVelX;
+		ammoPickUp2.x -= PlayerVelX;
+		healthPickUp3.x -= PlayerVelX;
+		ammoPickUp3.x -= PlayerVelX;
+		healthPickUp4.x -= PlayerVelX;
+		ammoPickUp4.x -= PlayerVelX;
 		PinkKey.x -= PlayerVelX;
 		PurpleKey.x -= PlayerVelX;
 		BlackKey.x -= PlayerVelX;
@@ -1453,7 +1513,8 @@ while(inGame)
 	if (SDL_HasIntersection(&Player, &WinningCondition) && hasBlackKey == true && hasPinkKey == true && hasBlackKey == true)
 	{
 		state = Win;
-		inGame = false;
+		WinningCondition.x = 1000;
+		WinningCondition.y = 1000;
 		inWin = true;
 	}
 	//Ladder Collision
@@ -1701,12 +1762,12 @@ while(inGame)
 			if(Disciples[eD].isRight == true)
 			{
 			Disciples[eD].Disciple.x += 2;
-			Disciples[eD].DiscipleVision.x = Disciples[eD].Disciple.x + 75;
+			Disciples[eD].DiscipleVision.x = Disciples[eD].Disciple.x;
 			}
 			if(Disciples[eD].isRight == false)
 			{
 				Disciples[eD].Disciple.x -= 2;
-				Disciples[eD].DiscipleVision.x = Disciples[eD].Disciple.x -75;
+				Disciples[eD].DiscipleVision.x = Disciples[eD].Disciple.x;
 			}
 		}
 	}
@@ -1907,33 +1968,149 @@ while(inGame)
 		playerHealth += 5;
 		healthPickUp.x = 2000;
 		healthPickUp.y = 2000;
+		if (playerHealth >= 100)
+		{
+			playerHealth = 100;
+			HealthBarFront.w = 200;
+		}
+		if (playerHealth <= 0)
+		{
+			playerHealth = 0;
+			HealthBarFront.w = 0;
+		}
 	}
-	if (playerHealth >= 100)
+	
+	if (SDL_HasIntersection(&Player, &healthPickUp2) && playerHealth < 100)
 	{
-		playerHealth = 100;
-		HealthBarFront.w = 200;
+		healthPickUp2.x = -1000;
+		healthPickUp2.y = -1000;
+		Player.y -= PlayerVelY;
+		HealthBarFront.w += 20;
+		playerHealth += 10;
+		if (playerHealth >= 100)
+		{
+			playerHealth = 100;
+			HealthBarFront.w = 200;
+		}
+		if (playerHealth <= 0)
+		{
+			playerHealth = 0;
+			HealthBarFront.w = 0;
+		}
 	}
-	if (playerHealth <= 0)
+
+	if (SDL_HasIntersection(&Player, &healthPickUp3) && playerHealth < 100)
 	{
-		playerHealth = 0;
-		HealthBarFront.w = 0;
+		healthPickUp3.x = -1000;
+		healthPickUp3.y = -1000;
+		Player.y -= PlayerVelY;
+		HealthBarFront.w += 20;
+		playerHealth += 10;
+		if (playerHealth >= 100)
+		{
+			playerHealth = 100;
+			HealthBarFront.w = 200;
+		}
+		if (playerHealth <= 0)
+		{
+			playerHealth = 0;
+			HealthBarFront.w = 0;
+		}
+	}
+
+	if (SDL_HasIntersection(&Player, &healthPickUp4) && playerHealth < 100)
+	{
+		healthPickUp4.x = -1000;
+		healthPickUp4.y = -1000;
+		Player.y -= PlayerVelY;
+		HealthBarFront.w += 20;
+		playerHealth += 10;
+		if (playerHealth >= 100)
+		{
+			playerHealth = 100;
+			HealthBarFront.w = 200;
+		}
+		if (playerHealth <= 0)
+		{
+			playerHealth = 0;
+			HealthBarFront.w = 0;
+		}
 	}
 	//Mana PickUp Collision
 	if (SDL_HasIntersection(&Player, &ammoPickUp) && ammoCount < 10)
 	{
 		Player.x -= PlayerVelX;
-		ManaBarFront.w += 20;
-		ammoCount += 1;
+		ammoPickUp.x = -1000;
+		ammoPickUp.y = -1000;
+		ManaBarFront.w += 100;
+		ammoCount += 5;
+		if (ammoCount >= 10)
+		{
+			ammoCount = 10;
+			ManaBarFront.w = 200;
+		}
+		if (ammoCount <= 0)
+		{
+			ammoCount = 0;
+			ManaBarFront.w = 0;
+		}
 	}
-	if (ammoCount >= 10)
+	
+	if (SDL_HasIntersection(&Player, &ammoPickUp2) && ammoCount < 10)
 	{
-		ammoCount = 10;
-		ManaBarFront.w = 200;
+		ammoPickUp2.x = -1000;
+		ammoPickUp2.y = -1000;
+		Player.y -= PlayerVelY;
+		ManaBarFront.w += 100;
+		ammoCount += 5;
+		if (ammoCount >= 10)
+		{
+			ammoCount = 10;
+			ManaBarFront.w = 200;
+		}
+		if (ammoCount <= 0)
+		{
+			ammoCount = 0;
+			ManaBarFront.w = 0;
+		}
 	}
-	if (ammoCount <= 0)
+
+	if (SDL_HasIntersection(&Player, &ammoPickUp3) && ammoCount < 10)
 	{
-		ammoCount = 0;
-		ManaBarFront.w = 0;
+		ammoPickUp3.x = -1000;
+		ammoPickUp3.y = -1000;
+		Player.y -= PlayerVelY;
+		ManaBarFront.w += 100;
+		ammoCount += 5;
+		if (ammoCount >= 10)
+		{
+			ammoCount = 10;
+			ManaBarFront.w = 200;
+		}
+		if (ammoCount <= 0)
+		{
+			ammoCount = 0;
+			ManaBarFront.w = 0;
+		}
+	}
+
+	if (SDL_HasIntersection(&Player, &ammoPickUp4) && ammoCount < 10)
+	{
+		ammoPickUp4.x = -1000;
+		ammoPickUp4.y = -1000;
+		Player.y -= PlayerVelY;
+		ManaBarFront.w += 100;
+		ammoCount += 5;
+		if (ammoCount >= 10)
+		{
+			ammoCount = 10;
+			ManaBarFront.w = 200;
+		}
+		if (ammoCount <= 0)
+		{
+			ammoCount = 0;
+			ManaBarFront.w = 0;
+		}
 	}
 	//Player Falling Code
 	if(isGrounded == false)
@@ -1958,6 +2135,12 @@ while(inGame)
 				Wall12.y -= PlayerVelY;
 				healthPickUp.y -= PlayerVelY;
 				ammoPickUp.y -= PlayerVelY;
+				healthPickUp2.y -= PlayerVelY;
+				ammoPickUp2.y -= PlayerVelY;
+				healthPickUp3.y -= PlayerVelY;
+				ammoPickUp3.y -= PlayerVelY;
+				healthPickUp4.y -= PlayerVelY;
+				ammoPickUp4.y -= PlayerVelY;
 				PinkKey.y -= PlayerVelY;
 				PurpleKey.y -= PlayerVelY;
 				BlackKey.y -= PlayerVelY;
@@ -2048,6 +2231,12 @@ while(inGame)
 				Wall12.y -= PlayerVelY;
 				healthPickUp.y -= PlayerVelY;
 				ammoPickUp.y -= PlayerVelY;
+				healthPickUp2.y -= PlayerVelY;
+				ammoPickUp2.y -= PlayerVelY;
+				healthPickUp3.y -= PlayerVelY;
+				ammoPickUp3.y -= PlayerVelY;
+				healthPickUp4.y -= PlayerVelY;
+				ammoPickUp4.y -= PlayerVelY;
 				PinkKey.y -= PlayerVelY;
 				PurpleKey.y -= PlayerVelY;
 				BlackKey.y -= PlayerVelY;
@@ -2145,6 +2334,12 @@ while(inGame)
 			Wall12.y -= PlayerVelY;
 			healthPickUp.y -= PlayerVelY;
 			ammoPickUp.y -= PlayerVelY;
+			healthPickUp2.y -= PlayerVelY;
+			ammoPickUp2.y -= PlayerVelY;
+			healthPickUp3.y -= PlayerVelY;
+			ammoPickUp3.y -= PlayerVelY;
+			healthPickUp4.y -= PlayerVelY;
+			ammoPickUp4.y -= PlayerVelY;
 			PinkKey.y -= PlayerVelY;
 			PurpleKey.y -= PlayerVelY;
 			BlackKey.y -= PlayerVelY;
@@ -2234,6 +2429,12 @@ while(inGame)
 			Wall12.y -= PlayerVelY;
 			healthPickUp.y -= PlayerVelY;
 			ammoPickUp.y -= PlayerVelY;
+			healthPickUp2.y -= PlayerVelY;
+			ammoPickUp2.y -= PlayerVelY;
+			healthPickUp3.y -= PlayerVelY;
+			ammoPickUp3.y -= PlayerVelY;
+			healthPickUp4.y -= PlayerVelY;
+			ammoPickUp4.y -= PlayerVelY;
 			PinkKey.y -= PlayerVelY;
 			PurpleKey.y -= PlayerVelY;
 			BlackKey.y -= PlayerVelY;
@@ -2332,6 +2533,7 @@ while(inGame)
 	{
 		state = Win;
 		inGame = false;
+		inLose = false;
 		inWin = true;
 	}
 
@@ -2450,19 +2652,152 @@ while(inGame)
 		hasPurpleKey = true;
 	}
 	//Health PickUp Collision
-	if (SDL_HasIntersection(&Player, &healthPickUp))
+	if (SDL_HasIntersection(&Player, &healthPickUp) && playerHealth < 100)
 	{
+		healthPickUp.x = -1000;
+		healthPickUp.y = -1000;
 		Player.y -= PlayerVelY;
 		HealthBarFront.w += 20;
 		playerHealth += 10;
+		if (playerHealth >= 100)
+		{
+			playerHealth = 100;
+			HealthBarFront.w = 200;
+		}
+		if (playerHealth <= 0)
+		{
+			playerHealth = 0;
+			HealthBarFront.w = 0;
+		}
+	}
+	if (SDL_HasIntersection(&Player, &healthPickUp2) && playerHealth < 100)
+	{
+		healthPickUp2.x = -1000;
+		healthPickUp2.y = -1000;
+		Player.y -= PlayerVelY;
+		HealthBarFront.w += 20;
+		playerHealth += 10;
+		if (playerHealth >= 100)
+		{
+			playerHealth = 100;
+			HealthBarFront.w = 200;
+		}
+		if (playerHealth <= 0)
+		{
+			playerHealth = 0;
+			HealthBarFront.w = 0;
+		}
+	}
+	if (SDL_HasIntersection(&Player, &healthPickUp3) && playerHealth < 100)
+	{
+		healthPickUp3.x = -1000;
+		healthPickUp3.y = -1000;
+		Player.y -= PlayerVelY;
+		HealthBarFront.w += 20;
+		playerHealth += 10;
+		if (playerHealth >= 100)
+		{
+			playerHealth = 100;
+			HealthBarFront.w = 200;
+		}
+		if (playerHealth <= 0)
+		{
+			playerHealth = 0;
+			HealthBarFront.w = 0;
+		}
+	}
+	if (SDL_HasIntersection(&Player, &healthPickUp4) && playerHealth < 100)
+	{
+		healthPickUp4.x = -1000;
+		healthPickUp4.y = -1000;
+		Player.y -= PlayerVelY;
+		HealthBarFront.w += 20;
+		playerHealth += 10;
+		if (playerHealth >= 100)
+		{
+			playerHealth = 100;
+			HealthBarFront.w = 200;
+		}
+		if (playerHealth <= 0)
+		{
+			playerHealth = 0;
+			HealthBarFront.w = 0;
+		}
 	}
 	//Mana PickUp Collision
-	if (SDL_HasIntersection(&Player, &ammoPickUp))
+	if (SDL_HasIntersection(&Player, &ammoPickUp) &&ammoCount <10)
 	{
+		ammoPickUp.x = -1000;
+		ammoPickUp.y = -1000;
 		Player.y -= PlayerVelY;
-		ManaBarFront.w += 20;
-		ammoCount += 1;
+		ManaBarFront.w += 100;
+		ammoCount += 5;
+		if (ammoCount >= 10)
+		{
+			ammoCount = 10;
+			ManaBarFront.w = 200;
+		}
+		if (ammoCount <= 0)
+		{
+			ammoCount = 0;
+			ManaBarFront.w = 0;
+		}
 	}
+	if (SDL_HasIntersection(&Player, &ammoPickUp2) && ammoCount <10)
+	{
+		ammoPickUp2.x = -1000;
+		ammoPickUp2.y = -1000;
+		Player.y -= PlayerVelY;
+		ManaBarFront.w += 100;
+		ammoCount += 5;
+		if (ammoCount >= 10)
+		{
+			ammoCount = 10;
+			ManaBarFront.w = 200;
+		}
+		if (ammoCount <= 0)
+		{
+			ammoCount = 0;
+			ManaBarFront.w = 0;
+		}
+	}
+	if (SDL_HasIntersection(&Player, &ammoPickUp3) && ammoCount <10)
+	{
+		ammoPickUp3.x = -1000;
+		ammoPickUp3.y = -1000;
+		Player.y -= PlayerVelY;
+		ManaBarFront.w += 100;
+		ammoCount += 5;
+		if (ammoCount >= 10)
+		{
+			ammoCount = 10;
+			ManaBarFront.w = 200;
+		}
+		if (ammoCount <= 0)
+		{
+			ammoCount = 0;
+			ManaBarFront.w = 0;
+		}
+	}
+	if (SDL_HasIntersection(&Player, &ammoPickUp4) && ammoCount <10)
+	{
+		ammoPickUp4.x = -1000;
+		ammoPickUp4.y = -1000;
+		Player.y -= PlayerVelY;
+		ManaBarFront.w += 100;
+		ammoCount += 5;
+		if (ammoCount >= 10)
+		{
+			ammoCount = 10;
+			ManaBarFront.w = 200;
+		}
+		if (ammoCount <= 0)
+		{
+			ammoCount = 0;
+			ManaBarFront.w = 0;
+		}
+	}
+	//SpikeTrap Collision
 	if(SDL_HasIntersection(&Player, &SpikeTrap))
 	{
 		playerHealth = 0;
@@ -2479,8 +2814,14 @@ SDL_RenderCopy(r1, t1, NULL, &Background);
 SDL_RenderCopy(r1,t2,NULL,&Player);
 //Rendering the health pickup
 SDL_RenderCopy(r1,HealthPkUp1,NULL,&healthPickUp);
+SDL_RenderCopy(r1, HealthPkUp2, NULL, &healthPickUp2);
+SDL_RenderCopy(r1, HealthPkUp3, NULL, &healthPickUp3);
+SDL_RenderCopy(r1, HealthPkUp4, NULL, &healthPickUp4);
 //Rendering the Ammo Pickup
 SDL_RenderCopy(r1,AmmoPkUp1,NULL,&ammoPickUp);
+SDL_RenderCopy(r1, AmmoPkUp2, NULL, &ammoPickUp2);
+SDL_RenderCopy(r1, AmmoPkUp3, NULL, &ammoPickUp3);
+SDL_RenderCopy(r1, AmmoPkUp4, NULL, &ammoPickUp4);
 //Rendering the Health Bar
 SDL_RenderCopy(r1, HBarBack, NULL, &HealthBarBack);
 SDL_RenderCopy(r1, HBarFront, NULL, &HealthBarFront);
@@ -2558,7 +2899,7 @@ if (hasPurpleKey == true)
 {
 	SDL_RenderCopy(r1, PurpleKeyGUITexture, NULL, &PurpleKeyGUI);
 }
-SDL_RenderCopy(r1, WinningConditionTexture, NULL, &WinningCondition);
+//SDL_RenderCopy(r1, WinningConditionTexture, NULL, &WinningCondition);
 //Wall Texture Code
 SDL_RenderCopy(r1, w1, NULL, &Wall);
 
@@ -2640,7 +2981,7 @@ SDL_RenderCopy(r1, TableTexture, NULL, &Table);
 SDL_RenderCopy(r1, BookCaseTexture, NULL, &BookCase);
 SDL_RenderCopy(r1, StaffTexture, NULL, &Staff);
 SDL_RenderCopy(r1, ShieldTexture, NULL, &Shield);
-SDL_RenderCopy(r1,SpikeTrapTexture,NULL,&SpikeTrap);
+//SDL_RenderCopy(r1,SpikeTrapTexture,NULL,&SpikeTrap);
 SDL_RenderPresent(r1);
 
 //SDL Drawing Process End//
@@ -2652,7 +2993,7 @@ if (state == Lose)
 	{
 		cout << "We are in the lose state :(" << endl;
 		SDL_RenderClear(r1);
-		//SDL_RenderCopy();
+		SDL_RenderCopy(r1,LoseScreenTexture,NULL,&LoseScreen);
 		SDL_RenderPresent(r1);
 		//Input for Game//
 		while (SDL_PollEvent(&event) != 0)
@@ -2814,10 +3155,22 @@ if (state == Lose)
 						Staff.y = 90;
 						Shield.x = 300;
 						Shield.y = 500;
-						healthPickUp.x = 700;
-						healthPickUp.y = 620;
-						ammoPickUp.x = 600;
-						ammoPickUp.y = 620;
+						healthPickUp.x = 1325;
+						healthPickUp.y = 464;
+						healthPickUp2.x = 700;
+						healthPickUp2.y = -100;
+						healthPickUp3.x = 250;
+						healthPickUp3.y = -25;
+						healthPickUp4.x = 800;
+						healthPickUp4.y = -980;
+						ammoPickUp.x = 1275;
+						ammoPickUp.y = 464;
+						ammoPickUp2.x = 600;
+						ammoPickUp2.y = -100;
+						ammoPickUp3.x = 150;
+						ammoPickUp3.y = -25;
+						ammoPickUp4.x = 700;
+						ammoPickUp4.y = -980;
 						HealthBarFront.x = 100;
 						HealthBarFront.y = 50;
 						HealthBarBack.x = 100;
@@ -2872,6 +3225,8 @@ if (state == Lose)
 						Disciples[3].Disciple.y = 570;
 						Disciples[3].DiscipleVision.x = Disciples[3].Disciple.x + 20;
 						Disciples[3].DiscipleVision.y = Disciples[3].Disciple.y;
+						WinningCondition.x = 520;
+						WinningCondition.y = 550;
 						SpikeTrap.x = 1250;
 						SpikeTrap.y = 550;
 						}
@@ -2887,7 +3242,7 @@ if (state == Win)
 	{
 		cout << "We are in the Win state :)" << endl;
 		SDL_RenderClear(r1);
-		//SDL_RenderCopy();
+		SDL_RenderCopy(r1,WinScreenTexture,NULL,&WinScreen);
 		SDL_RenderPresent(r1);
 		while (SDL_PollEvent(&event) != 0)
 		{
@@ -3051,10 +3406,22 @@ if (state == Win)
 				Staff.y = 90;
 				Shield.x = 300;
 				Shield.y = 500;
-				healthPickUp.x = 700;
-				healthPickUp.y = 620;
-				ammoPickUp.x = 600;
-				ammoPickUp.y = 620;
+				healthPickUp.x = 1325;
+				healthPickUp.y = 464;
+				healthPickUp2.x = 700;
+				healthPickUp2.y = -100;
+				healthPickUp3.x = 250;
+				healthPickUp3.y = -25;
+				healthPickUp4.x = 800;
+				healthPickUp4.y = -980;
+				ammoPickUp.x = 1275;
+				ammoPickUp.y = 464;
+				ammoPickUp2.x = 600;
+				ammoPickUp2.y = -100;
+				ammoPickUp3.x = 150;
+				ammoPickUp3.y = -25;
+				ammoPickUp4.x = 700;
+				ammoPickUp4.y = -980;
 				HealthBarFront.x = 100;
 				HealthBarFront.y = 50;
 				HealthBarBack.x = 100;
@@ -3111,6 +3478,8 @@ if (state == Win)
 				tempDisciple4.DiscipleVision.y = tempDisciple4.Disciple.y;
 				SpikeTrap.x = 1250;
 				SpikeTrap.y = 550;
+				WinningCondition.x = 520;
+				WinningCondition.y = 550;
 				}
 					}
 				}
