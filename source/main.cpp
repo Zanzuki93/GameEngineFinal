@@ -1524,6 +1524,8 @@ while(inGame)
 		WinningCondition.x = 1000;
 		WinningCondition.y = 1000;
 		inWin = true;
+		inGame = false;
+
 	}
 	//Ladder Collision
 	if(SDL_HasIntersection(&Player,&Ladder)|| SDL_HasIntersection(&Player, &Ladder2)||
@@ -1972,8 +1974,8 @@ while(inGame)
 	if (SDL_HasIntersection(&Player, &healthPickUp) && playerHealth < 100)
 	{
 		Player.x -= PlayerVelX;
-		HealthBarFront.w += 10;
-		playerHealth += 5;
+		HealthBarFront.w += 100;
+		playerHealth += 50;
 		healthPickUp.x = 2000;
 		healthPickUp.y = 2000;
 		if (playerHealth >= 100)
@@ -1993,8 +1995,8 @@ while(inGame)
 		healthPickUp2.x = -1000;
 		healthPickUp2.y = -1000;
 		Player.y -= PlayerVelY;
-		HealthBarFront.w += 20;
-		playerHealth += 10;
+		HealthBarFront.w += 100;
+		playerHealth += 50;
 		if (playerHealth >= 100)
 		{
 			playerHealth = 100;
@@ -2012,8 +2014,8 @@ while(inGame)
 		healthPickUp3.x = -1000;
 		healthPickUp3.y = -1000;
 		Player.y -= PlayerVelY;
-		HealthBarFront.w += 20;
-		playerHealth += 10;
+		HealthBarFront.w += 100;
+		playerHealth += 50;
 		if (playerHealth >= 100)
 		{
 			playerHealth = 100;
@@ -2031,8 +2033,8 @@ while(inGame)
 		healthPickUp4.x = -1000;
 		healthPickUp4.y = -1000;
 		Player.y -= PlayerVelY;
-		HealthBarFront.w += 20;
-		playerHealth += 10;
+		HealthBarFront.w += 100;
+		playerHealth += 50;
 		if (playerHealth >= 100)
 		{
 			playerHealth = 100;
@@ -2669,8 +2671,8 @@ while(inGame)
 		healthPickUp.x = -1000;
 		healthPickUp.y = -1000;
 		Player.y -= PlayerVelY;
-		HealthBarFront.w += 20;
-		playerHealth += 10;
+		HealthBarFront.w += 100;
+		playerHealth += 50;
 		if (playerHealth >= 100)
 		{
 			playerHealth = 100;
@@ -2687,8 +2689,8 @@ while(inGame)
 		healthPickUp2.x = -1000;
 		healthPickUp2.y = -1000;
 		Player.y -= PlayerVelY;
-		HealthBarFront.w += 20;
-		playerHealth += 10;
+		HealthBarFront.w += 100;
+		playerHealth += 50;
 		if (playerHealth >= 100)
 		{
 			playerHealth = 100;
@@ -2705,8 +2707,8 @@ while(inGame)
 		healthPickUp3.x = -1000;
 		healthPickUp3.y = -1000;
 		Player.y -= PlayerVelY;
-		HealthBarFront.w += 20;
-		playerHealth += 10;
+		HealthBarFront.w += 100;
+		playerHealth += 50;
 		if (playerHealth >= 100)
 		{
 			playerHealth = 100;
@@ -2723,8 +2725,8 @@ while(inGame)
 		healthPickUp4.x = -1000;
 		healthPickUp4.y = -1000;
 		Player.y -= PlayerVelY;
-		HealthBarFront.w += 20;
-		playerHealth += 10;
+		HealthBarFront.w += 100;
+		playerHealth += 50;
 		if (playerHealth >= 100)
 		{
 			playerHealth = 100;
@@ -2911,7 +2913,7 @@ if (hasPurpleKey == true)
 {
 	SDL_RenderCopy(r1, PurpleKeyGUITexture, NULL, &PurpleKeyGUI);
 }
-//SDL_RenderCopy(r1, WinningConditionTexture, NULL, &WinningCondition);
+SDL_RenderCopy(r1, WinningConditionTexture, NULL, &WinningCondition);
 //Wall Texture Code
 SDL_RenderCopy(r1, w1, NULL, &Wall);
 
@@ -3004,7 +3006,7 @@ if (state == Lose)
 {
 	while (inLose)
 	{
-		cout << "We are in the lose state :(" << endl;
+		//cout << "We are in the lose state :(" << endl;
 		SDL_RenderClear(r1);
 		SDL_RenderCopy(r1,LoseScreenTexture,NULL,&LoseScreen);
 		SDL_RenderPresent(r1);
@@ -3242,6 +3244,8 @@ if (state == Lose)
 						WinningCondition.y = 550;
 						SpikeTrap.x = 1250;
 						SpikeTrap.y = 550;
+						Sofa.x = 600;
+						Sofa.y = -260;
 						}
 					}
 				}
@@ -3253,7 +3257,7 @@ if (state == Win)
 {
 	while (inWin)
 	{
-		cout << "We are in the Win state :)" << endl;
+		//cout << "We are in the Win state :)" << endl;
 		SDL_RenderClear(r1);
 		SDL_RenderCopy(r1,WinScreenTexture,NULL,&WinScreen);
 		SDL_RenderPresent(r1);
@@ -3461,38 +3465,40 @@ if (state == Win)
 				PurpleKey.y = 400;
 				BlackKey.x = 1400;
 				BlackKey.y = -975;
-				tempTurret.Turret.x = 0;
-				tempTurret.Turret.y = -890;
-				tempTurret.TurretVision.x = tempTurret.Turret.x;
-				tempTurret.TurretVision.y = tempTurret.Turret.y;
-				tempTurret2.Turret.x = 700;
-				tempTurret2.Turret.y = -270;
-				tempTurret2.TurretVision.x = tempTurret2.Turret.x;
-				tempTurret2.TurretVision.y = tempTurret2.Turret.y;
-				tempTurret3.Turret.x = 1480;
-				tempTurret3.Turret.y = 380;
-				tempTurret3.TurretVision.x = tempTurret3.Turret.x;
-				tempTurret3.TurretVision.y = tempTurret3.Turret.y;
-				tempDisciple.Disciple.x = 725;
-				tempDisciple.Disciple.y = -100;
-				tempDisciple.DiscipleVision.x = tempDisciple.Disciple.x + 20;
-				tempDisciple.DiscipleVision.y = tempDisciple.Disciple.y;
-				tempDisciple2.Disciple.x = 140;
-				tempDisciple2.Disciple.y = -78;
-				tempDisciple2.DiscipleVision.x = tempDisciple2.Disciple.x + 20;
-				tempDisciple2.DiscipleVision.y = tempDisciple2.Disciple.y;
-				tempDisciple3.Disciple.x = 1300;
-				tempDisciple3.Disciple.y = -980;
-				tempDisciple3.DiscipleVision.x = tempDisciple3.Disciple.x + 20;
-				tempDisciple3.DiscipleVision.y = tempDisciple3.Disciple.y;
-				tempDisciple4.Disciple.x = 180;
-				tempDisciple4.Disciple.y = 570;
-				tempDisciple4.DiscipleVision.x = tempDisciple4.Disciple.x + 20;
-				tempDisciple4.DiscipleVision.y = tempDisciple4.Disciple.y;
+				Turrets[0].Turret.x = 0;
+				Turrets[0].Turret.y = -890;
+				Turrets[0].TurretVision.x = Turrets[0].Turret.x;
+				Turrets[0].TurretVision.y = Turrets[0].Turret.y;
+				Turrets[1].Turret.x = 700;
+				Turrets[1].Turret.y = -270;
+				Turrets[1].TurretVision.x = Turrets[1].Turret.x;
+				Turrets[1].TurretVision.y = Turrets[1].Turret.y;
+				Turrets[2].Turret.x = 1480;
+				Turrets[2].Turret.y = 380;
+				Turrets[2].TurretVision.x = Turrets[2].Turret.x;
+				Turrets[2].TurretVision.y = Turrets[2].Turret.y;
+				Disciples[0].Disciple.x = 725;
+				Disciples[0].Disciple.y = -100;
+				Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x + 20;
+				Disciples[0].DiscipleVision.y = Disciples[0].Disciple.y;
+				Disciples[1].Disciple.x = 140;
+				Disciples[1].Disciple.y = -78;
+				Disciples[1].DiscipleVision.x = Disciples[1].Disciple.x + 20;
+				Disciples[1].DiscipleVision.y = Disciples[1].Disciple.y;
+				Disciples[2].Disciple.x = 1300;
+				Disciples[2].Disciple.y = -980;
+				Disciples[2].DiscipleVision.x = Disciples[2].Disciple.x + 20;
+				Disciples[2].DiscipleVision.y = Disciples[2].Disciple.y;
+				Disciples[3].Disciple.x = 180;
+				Disciples[3].Disciple.y = 570;
+				Disciples[3].DiscipleVision.x = Disciples[3].Disciple.x + 20;
+				Disciples[3].DiscipleVision.y = Disciples[3].Disciple.y;
 				SpikeTrap.x = 1250;
 				SpikeTrap.y = 550;
 				WinningCondition.x = 520;
 				WinningCondition.y = 550;
+				Sofa.x = 600;
+				Sofa.y = -260;
 				}
 					}
 				}
