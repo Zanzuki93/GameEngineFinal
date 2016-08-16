@@ -312,14 +312,6 @@ string currentWorkingDirectory(getcwd(NULL, 0));
  vector<DiscipleEnemy>Disciples;
  //Variable set up to allow for left and right movement
  const Uint8 * State = SDL_GetKeyboardState(NULL);
- //Disciple Parameters
- int discipleHealth = 0;
- discipleHealth = rand()%20;
- bool discipleDead = false;
- //Turret Parameters
- int turretHealth = 0;
- turretHealth = rand() % 20;
- bool turretDead = false;
  SDL_Event event;
  SDL_Window *window;
 //initialize SDL
@@ -1908,7 +1900,7 @@ while(inGame)
 		if (SDL_HasIntersection(&Player, &Turrets[0].TurretVision))
 		{
 			int random_number = rand() % 5;
-			if (turretDead == false && random_number == 1)
+			if (Turrets[0].turretDead == false && random_number == 1)
 			{
 				for (int t = 0; t < 4; t++)
 				{
@@ -1925,7 +1917,7 @@ while(inGame)
 		if (SDL_HasIntersection(&Player, &Turrets[1].TurretVision))
 		{
 			int random_number = rand() % 5;
-			if (turretDead == false && random_number == 1)
+			if (Turrets[1].turretDead == false && random_number == 1)
 			{
 				for (int t = 0; t < 4; t++)
 				{
@@ -1942,7 +1934,7 @@ while(inGame)
 		if (SDL_HasIntersection(&Player, &Turrets[2].TurretVision))
 		{
 			int random_number = rand() % 5;
-			if (turretDead == false && random_number == 1)
+			if (Turrets[2].turretDead == false && random_number == 1)
 			{
 				for (int t = 0; t < 4; t++)
 				{
@@ -3216,30 +3208,44 @@ if (state == Lose)
 						Turrets[0].Turret.y = -890;
 						Turrets[0].TurretVision.x = Turrets[0].Turret.x;
 						Turrets[0].TurretVision.y = Turrets[0].Turret.y;
+						Turrets[0].turretDead = false;
+						Turrets[0].turretHealth = rand() % 20;
 						Turrets[1].Turret.x = 700;
 						Turrets[1].Turret.y = -270;
 						Turrets[1].TurretVision.x = Turrets[1].Turret.x;
 						Turrets[1].TurretVision.y = Turrets[1].Turret.y;
+						Turrets[1].turretDead = false;
+						Turrets[1].turretHealth = rand() % 20;
 						Turrets[2].Turret.x = 1480;
 						Turrets[2].Turret.y = 380;
 						Turrets[2].TurretVision.x = Turrets[2].Turret.x;
 						Turrets[2].TurretVision.y = Turrets[2].Turret.y;
+						Turrets[2].turretDead = false;
+						Turrets[2].turretHealth = rand() % 20;
 						Disciples[0].Disciple.x = 725;
 						Disciples[0].Disciple.y = -100;
 						Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x + 20;
 						Disciples[0].DiscipleVision.y = Disciples[0].Disciple.y;
+						Disciples[0].discipleHealth = rand() %20;
+						Disciples[0].discipleDead = false;
 						Disciples[1].Disciple.x = 140;
 						Disciples[1].Disciple.y = -78;
 						Disciples[1].DiscipleVision.x = Disciples[1].Disciple.x + 20;
 						Disciples[1].DiscipleVision.y = Disciples[1].Disciple.y;
+						Disciples[1].discipleHealth = rand() %20;
+						Disciples[1].discipleDead = false;
 						Disciples[2].Disciple.x = 1300;
 						Disciples[2].Disciple.y = -980;
 						Disciples[2].DiscipleVision.x = Disciples[2].Disciple.x + 20;
 						Disciples[2].DiscipleVision.y = Disciples[2].Disciple.y;
+						Disciples[2].discipleHealth = rand() %20;
+						Disciples[2].discipleDead = false;
 						Disciples[3].Disciple.x = 180;
 						Disciples[3].Disciple.y = 570;
 						Disciples[3].DiscipleVision.x = Disciples[3].Disciple.x + 20;
 						Disciples[3].DiscipleVision.y = Disciples[3].Disciple.y;
+						Disciples[3].discipleHealth = rand() %20;
+						Disciples[3].discipleDead = false;
 						WinningCondition.x = 520;
 						WinningCondition.y = 550;
 						SpikeTrap.x = 1250;
@@ -3469,30 +3475,44 @@ if (state == Win)
 				Turrets[0].Turret.y = -890;
 				Turrets[0].TurretVision.x = Turrets[0].Turret.x;
 				Turrets[0].TurretVision.y = Turrets[0].Turret.y;
+				Turrets[0].turretDead = false;
+				Turrets[0].turretHealth = rand() % 20;
 				Turrets[1].Turret.x = 700;
 				Turrets[1].Turret.y = -270;
 				Turrets[1].TurretVision.x = Turrets[1].Turret.x;
 				Turrets[1].TurretVision.y = Turrets[1].Turret.y;
+				Turrets[1].turretDead = false;
+				Turrets[1].turretHealth = rand() % 20;
 				Turrets[2].Turret.x = 1480;
 				Turrets[2].Turret.y = 380;
 				Turrets[2].TurretVision.x = Turrets[2].Turret.x;
 				Turrets[2].TurretVision.y = Turrets[2].Turret.y;
+				Turrets[2].turretDead = false;
+				Turrets[2].turretHealth = rand() % 20;
 				Disciples[0].Disciple.x = 725;
 				Disciples[0].Disciple.y = -100;
 				Disciples[0].DiscipleVision.x = Disciples[0].Disciple.x + 20;
 				Disciples[0].DiscipleVision.y = Disciples[0].Disciple.y;
+				Disciples[0].discipleHealth = rand() %20;
+				Disciples[0].discipleDead = false;
 				Disciples[1].Disciple.x = 140;
 				Disciples[1].Disciple.y = -78;
 				Disciples[1].DiscipleVision.x = Disciples[1].Disciple.x + 20;
 				Disciples[1].DiscipleVision.y = Disciples[1].Disciple.y;
+				Disciples[1].discipleHealth = rand() %20;
+				Disciples[1].discipleDead = false;
 				Disciples[2].Disciple.x = 1300;
 				Disciples[2].Disciple.y = -980;
 				Disciples[2].DiscipleVision.x = Disciples[2].Disciple.x + 20;
 				Disciples[2].DiscipleVision.y = Disciples[2].Disciple.y;
+				Disciples[2].discipleHealth = rand() %20;
+				Disciples[2].discipleDead = false;
 				Disciples[3].Disciple.x = 180;
 				Disciples[3].Disciple.y = 570;
 				Disciples[3].DiscipleVision.x = Disciples[3].Disciple.x + 20;
 				Disciples[3].DiscipleVision.y = Disciples[3].Disciple.y;
+				Disciples[3].discipleHealth = rand() %20;
+				Disciples[3].discipleDead = false;
 				SpikeTrap.x = 1250;
 				SpikeTrap.y = 550;
 				WinningCondition.x = 520;
