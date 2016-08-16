@@ -766,6 +766,12 @@ Shield.y = 500;
 Shield.w = 50;
 Shield.h = 50;
 SDL_Texture * ShieldTexture = IMG_LoadTexture(r1, (images_dir + "ShieldTexture.png").c_str());
+SDL_Rect Sofa;
+Sofa.x = 600;
+Sofa.y = -260;
+Sofa.w = 150;
+Sofa.h = 75;
+SDL_Texture * SofaTexture = IMG_LoadTexture(r1, (images_dir + "SofaTexture.png").c_str());
 //Creating a pickup
 SDL_Rect healthPickUp;
 healthPickUp.x = 1325;
@@ -1352,6 +1358,7 @@ while(inGame)
 		BookCase.x -= PlayerVelX;
 		Staff.x -= PlayerVelX;
 		Shield.x -= PlayerVelX;
+		Sofa.x -= PlayerVelX;
 		WinningCondition.x -= PlayerVelX;
 		SpikeTrap.x -= PlayerVelX;
 	}
@@ -1446,6 +1453,7 @@ while(inGame)
 		BookCase.x -= PlayerVelX;
 		Staff.x -= PlayerVelX;
 		Shield.x -= PlayerVelX;
+		Sofa.x -= PlayerVelX;
 		WinningCondition.x -= PlayerVelX;
 		SpikeTrap.x -= PlayerVelX;
 	}
@@ -2208,6 +2216,7 @@ while(inGame)
 				BookCase.y -= PlayerVelY;
 				Staff.y -= PlayerVelY;
 				Shield.y -= PlayerVelY;
+				Sofa.y -= PlayerVelY;
 				WinningCondition.y -= PlayerVelY;
 				SpikeTrap.y -= PlayerVelY;
 			}
@@ -2304,6 +2313,7 @@ while(inGame)
 				BookCase.y -= PlayerVelY;
 				Staff.y -= PlayerVelY;
 				Shield.y -= PlayerVelY;
+				Sofa.y -= PlayerVelY;
 				WinningCondition.y -= PlayerVelY;
 				SpikeTrap.y -= PlayerVelY;
 			}
@@ -2407,6 +2417,7 @@ while(inGame)
 			BookCase.y -= PlayerVelY;
 			Staff.y -= PlayerVelY;
 			Shield.y -= PlayerVelY;
+			Sofa.y -= PlayerVelY;
 			WinningCondition.y -= PlayerVelY;
 		}
 
@@ -2502,6 +2513,7 @@ while(inGame)
 			BookCase.y -= PlayerVelY;
 			Staff.y -= PlayerVelY;
 			Shield.y -= PlayerVelY;
+			Sofa.y -= PlayerVelY;
 			WinningCondition.y -= PlayerVelY;
 		}
 	}
@@ -2981,6 +2993,7 @@ SDL_RenderCopy(r1, TableTexture, NULL, &Table);
 SDL_RenderCopy(r1, BookCaseTexture, NULL, &BookCase);
 SDL_RenderCopy(r1, StaffTexture, NULL, &Staff);
 SDL_RenderCopy(r1, ShieldTexture, NULL, &Shield);
+SDL_RenderCopy(r1, SofaTexture, NULL, &Sofa);
 //SDL_RenderCopy(r1,SpikeTrapTexture,NULL,&SpikeTrap);
 SDL_RenderPresent(r1);
 
