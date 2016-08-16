@@ -2913,7 +2913,7 @@ if (hasPurpleKey == true)
 {
 	SDL_RenderCopy(r1, PurpleKeyGUITexture, NULL, &PurpleKeyGUI);
 }
-SDL_RenderCopy(r1, WinningConditionTexture, NULL, &WinningCondition);
+//SDL_RenderCopy(r1, WinningConditionTexture, NULL, &WinningCondition);
 //Wall Texture Code
 SDL_RenderCopy(r1, w1, NULL, &Wall);
 
